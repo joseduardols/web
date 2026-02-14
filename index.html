@@ -18,7 +18,7 @@
   <style>
     
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; }
+    body { font-family: 'Inter', sans-serif; position: relative; }
     .font-serif { font-family: 'Playfair Display', serif; }
 
     :root{
@@ -26,6 +26,32 @@
       --text: #0B1220;
       --muted: #4B5563;
       --border: #E5E7EB;
+    }
+
+    /* Degradado global visible (blanco → crema/hueso) */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        #FFFFFF 0%,
+        #FFFFFF 20%,
+        #FAF8F3 40%,
+        #F5F2EA 60%,
+        #F0EBE3 80%,
+        #EBE6DD 100%
+      );
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Limpiar fondos duros de secciones afectadas */
+    .clean-bg {
+      background: transparent !important;
     }
 
     /* ===== HEADER (estilo Hostinger Noble) ===== */
@@ -37,50 +63,49 @@
       transition: box-shadow .22s ease, background .22s ease;
     }
     #siteHeader.is-scrolled{
-      box-shadow: 0 18px 46px rgba(11,18,32,0.14); /* sombra más intensa al bajar */
+      box-shadow: 0 18px 46px rgba(11,18,32,0.14);
       background: rgba(255,255,255,0.98);
     }
 
     /* Links del nav centrado con underline "hover" y "activo" */
-.navlink{
-  position: relative;
-  padding: 10px 2px;
-  color: rgba(11,18,32,0.80);
-  transition: color .2s ease;
-}
+    .navlink{
+      position: relative;
+      padding: 10px 2px;
+      color: rgba(11,18,32,0.80);
+      transition: color .2s ease;
+    }
 
-.navlink::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:4px;
-  height:2px;
-  background: rgba(11,18,32,0.95);
-  border-radius:999px;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform .2s ease;
-}
+    .navlink::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:4px;
+      height:2px;
+      background: rgba(11,18,32,0.95);
+      border-radius:999px;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .2s ease;
+    }
 
-.navlink:hover{
-  color: rgba(11,18,32,1);
-}
+    .navlink:hover{
+      color: rgba(11,18,32,1);
+    }
 
-.navlink:hover::after{
-  transform: scaleX(1);
-}
+    .navlink:hover::after{
+      transform: scaleX(1);
+    }
 
-/* Activo (se queda subrayado) */
-.navlink.active{
-  color: rgba(11,18,32,1);
-}
-.navlink.active::after{
-  transform: scaleX(1);
-}
+    /* Activo (se queda subrayado) */
+    .navlink.active{
+      color: rgba(11,18,32,1);
+    }
+    .navlink.active::after{
+      transform: scaleX(1);
+    }
 
-
-    /* Marca (si tu PNG tiene fondo, esto ayuda visualmente) */
+    /* Marca */
     .brandmark{
       display:block;
       background: transparent;
@@ -102,9 +127,9 @@
       50%,100%{ border-color:transparent; }
     }
 
-    /* Degradado suave entre secciones */
+    /* Degradado suave entre secciones (mantener para Hero) */
     .gradient-transition{
-      background: linear-gradient(180deg, #ffffff 0%, #FDFCFA 50%, #F9F7F2 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(253,252,250,0.5) 50%, rgba(249,247,242,0.3) 100%);
     }
 
     /* --- MARQUEE LOGOS --- */
@@ -171,188 +196,292 @@
     }
 
     #backToTop{
-  position:fixed;
-  left:50%;
-  bottom:24px;
-  transform: translateX(-50%) translateY(10px);
-  width:56px;
-  height:56px;
-  border-radius:999px;
-  background:#0B1220;              /* negro */
-  border:1px solid rgba(255,255,255,0.14);
-  box-shadow:0 14px 34px rgba(11,18,32,0.22);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#FFFFFF;                   /* flecha blanca */
-  opacity:0;
-  pointer-events:none;
-  transition: opacity .2s ease, transform .2s ease, background .2s ease;
-  z-index:9999;
-}
-#backToTop:hover{
-  background:#111827;              /* un poco más claro al hover */
-}
-#backToTop.show{
-  opacity:1;
-  pointer-events:auto;
-  transform: translateX(-50%) translateY(0);
-}
+      position:fixed;
+      left:50%;
+      bottom:24px;
+      transform: translateX(-50%) translateY(10px);
+      width:56px;
+      height:56px;
+      border-radius:999px;
+      background:#0B1220;
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:0 14px 34px rgba(11,18,32,0.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#FFFFFF;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .2s ease, transform .2s ease, background .2s ease;
+      z-index:9999;
+    }
+    #backToTop:hover{
+      background:#111827;
+    }
+    #backToTop.show{
+      opacity:1;
+      pointer-events:auto;
+      transform: translateX(-50%) translateY(0);
+    }
 
+    /* Título estilo plantilla */
+    .font-elegant { font-family: "Cormorant Garamond", serif; }
 
-  /* ===== Bloque tipo plantilla (1 foto + recuadro encima) ===== */
- /* Título estilo plantilla */
-.font-elegant { font-family: "Cormorant Garamond", serif; }
+    /* Sección Who we are */
+    .about-showcase {
+      background: rgba(249,247,242,0.6);
+    }
 
-/* Sección Who we are (igual a la captura) */
-.about-showcase {
-  background: #F3F4F6;
-}
+    .about-photo {
+      background: #E5E7EB;
+      border-radius: 22px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      box-shadow: 0 30px 80px rgba(11,18,32,.10);
+    }
 
-.about-photo {
-  background: #E5E7EB;
-  border-radius: 22px;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  box-shadow: 0 30px 80px rgba(11,18,32,.10);
-}
+    .about-photo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
 
-.about-photo img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display:block;
-}
+    .about-card {
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid rgba(11,18,32,.08);
+      box-shadow: 0 30px 90px rgba(11,18,32,.12);
+    }
 
-.about-card {
-  background: #fff;
-  border-radius: 18px;
-  border: 1px solid rgba(11,18,32,.08);
-  box-shadow: 0 30px 90px rgba(11,18,32,.12);
-}
+    .about-card p{
+      color: #4B5563;
+      line-height: 1.9;
+    }
 
-.about-card p{
-  color: #4B5563;
-  line-height: 1.9;
-}
+    /* Responsive: en móvil NO se solapa, se apila */
+    @media (max-width: 768px){
+      .who-card-wrap{ margin-left:0 !important; margin-top: -26px; }
+      .who-media{ min-height: 280px; }
+    }
 
-  /* Responsive: en móvil NO se solapa, se apila */
-  @media (max-width: 768px){
-    .who-card-wrap{ margin-left:0 !important; margin-top: -26px; }
-    .who-media{ min-height: 280px; }
-  }
+    /* ===== About immersive zoom: escala contenedor + imagen ===== */
+    .about-zoom-shell{
+      position: relative;
+      transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+      transform-origin: center;
+      will-change: transform;
+    }
 
-  /* ===== About immersive zoom: escala contenedor + imagen ===== */
-.about-zoom-shell{
-  position: relative;
-  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
-  transform-origin: center;
-  will-change: transform;
-}
+    .about-zoom-shell:hover{
+      transform: scale(1.03);
+      z-index: 20;
+    }
 
-/* Cuando pasas el mouse: escala el área completa (contenedor) */
-.about-zoom-shell:hover{
-  transform: scale(1.03);
-  z-index: 20;
-}
+    .about-zoom{
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+    }
 
-/* Este es tu bloque de imagen */
-.about-zoom{
-  position: relative;
-  border-radius: 14px;
-  overflow: hidden;
-}
+    .about-zoom-img{
+      transition: transform .55s cubic-bezier(.2,.8,.2,1);
+      will-change: transform;
+    }
 
-/* zoom interno suave para que se sienta más "inmersivo" */
-.about-zoom-img{
-  transition: transform .55s cubic-bezier(.2,.8,.2,1);
-  will-change: transform;
-}
+    .about-zoom-shell:hover .about-zoom-img{
+      transform: scale(1.06);
+    }
 
-.about-zoom-shell:hover .about-zoom-img{
-  transform: scale(1.06);
-}
+    /* Hint */
+    .about-zoom-hint{
+      position:absolute;
+      left:14px;
+      bottom:14px;
+      background: rgba(11,18,32,0.82);
+      color:#fff;
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      opacity:0;
+      transform: translateY(6px);
+      transition: opacity .2s ease, transform .2s ease;
+      pointer-events:none;
+    }
+    .about-zoom-shell:hover .about-zoom-hint{
+      opacity:1;
+      transform: translateY(0);
+    }
 
-/* Hint */
-.about-zoom-hint{
-  position:absolute;
-  left:14px;
-  bottom:14px;
-  background: rgba(11,18,32,0.82);
-  color:#fff;
-  font-size:12px;
-  padding:8px 10px;
-  border-radius:999px;
-  opacity:0;
-  transform: translateY(6px);
-  transition: opacity .2s ease, transform .2s ease;
-  pointer-events:none;
-}
-.about-zoom-shell:hover .about-zoom-hint{
-  opacity:1;
-  transform: translateY(0);
-}
+    /* Lightbox (modal inmersivo) */
+    #imgLightbox{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(8px);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
 
-/* Lightbox (modal inmersivo) */
-#imgLightbox{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.92);
-  backdrop-filter: blur(8px);
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s ease;
-}
+    #imgLightbox.show{
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-#imgLightbox.show{
-  opacity: 1;
-  pointer-events: auto;
-}
+    #imgLightboxInner{
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
 
-#imgLightboxInner{
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-}
+    #imgLightboxImg{
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+    }
 
-#imgLightboxImg{
-  max-width: 100%;
-  max-height: 90vh;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-}
+    #imgLightboxClose{
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background .2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-#imgLightboxClose{
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  width: 48px;
-  height: 48px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 50%;
-  color: #fff;
-  font-size: 20px;
-  cursor: pointer;
-  transition: background .2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    #imgLightboxClose:hover{
+      background: rgba(255,255,255,0.25);
+    }
 
-#imgLightboxClose:hover{
-  background: rgba(255,255,255,0.25);
-}
+    /* ===== VIDEO PREVIEW INTERACTIVO (estilo Glass Factory) ===== */
+    .resource-video-preview {
+      position: relative;
+      background: #E5E7EB;
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+      will-change: transform;
+    }
 
-</style>
+    .resource-video-preview:hover {
+      transform: scale(1.02);
+      box-shadow: 0 40px 100px rgba(11, 18, 32, 0.15);
+    }
+
+    /* Poster (imagen estática) */
+    .resource-poster {
+      display: block;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Video (oculto por defecto) */
+    .resource-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Cuando está activo (playing) */
+    .resource-video-preview.is-playing .resource-poster {
+      opacity: 0;
+    }
+
+    .resource-video-preview.is-playing .resource-video {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Play hint overlay */
+    .resource-play-hint {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 8px 24px rgba(11, 18, 32, 0.2);
+    }
+
+    .resource-play-hint i {
+      color: #0B1220;
+      font-size: 20px;
+      margin-left: 3px;
+    }
+
+    .resource-video-preview:hover .resource-play-hint {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .resource-video-preview.is-playing .resource-play-hint {
+      opacity: 0;
+    }
+
+    /* Focus state para accesibilidad */
+    .resource-video-preview:focus {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .resource-video-preview:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    /* Responsive: ajustes móvil */
+    @media (max-width: 768px) {
+      .resource-video-preview:hover {
+        transform: none;
+      }
+      
+      .resource-play-hint {
+        opacity: 0.8;
+      }
+    }
+
+    /* Respeto a prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .resource-video-preview,
+      .resource-poster,
+      .resource-video,
+      .resource-play-hint {
+        transition: none !important;
+      }
+      
+      .resource-video-preview:hover {
+        transform: none;
+      }
+    }
+
+  </style>
 
  
 </head>
@@ -464,201 +593,426 @@
     </div>
   </section>
 
- <!-- QUIÉNES SOMOS (layout 2 columnas con texto a la derecha y elevado) -->
- <section id="about" class="py-24" style="background-color: #F9F7F2;">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+  <!-- QUIÉNES SOMOS (layout 2 columnas con texto a la derecha y elevado) -->
+  <section id="about" class="py-24 about-showcase">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
 
-      <!-- Columna izquierda: imagen -->
-      <div class="about-zoom-shell">
-        <div class="rounded-lg overflow-hidden shadow-sm aspect-[16/10] md:aspect-[4/3] about-zoom cursor-zoom-in" id="aboutZoomWrap">
-          <img
-            src="assets/historia.JPG"
-            alt="Latam Sourcing"
-            class="w-full h-full object-cover about-zoom-img"
-            id="aboutZoomImg"
-          >
-          <div class="about-zoom-hint">Click para ampliar</div>
+        <!-- Columna izquierda: imagen -->
+        <div class="about-zoom-shell">
+          <div class="rounded-lg overflow-hidden shadow-sm aspect-[16/10] md:aspect-[4/3] about-zoom cursor-zoom-in" id="aboutZoomWrap">
+            <img
+              src="assets/historia.JPG"
+              alt="Latam Sourcing"
+              class="w-full h-full object-cover about-zoom-img"
+              id="aboutZoomImg"
+            >
+            <div class="about-zoom-hint">Click para ampliar</div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: texto (ligeramente elevado) -->
+        <div class="md:-mt-8">
+          <div class="bg-white p-10 md:p-12 shadow-2xl rounded-sm">
+            <h2 class="font-elegant text-4xl md:text-5xl text-slate-900 mb-8 relative inline-block">
+              Aumenta su confianza creativa
+              <span class="absolute bottom-[-8px] left-0 w-full h-[6px] bg-yellow-200/60 -z-10 rounded-full"></span>
+            </h2>
+
+            <p class="text-slate-600 text-lg leading-relaxed mb-6">
+              Cada estímulo de actividad creativa es una oportunidad para que tu negocio adopte un nuevo desafío. Mediante el <span class="font-semibold">sourcing estratégico</span>, es más probable que te comprometas con la tarea y que aumentes tus habilidades de resolución creativa de problemas en tus importaciones.
+            </p>
+
+            <a href="about.html" class="inline-block text-sm font-bold tracking-widest uppercase border-b-2 border-slate-900 pb-1 hover:text-[color:var(--accent)] hover:border-[color:var(--accent)] transition-colors">
+              Nuestra historia
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS (rediseñado con layout intercalado) -->
+  <section id="services" class="py-28 clean-bg">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- Header centrado -->
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <h2 class="font-serif text-4xl md:text-5xl font-semibold text-[color:var(--text)] mb-5">
+          Servicios
+        </h2>
+        <p class="text-[color:var(--muted)] text-lg leading-relaxed">
+          Soluciones completas diseñadas para que importes desde China con claridad y sin improvisar.
+        </p>
+      </div>
+
+      <!-- Servicio 1: Imagen IZQUIERDA -->
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-28">
+        <div class="order-2 md:order-1">
+          <!-- Imagen con zoom (igual a Nuestra historia) -->
+          <div class="about-zoom-shell">
+            <div class="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl about-zoom cursor-zoom-in service-zoom-wrap">
+              <img 
+                src="assets\servicio.JPG" 
+                alt="Servicio Integral en China" 
+                class="w-full h-full object-cover about-zoom-img service-zoom-img"
+                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"
+              >
+              <div class="about-zoom-hint">Click para ampliar</div>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="inline-block px-3 py-1 bg-blue-50 text-[color:var(--accent)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+            Servicio 1
+          </div>
+          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+            Servicio Integral en China (One-Stop Service)
+          </h3>
+          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-4">
+            Somos tu servicio integral en China. Te acompañamos en búsqueda de fábricas confiables, negociación de MOQ y precios, control de calidad en origen, y seguimiento completo hasta el envío.
+          </p>
+          <ul class="text-[color:var(--muted)] space-y-2 mb-7">
+            <li class="flex items-start gap-2">
+              <span class="text-[color:var(--accent)] mt-1">•</span>
+              <span>Búsqueda de proveedores confiables</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[color:var(--accent)] mt-1">•</span>
+              <span>Visitas a fábrica y reportes de calidad</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[color:var(--accent)] mt-1">•</span>
+              <span>Negociación directa en mandarín</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[color:var(--accent)] mt-1">•</span>
+              <span>Control de calidad y supervisión</span>
+            </li>
+          </ul>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-[color:var(--accent)] transition">
+              Aplicar al servicio
+              <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+            <a href="services.html" class="inline-flex items-center justify-center gap-2 border-2 border-[color:var(--text)] text-[color:var(--text)] px-6 py-3 rounded-lg font-semibold hover:bg-[color:var(--text)] hover:text-white transition">
+              Ver detalles
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- Columna derecha: texto (ligeramente elevado) -->
-      <div class="md:-mt-8">
-        <div class="bg-white p-10 md:p-12 shadow-2xl rounded-sm">
-          <h2 class="font-elegant text-4xl md:text-5xl text-slate-900 mb-8 relative inline-block">
-            Aumenta su confianza creativa
-            <span class="absolute bottom-[-8px] left-0 w-full h-[6px] bg-yellow-200/60 -z-10 rounded-full"></span>
-          </h2>
-
-          <p class="text-slate-600 text-lg leading-relaxed mb-6">
-            Cada estímulo de actividad creativa es una oportunidad para que tu negocio adopte un nuevo desafío. Mediante el <span class="font-semibold">sourcing estratégico</span>, es más probable que te comprometas con la tarea y que aumentes tus habilidades de resolución creativa de problemas en tus importaciones.
+      <!-- Servicio 2: Imagen DERECHA -->
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-28">
+        <div>
+          <div class="inline-block px-3 py-1 bg-purple-50 text-purple-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+            Servicio 2
+          </div>
+          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+            Servicio Completo (Sourcing + Logística + Aduana)
+          </h3>
+          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-4">
+            Nuestro servicio más completo: incluye todo el ciclo de importación desde China hasta tu almacén. Sourcing, logística internacional y nacionalización en destino.
           </p>
+          <ul class="text-[color:var(--muted)] space-y-2 mb-7">
+            <li class="flex items-start gap-2">
+              <span class="text-purple-600 mt-1">•</span>
+              <span>Todo del servicio integral en China</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-600 mt-1">•</span>
+              <span>Gestión de logística internacional</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-600 mt-1">•</span>
+              <span>Coordinación del envío (mar o aire)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-600 mt-1">•</span>
+              <span>Manejo del proceso de aduana y entrega</span>
+            </li>
+          </ul>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-600 transition">
+              Aplicar al servicio
+              <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+            <a href="services.html" class="inline-flex items-center justify-center gap-2 border-2 border-[color:var(--text)] text-[color:var(--text)] px-6 py-3 rounded-lg font-semibold hover:bg-[color:var(--text)] hover:text-white transition">
+              Ver detalles
+            </a>
+          </div>
+        </div>
+        <div>
+          <!-- Imagen con zoom (igual a Nuestra historia) -->
+          <div class="about-zoom-shell">
+            <div class="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl about-zoom cursor-zoom-in service-zoom-wrap">
+              <img 
+                src="assets\serviiciologistica.JPG" 
+                alt="Servicio Completo" 
+                class="w-full h-full object-cover about-zoom-img service-zoom-img"
+                style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"
+              >
+              <div class="about-zoom-hint">Click para ampliar</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          <a href="about.html" class="inline-block text-sm font-bold tracking-widest uppercase border-b-2 border-slate-900 pb-1 hover:text-[color:var(--accent)] hover:border-[color:var(--accent)] transition-colors">
-            Nuestra historia
+      <!-- Servicio 3: Imagen IZQUIERDA -->
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="order-2 md:order-1">
+          <!-- Imagen con zoom (igual a Nuestra historia) -->
+          <div class="about-zoom-shell">
+            <div class="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl about-zoom cursor-zoom-in service-zoom-wrap">
+              <img 
+                src="assets\mentoria.JPG" 
+                alt="Mentorías 1 a 1" 
+                class="w-full h-full object-cover about-zoom-img service-zoom-img"
+                style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"
+              >
+              <div class="about-zoom-hint">Click para ampliar</div>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="inline-block px-3 py-1 bg-green-50 text-green-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+            Servicio 3
+          </div>
+          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+            Mentorías 1 a 1
+          </h3>
+          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-4">
+            Mentorías personalizadas donde te guiamos a importar de forma autónoma. Aprende el proceso completo, toma un agente de sourcing, Se brinda un proceso 100% personalizado según tu nivel de conocimientos.
+          </p>
+          <ul class="text-[color:var(--muted)] space-y-2 mb-7">
+            <li class="flex items-start gap-2">
+              <span class="text-green-600 mt-1">•</span>
+              <span>Guía personalizada según tu nivel</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-600 mt-1">•</span>
+              <span>Guía paso a paso para importar correctamente</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-600 mt-1">•</span>
+              <span>Estrategia para importar correctamente</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-600 mt-1">•</span>
+              <span>Ruta para convertirte en agente de sourcing</span>
+            </li>
+          </ul>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition">
+              Agendar mentoría
+              <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+            <a href="services.html" class="inline-flex items-center justify-center gap-2 border-2 border-[color:var(--text)] text-[color:var(--text)] px-6 py-3 rounded-lg font-semibold hover:bg-[color:var(--text)] hover:text-white transition">
+              Ver detalles
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RECURSOS (rediseñado con layout intercalado + video preview interactivo) -->
+  <section id="resources" class="py-28 clean-bg">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- Header centrado -->
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <h2 class="font-serif text-4xl md:text-5xl font-semibold text-[color:var(--text)] mb-5">
+          Recursos
+        </h2>
+        <p class="text-[color:var(--muted)] text-lg leading-relaxed">
+          Guías y materiales prácticos para entender el proceso de importación desde cero.
+        </p>
+      </div>
+
+      <!-- Recurso 1: Imagen IZQUIERDA -->
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-28">
+        <div class="order-2 md:order-1">
+          <!-- Video Preview Container -->
+          <div 
+            class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
+            tabindex="0"
+            role="button"
+            aria-label="Ver preview de Guía paso a paso"
+            data-poster="assets\guia.jpg"
+            data-video="assets\0214.mp4"
+          >
+            <img 
+              src="assets\guia.jpg" 
+              alt="Guía paso a paso" 
+              class="resource-poster w-full h-full object-cover"
+              style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"
+            >
+            <video 
+              class="resource-video w-full h-full object-cover"
+              playsinline
+              loop
+              preload="none"
+            >
+              <source src="assets\0214.mp4" type="video/mp4">
+            </video>
+            <!-- Play hint overlay -->
+            <div class="resource-play-hint">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="inline-block px-3 py-1 bg-blue-50 text-[color:var(--accent)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+            GUÍA GRATUITA
+          </div>
+          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+            Guía paso a paso
+          </h3>
+          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-6">
+            Desde encontrar proveedores hasta recibir tu mercancía. Un recorrido completo por cada etapa del proceso de importación desde China, con ejemplos reales y plantillas descargables.
+          </p>
+          <a href="resources.html" class="inline-flex items-center gap-2 text-[color:var(--accent)] font-semibold text-lg hover:gap-3 transition-all">
+            Descargar guía gratuita
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Recurso 2: Imagen DERECHA -->
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-28">
+        <div>
+          <div class="inline-block px-3 py-1 bg-amber-50 text-amber-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+            CHECKLIST
+          </div>
+          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+            Errores comunes
+          </h3>
+          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-6">
+            Evita las pérdidas típicas al comenzar. Lista completa de errores frecuentes que cometen los importadores novatos y cómo prevenirlos antes de hacer tu primera orden.
+          </p>
+          <a href="resources.html" class="inline-flex items-center gap-2 text-amber-600 font-semibold text-lg hover:gap-3 transition-all">
+            Ver checklist completo
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div>
+          <!-- Video Preview Container -->
+          <div 
+            class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
+            tabindex="0"
+            role="button"
+            aria-label="Ver preview de Errores comunes"
+            data-poster=assets\errores.jpg"
+            data-video="assets\0214 (1).mp4"
+          >
+            <img 
+              src="assets\errores.jpg" 
+              alt="Errores comunes" 
+              class="resource-poster w-full h-full object-cover"
+              style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"
+            >
+            <video 
+              class="resource-video w-full h-full object-cover"
+              playsinline
+              loop
+              preload="none"
+            >
+              <source src="assets\0214 (1).mp4" type="video/mp4">
+            </video>
+            <!-- Play hint overlay -->
+            <div class="resource-play-hint">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recurso 3: Imagen IZQUIERDA -->
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="order-2 md:order-1">
+          <!-- Video Preview Container -->
+          <div 
+            class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
+            tabindex="0"
+            role="button"
+            aria-label="Ver preview de Costos reales"
+            data-poster="assets\exel.jpg"
+            data-video="assets\exel.mp4"
+          >
+            <img 
+              src="assets\exel.jpg" 
+              alt="Calculadora de costos" 
+              class="resource-poster w-full h-full object-cover"
+              style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"
+            >
+            <video 
+              class="resource-video w-full h-full object-cover"
+              playsinline
+              loop
+              preload="none"
+            >
+              <source src="assets\exel.mp4" type="video/mp4">
+            </video>
+            <!-- Play hint overlay -->
+            <div class="resource-play-hint">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="inline-block px-3 py-1 bg-green-50 text-green-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+            CALCULADORA
+          </div>
+          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+            Costos reales
+          </h3>
+          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-6">
+            Cómo calcular tu costo por unidad y margen real. Herramienta práctica para estimar inversión total incluyendo todos los gastos ocultos que nadie te cuenta.
+          </p>
+          <a href="resources.html" class="inline-flex items-center gap-2 text-green-600 font-semibold text-lg hover:gap-3 transition-all">
+            Usar calculadora
+            <i class="fas fa-arrow-right"></i>
           </a>
         </div>
       </div>
 
     </div>
-  </div>
-</section>
-
-
-
-  <!-- SERVICIOS -->
-  <section id="services" class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto">
-        <h2 class="font-serif text-4xl font-semibold text-[color:var(--text)] mb-4">Servicios</h2>
-        <p class="text-[color:var(--muted)] text-lg">
-          Servicios diseñados para que puedas importar desde China con claridad y sin improvisar.
-        </p>
-        <a href="services.html" class="inline-block mt-6 text-[color:var(--accent)] font-semibold hover:underline">
-          Ver todos los servicios →
-        </a>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-        <div class="bg-white p-7 rounded-xl border" style="border-color: var(--border);">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4" style="background: rgba(37,99,235,0.10);">
-            <i class="fas fa-search text-[color:var(--accent)]"></i>
-          </div>
-          <h3 class="font-semibold text-[color:var(--text)]">Búsqueda de proveedores</h3>
-          <p class="text-sm text-[color:var(--muted)] mt-2">Encontramos fábricas confiables y alineadas a tu producto.</p>
-        </div>
-
-        <div class="bg-white p-7 rounded-xl border" style="border-color: var(--border);">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4" style="background: rgba(37,99,235,0.10);">
-            <i class="fas fa-handshake text-[color:var(--accent)]"></i>
-          </div>
-          <h3 class="font-semibold text-[color:var(--text)]">Negociación</h3>
-          <p class="text-sm text-[color:var(--muted)] mt-2">MOQ, precios, términos de pago y condiciones claras.</p>
-        </div>
-
-        <div class="bg-white p-7 rounded-xl border" style="border-color: var(--border);">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4" style="background: rgba(37,99,235,0.10);">
-            <i class="fas fa-clipboard-check text-[color:var(--accent)]"></i>
-          </div>
-          <h3 class="font-semibold text-[color:var(--text)]">Control de calidad</h3>
-          <p class="text-sm text-[color:var(--muted)] mt-2">Inspección en origen para evitar sorpresas al recibir.</p>
-        </div>
-
-        <div class="bg-white p-7 rounded-xl border" style="border-color: var(--border);">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4" style="background: rgba(37,99,235,0.10);">
-            <i class="fas fa-ship text-[color:var(--accent)]"></i>
-          </div>
-          <h3 class="font-semibold text-[color:var(--text)]">Logística y envío</h3>
-          <p class="text-sm text-[color:var(--muted)] mt-2">Coordinación completa hasta destino.</p>
-        </div>
-      </div>
-    </div>
   </section>
 
-  <!-- RECURSOS -->
-  <section id="resources" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto">
-        <h2 class="font-serif text-4xl font-semibold text-[color:var(--text)] mb-4">Recursos para principiantes</h2>
-        <p class="text-[color:var(--muted)] text-lg">
-          Guías y materiales prácticos para entender el proceso de importación desde cero.
-        </p>
-        <a href="resources.html" class="inline-block mt-6 text-[color:var(--accent)] font-semibold hover:underline">
-          Ver recursos →
-        </a>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6 mt-12">
-        <div class="p-7 rounded-xl border bg-gray-50" style="border-color: var(--border);">
-          <div class="text-3xl text-[color:var(--accent)] mb-4"><i class="fas fa-book"></i></div>
-          <h3 class="font-semibold text-[color:var(--text)]">Guía paso a paso</h3>
-          <p class="text-sm text-[color:var(--muted)] mt-2">Desde proveedores hasta entrega final.</p>
-        </div>
-
-        <div class="p-7 rounded-xl border bg-gray-50" style="border-color: var(--border);">
-          <div class="text-3xl text-[color:var(--accent)] mb-4"><i class="fas fa-triangle-exclamation"></i></div>
-          <h3 class="font-semibold text-[color:var(--text)]">Errores comunes</h3>
-          <p class="text-sm text-[color:var(--muted)] mt-2">Evita pérdidas típicas al comenzar.</p>
-        </div>
-
-        <div class="p-7 rounded-xl border bg-gray-50" style="border-color: var(--border);">
-          <div class="text-3xl text-[color:var(--accent)] mb-4"><i class="fas fa-calculator"></i></div>
-          <h3 class="font-semibold text-[color:var(--text)]">Costos reales</h3>
-          <p class="text-sm text-[color:var(--muted)] mt-2">Cómo calcular tu costo por unidad y margen.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACTO + FORMULARIO -->
-  <section id="contact" class="py-20 bg-gray-50">
+  <!-- CONTACTO (rediseñado sin formulario) -->
+  <section id="contact" class="py-20 bg-white relative z-10">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center max-w-3xl mx-auto mb-12">
         <h2 class="font-serif text-4xl font-semibold text-[color:var(--text)] mb-4">Contacto</h2>
         <p class="text-[color:var(--muted)] text-lg">
-          Completa este formulario y te respondemos con la mejor ruta para tu importación.
+          Estamos aquí para ayudarte a importar desde China de forma segura y rentable.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-10">
-        <div class="bg-white rounded-xl border p-8" style="border-color: var(--border);">
-          <h3 class="font-semibold text-xl text-[color:var(--text)] mb-6">Solicitar evaluación</h3>
-
-          <form class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
-              <input type="text" class="w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-[color:var(--accent)] focus:border-transparent" style="border-color: var(--border);" placeholder="Tu nombre">
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Correo</label>
-              <input type="email" class="w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-[color:var(--accent)] focus:border-transparent" style="border-color: var(--border);" placeholder="tu@email.com">
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">WhatsApp (con código país)</label>
-              <input type="tel" class="w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-[color:var(--accent)] focus:border-transparent" style="border-color: var(--border);" placeholder="+593 99 999 9999">
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Rango de inversión</label>
-              <select class="w-full px-4 py-3 border rounded-md bg-white focus:ring-2 focus:ring-[color:var(--accent)] focus:border-transparent" style="border-color: var(--border);">
-                <option value="">Selecciona una opción</option>
-                <option>Menos de $2,000</option>
-                <option>$2,000 a $5,000</option>
-                <option>$5,000 a $20,000</option>
-                <option>Más de $20,000</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Producto interesado</label>
-              <textarea rows="4" class="w-full px-4 py-3 border rounded-md focus:ring-2 focus:ring-[color:var(--accent)] focus:border-transparent" style="border-color: var(--border);" placeholder="Ej: camisetas premium, hoodie, herramientas, etc."></textarea>
-            </div>
-
-            <button type="submit" class="w-full bg-black text-white px-6 py-3 rounded-md font-semibold hover:bg-[color:var(--accent)] transition">
-              Enviar
-            </button>
-          </form>
+      <div class="max-w-2xl mx-auto space-y-6">
+        <div class="bg-white rounded-xl border p-8 shadow-sm hover:shadow-md transition" style="border-color: var(--border);">
+          <h4 class="font-semibold text-xl text-[color:var(--text)] mb-3">Respuesta y próximos pasos</h4>
+          <p class="text-[color:var(--muted)] mb-5">
+            Te respondemos con: ruta recomendada, estimación de costos y próximos pasos claros.
+          </p>
+          <a href="mailto:contacto@latamsourcing.com" class="inline-flex items-center gap-2 text-[color:var(--accent)] font-semibold hover:gap-3 transition-all">
+            <i class="fas fa-envelope"></i>
+            contacto@latamsourcing.com
+          </a>
         </div>
 
-        <div class="space-y-6">
-          <div class="bg-white rounded-xl border p-7" style="border-color: var(--border);">
-            <h4 class="font-semibold text-[color:var(--text)] mb-2">Respuesta y próximos pasos</h4>
-            <p class="text-sm text-[color:var(--muted)]">
-              Te respondemos con: ruta recomendada, estimación de costos y próximos pasos claros.
-            </p>
-          </div>
-
-          <div class="bg-white rounded-xl border p-7" style="border-color: var(--border);">
-            <h4 class="font-semibold text-[color:var(--text)] mb-2">¿Listo para Crecer?</h4>
-            <p class="text-sm text-[color:var(--muted)] mb-4">
-              Rellena el siguiente formulario.
-            </p>
-            <a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="inline-flex items-center gap-2 bg-black text-white px-5 py-3 rounded-md font-semibold hover:bg-[color:var(--accent)] transition">
-              <i class="fab fa-clipboard-check"></i> Trabaja con Nosotros
-            </a>
-          </div>
+        <div class="bg-white rounded-xl border p-8 shadow-sm hover:shadow-md transition" style="border-color: var(--border);">
+          <h4 class="font-semibold text-xl text-[color:var(--text)] mb-3">¿Listo para Crecer?</h4>
+          <p class="text-[color:var(--muted)] mb-5">
+            Rellena el siguiente formulario y comienza tu proceso de importación con nosotros.
+          </p>
+          <a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-[color:var(--accent)] transition">
+            <i class="fas fa-clipboard-check"></i> 
+            Trabaja con Nosotros
+          </a>
         </div>
       </div>
     </div>
@@ -687,7 +1041,7 @@
           <h4 class="text-white font-semibold mb-4">Contacto</h4>
           <ul class="space-y-2 text-sm text-gray-400">
             <li><a href="#contact" class="hover:text-white transition">Formulario</a></li>
-            <li><a href="https://wa.me/593XXXXXXXXX" target="_blank" class="hover:text-white transition">Trabaja con nosotros</a></li>
+            <li><a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="hover:text-white transition">Trabaja con nosotros</a></li>
             <li><a href="mailto:contacto@latamsourcing.com" class="hover:text-white transition">Email</a></li>
           </ul>
         </div>
@@ -778,49 +1132,230 @@
       });
     })();
 
-      // About image: click to open immersive lightbox
-  (function(){
-    const wrap = document.getElementById('aboutZoomWrap');
-    const img = document.getElementById('aboutZoomImg');
+    // About image: click to open immersive lightbox
+    (function(){
+      const wrap = document.getElementById('aboutZoomWrap');
+      const img = document.getElementById('aboutZoomImg');
 
-    const lb = document.getElementById('imgLightbox');
-    const lbImg = document.getElementById('imgLightboxImg');
-    const closeBtn = document.getElementById('imgLightboxClose');
+      const lb = document.getElementById('imgLightbox');
+      const lbImg = document.getElementById('imgLightboxImg');
+      const closeBtn = document.getElementById('imgLightboxClose');
 
-    if(!wrap || !img || !lb || !lbImg || !closeBtn) return;
+      if(!wrap || !img || !lb || !lbImg || !closeBtn) return;
 
-    function openLightbox(){
-      lbImg.src = img.src;
-      lb.classList.add('show');
-      lb.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
+      function openLightbox(){
+        lbImg.src = img.src;
+        lb.classList.add('show');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
 
-    function closeLightbox(){
-      lb.classList.remove('show');
-      lb.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      // opcional: limpiar src para ahorrar memoria
-      setTimeout(() => { lbImg.src = ''; }, 150);
-    }
+      function closeLightbox(){
+        lb.classList.remove('show');
+        lb.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        setTimeout(() => { lbImg.src = ''; }, 150);
+      }
 
-    wrap.addEventListener('click', openLightbox);
-    closeBtn.addEventListener('click', closeLightbox);
+      wrap.addEventListener('click', openLightbox);
+      closeBtn.addEventListener('click', closeLightbox);
 
-    // click afuera cierra
-    lb.addEventListener('click', (e) => {
-      if(e.target === lb) closeLightbox();
-    });
+      lb.addEventListener('click', (e) => {
+        if(e.target === lb) closeLightbox();
+      });
 
-    // ESC cierra
-    window.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && lb.classList.contains('show')) closeLightbox();
-    });
-  })();
+      window.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && lb.classList.contains('show')) closeLightbox();
+      });
+    })();
+
+    // ===== VIDEO PREVIEW INTERACTIVO (estilo Glass Factory) =====
+    (function(){
+      const previews = document.querySelectorAll('.resource-video-preview');
+      if (!previews.length) return;
+
+      // Detectar si el usuario prefiere reduced motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      previews.forEach(preview => {
+        const poster = preview.querySelector('.resource-poster');
+        const video = preview.querySelector('.resource-video');
+        const videoSrc = preview.getAttribute('data-video');
+        
+        if (!video || !videoSrc) return;
+
+        let isPlaying = false;
+        let hasLoadedVideo = false;
+
+        // Configurar volumen inicial (0.7 = 70%)
+        video.volume = 0.7;
+
+        // Función para cargar el video (lazy-load)
+        function loadVideo() {
+          if (hasLoadedVideo) return;
+          
+          // Si el video no tiene source cargado, lo agregamos
+          if (!video.querySelector('source').hasAttribute('src')) {
+            video.querySelector('source').setAttribute('src', videoSrc);
+            video.load();
+          }
+          hasLoadedVideo = true;
+        }
+
+        // Función para reproducir video
+        function playVideo() {
+          if (prefersReducedMotion) {
+            // Si el usuario prefiere reduced motion, no autoplay
+            return;
+          }
+          
+          loadVideo();
+          preview.classList.add('is-playing');
+          
+          // Intentar reproducir con audio
+          video.play().catch(err => {
+            console.log('Video play prevented:', err);
+            // Si falla por políticas de autoplay, intentar muted
+            video.muted = true;
+            video.play().catch(e => console.log('Muted play also failed:', e));
+          });
+          
+          isPlaying = true;
+        }
+
+        // Función para pausar video
+        function pauseVideo() {
+          preview.classList.remove('is-playing');
+          video.pause();
+          video.currentTime = 0; // Volver al inicio
+          isPlaying = false;
+        }
+
+        // Función toggle para móvil
+        function toggleVideo() {
+          if (isPlaying) {
+            pauseVideo();
+          } else {
+            playVideo();
+          }
+        }
+
+        // Desktop: hover
+        if (!('ontouchstart' in window)) {
+          preview.addEventListener('mouseenter', playVideo);
+          preview.addEventListener('mouseleave', pauseVideo);
+        }
+
+        // Móvil + Desktop: click/tap
+        preview.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Si el video está muteado por políticas de autoplay, desmutearlo al hacer click
+          if (video.muted && isPlaying) {
+            video.muted = false;
+            return;
+          }
+          
+          toggleVideo();
+        });
+
+        // Accesibilidad: teclado (Enter/Space)
+        preview.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            
+            // Si el video está muteado, desmutearlo
+            if (video.muted && isPlaying) {
+              video.muted = false;
+              return;
+            }
+            
+            toggleVideo();
+          }
+        });
+
+        // Cleanup cuando el video se pausa (por cualquier razón)
+        video.addEventListener('pause', () => {
+          if (isPlaying) {
+            preview.classList.remove('is-playing');
+            isPlaying = false;
+          }
+        });
+
+        // Intersection Observer para precargar cuando está cerca del viewport
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !hasLoadedVideo) {
+                // Precargar metadata cuando el elemento está visible
+                if (!video.querySelector('source').hasAttribute('src')) {
+                  video.querySelector('source').setAttribute('src', videoSrc);
+                  video.setAttribute('preload', 'metadata');
+                  video.load();
+                }
+              }
+            });
+          }, {
+            rootMargin: '200px' // Empieza a cargar 200px antes de entrar al viewport
+          });
+
+          observer.observe(preview);
+        }
+      });
+    })();
+
+    // ===== LIGHTBOX PARA SERVICIOS (igual que Nuestra historia) =====
+    (function(){
+      const serviceWraps = document.querySelectorAll('.service-zoom-wrap');
+      const lb = document.getElementById('imgLightbox');
+      const lbImg = document.getElementById('imgLightboxImg');
+      const closeBtn = document.getElementById('imgLightboxClose');
+
+      if(!serviceWraps.length || !lb || !lbImg || !closeBtn) return;
+
+      function openLightbox(imgSrc){
+        lbImg.src = imgSrc;
+        lb.classList.add('show');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox(){
+        lb.classList.remove('show');
+        lb.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        setTimeout(() => { lbImg.src = ''; }, 150);
+      }
+
+      // Agregar evento click a cada imagen de servicio
+      serviceWraps.forEach(wrap => {
+        const img = wrap.querySelector('.service-zoom-img');
+        if(!img) return;
+
+        wrap.addEventListener('click', () => {
+          openLightbox(img.src);
+        });
+      });
+
+      // Cerrar lightbox
+      closeBtn.addEventListener('click', closeLightbox);
+
+      // Click afuera cierra
+      lb.addEventListener('click', (e) => {
+        if(e.target === lb) closeLightbox();
+      });
+
+      // ESC cierra
+      window.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && lb.classList.contains('show')) closeLightbox();
+      });
+    })();
 
   </script>
 
 </body>
 </html>
+
+
 
 
