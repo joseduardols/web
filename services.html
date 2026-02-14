@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -8,303 +8,861 @@
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Fuentes (igual que index) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { 
+      font-family: 'Inter', sans-serif;
+      position: relative;
+    }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-elegant { font-family: "Cormorant Garamond", serif; }
+
+    :root{
+      --accent: #2563EB;
+      --text: #0B1220;
+      --muted: #4B5563;
+      --border: #E5E7EB;
+    }
+
+    /* Degradado global visible (blanco → crema/hueso) - IGUAL QUE INDEX */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        #FFFFFF 0%,
+        #FFFFFF 20%,
+        #FAF8F3 40%,
+        #F5F2EA 60%,
+        #F0EBE3 80%,
+        #EBE6DD 100%
+      );
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Limpiar fondos duros */
+    .clean-bg {
+      background: transparent !important;
+    }
+
+    /* ===== HEADER (estilo Noble) - IGUAL QUE INDEX ===== */
+    #siteHeader{
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 28px rgba(11,18,32,0.08);
+      transition: box-shadow .22s ease, background .22s ease;
+    }
+    #siteHeader.is-scrolled{
+      box-shadow: 0 18px 46px rgba(11,18,32,0.14);
+      background: rgba(255,255,255,0.98);
+    }
+
+    /* Links del nav */
+    .navlink{
+      position: relative;
+      padding: 10px 2px;
+      color: rgba(11,18,32,0.80);
+      transition: color .2s ease;
+    }
+
+    .navlink::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:4px;
+      height:2px;
+      background: rgba(11,18,32,0.95);
+      border-radius:999px;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .2s ease;
+    }
+
+    .navlink:hover{
+      color: rgba(11,18,32,1);
+    }
+
+    .navlink:hover::after{
+      transform: scaleX(1);
+    }
+
+    .navlink.active{
+      color: rgba(11,18,32,1);
+    }
+    .navlink.active::after{
+      transform: scaleX(1);
+    }
+
+    .brandmark{
+      display:block;
+      background: transparent;
+      filter: drop-shadow(0 6px 10px rgba(11,18,32,.12));
+      mix-blend-mode: multiply;
+    }
+
+    /* Back to top */
+    #backToTop{
+      position:fixed;
+      left:50%;
+      bottom:24px;
+      transform: translateX(-50%) translateY(10px);
+      width:56px;
+      height:56px;
+      border-radius:999px;
+      background:#0B1220;
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:0 14px 34px rgba(11,18,32,0.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#FFFFFF;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .2s ease, transform .2s ease, background .2s ease;
+      z-index:9999;
+    }
+    #backToTop:hover{
+      background:#111827;
+    }
+    #backToTop.show{
+      opacity:1;
+      pointer-events:auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ===== VIDEO PREVIEW INTERACTIVO (estilo Glass Factory) ===== */
+    .service-video-preview {
+      position: relative;
+      background: #E5E7EB;
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+      will-change: transform;
+    }
+
+    .service-video-preview:hover {
+      transform: scale(1.02);
+      box-shadow: 0 40px 100px rgba(11, 18, 32, 0.15);
+    }
+
+    /* Poster (imagen estática) */
+    .service-poster {
+      display: block;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Video (oculto por defecto) */
+    .service-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Cuando está activo (playing) */
+    .service-video-preview.is-playing .service-poster {
+      opacity: 0;
+    }
+
+    .service-video-preview.is-playing .service-video {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Play hint overlay */
+    .service-play-hint {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 8px 24px rgba(11, 18, 32, 0.2);
+    }
+
+    .service-play-hint i {
+      color: #0B1220;
+      font-size: 20px;
+      margin-left: 3px;
+    }
+
+    .service-video-preview:hover .service-play-hint {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .service-video-preview.is-playing .service-play-hint {
+      opacity: 0;
+    }
+
+    /* Focus state para accesibilidad */
+    .service-video-preview:focus {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .service-video-preview:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    /* Responsive: ajustes móvil */
+    @media (max-width: 768px) {
+      .service-video-preview:hover {
+        transform: none;
+      }
+      
+      .service-play-hint {
+        opacity: 0.8;
+      }
+    }
+
+    /* Respeto a prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .service-video-preview,
+      .service-poster,
+      .service-video,
+      .service-play-hint {
+        transition: none !important;
+      }
+      
+      .service-video-preview:hover {
+        transform: none;
+      }
+    }
+  </style>
 </head>
 
-<body class="font-sans text-gray-800 antialiased">
+<body class="text-gray-800 antialiased">
 
-<header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <a href="index.html" class="text-2xl font-bold text-gray-900">Latam Sourcing</a>
+  <!-- HEADER (idéntico a index) -->
+  <header id="siteHeader" class="fixed top-0 left-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="relative h-20 flex items-center">
 
-    <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-800">
-      <a href="index.html" class="hover:text-blue-900 transition">Inicio</a>
-      <a href="services.html" class="text-blue-900 font-semibold">Servicios</a>
-      <a href="about.html" class="hover:text-blue-900 transition">Nuestra Historia</a>
-      <a href="resources.html" class="hover:text-blue-900 transition">Recursos</a>
-      <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md hover:bg-blue-900 hover:text-white transition">
-        Contacto
+        <!-- Izquierda: Logo + texto -->
+        <a href="index.html" class="flex items-center gap-3 shrink-0">
+          <img
+            src="assets/logo latam.png"
+            alt="Latam Sourcing"
+            class="h-11 md:h-12 w-auto block brandmark"
+            style="filter: drop-shadow(0 6px 10px rgba(11,18,32,.14));"
+          >
+          <span class="font-serif text-[22px] md:text-2xl font-semibold text-[color:var(--text)] tracking-tight leading-none">
+            Latam Sourcing
+          </span>
+        </a>
+
+        <!-- Centro: Nav centrado -->
+        <nav class="hidden md:flex items-center gap-10 text-sm font-medium absolute left-1/2 -translate-x-1/2">
+          <a href="index.html" class="navlink">Inicio</a>
+          <a href="services.html" class="navlink active">Servicios</a>
+          <a href="about.html" class="navlink">Nuestra Historia</a>
+          <a href="resources.html" class="navlink">Recursos</a>
+        </nav>
+
+        <!-- Derecha: CTA -->
+        <div class="hidden md:flex items-center ml-auto">
+          <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md hover:bg-[color:var(--accent)] transition">
+            Contacto
+          </a>
+        </div>
+
+        <!-- Mobile -->
+        <button id="mobileMenuBtn" class="md:hidden ml-auto text-gray-700">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t" style="border-color: var(--border);">
+      <nav class="flex flex-col px-6 py-4 space-y-3 text-sm font-medium">
+        <a href="index.html" class="hover:text-[color:var(--accent)] transition">Inicio</a>
+        <a href="services.html" class="hover:text-[color:var(--accent)] transition">Servicios</a>
+        <a href="about.html" class="hover:text-[color:var(--accent)] transition">Nuestra Historia</a>
+        <a href="resources.html" class="hover:text-[color:var(--accent)] transition">Recursos</a>
+        <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md text-center hover:bg-[color:var(--accent)] transition">
+          Contacto
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="pt-32 md:pt-36 pb-16 clean-bg">
+    <div class="max-w-7xl mx-auto px-6">
+      <p class="uppercase tracking-[0.25em] text-xs font-bold text-[color:var(--accent)] mb-3">
+        Servicios
+      </p>
+      <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+        Soluciones de sourcing y trading a la medida de tu negocio
+      </h1>
+      <p class="text-[color:var(--muted)] text-lg md:text-xl max-w-3xl leading-relaxed">
+        Te acompañamos desde la búsqueda de proveedores hasta la llegada del producto a tu país, 
+        con servicios modulares que se adaptan a tu nivel de experiencia, presupuesto y objetivos.
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVICIOS CON VIDEO PREVIEW (grid 3 columnas) -->
+  <section class="py-28 clean-bg">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Intro -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5">
+          Nuestros servicios
+        </h2>
+        <p class="text-[color:var(--muted)] text-lg leading-relaxed">
+          Trabajamos únicamente con proyectos serios y listos para escalar. Recibimos más de 100 aplicaciones cada mes,
+          por eso usamos un proceso de aplicación para entender tu proyecto y confirmar si somos el equipo correcto.
+        </p>
+      </div>
+
+      <!-- Grid de 3 servicios -->
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+
+        <!-- Servicio 1 -->
+        <div>
+          <!-- Video Preview -->
+          <div 
+            class="service-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer mb-6"
+            tabindex="0"
+            role="button"
+            aria-label="Ver preview de Servicio Integral en China"
+            data-poster="assets\SERVICE01.jpg"
+            data-video="https://res.cloudinary.com/dzjjcsfr0/video/upload/v1771107699/Servicio_1_hidjmb.mp4"
+          >
+            <img 
+              src="assets\SERVICE01.jpg" 
+              alt="Servicio Integral en China" 
+              class="service-poster w-full h-full object-cover"
+              style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"
+            >
+            <video 
+              class="service-video w-full h-full object-cover"
+              muted
+              playsinline
+              loop
+              preload="none"
+            >
+              <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/v1771107699/Servicio_1_hidjmb.mp4" type="video/mp4">
+            </video>
+            <div class="service-play-hint">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+
+          <!-- Texto en caja blanca -->
+          <div class="bg-white p-7 shadow-xl rounded-lg border border-[color:var(--border)] h-full flex flex-col">
+            <div class="inline-block px-3 py-1 bg-blue-50 text-[color:var(--accent)] text-xs font-bold uppercase tracking-wider rounded-full mb-4 self-start">
+              Servicio 1
+            </div>
+            <h3 class="font-serif text-2xl font-semibold text-[color:var(--text)] mb-4 leading-tight">
+              Servicio Integral en China
+            </h3>
+            <p class="text-[color:var(--muted)] leading-relaxed mb-4">
+              Somos tu servicio integral en China. Te acompañamos desde la búsqueda de fábrica hasta el envío, 
+              con enfoque en precio real, calidad y ejecución.
+            </p>
+
+            <ul class="text-sm text-[color:var(--muted)] space-y-2 mb-6">
+              <li class="flex items-start gap-2">
+                <span class="text-[color:var(--accent)] mt-0.5">•</span>
+                <span>Búsqueda de proveedores</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[color:var(--accent)] mt-0.5">•</span>
+                <span>Verificación de fábricas</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[color:var(--accent)] mt-0.5">•</span>
+                <span>Negociación de MOQ y precios</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[color:var(--accent)] mt-0.5">•</span>
+                <span>Control de calidad</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[color:var(--accent)] mt-0.5">•</span>
+                <span>Coordinación de envíos</span>
+              </li>
+            </ul>
+
+            <div class="flex flex-col gap-3 mt-auto">
+              <a href="service-one-stop.html" class="inline-flex items-center justify-center gap-2 border-2 border-[color:var(--text)] text-[color:var(--text)] px-5 py-2.5 rounded-lg font-semibold hover:bg-[color:var(--text)] hover:text-white transition text-sm">
+                Ver detalles
+              </a>
+              <a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="inline-flex items-center justify-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-[color:var(--accent)] transition text-sm">
+                Aplicar al servicio
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Servicio 2 -->
+        <div>
+          <!-- Video Preview -->
+          <div 
+            class="service-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer mb-6"
+            tabindex="0"
+            role="button"
+            aria-label="Ver preview de Servicio Completo"
+            data-poster="assets/servicio-completo-poster.jpg"
+            data-video="assets/servicio-completo-video.mp4"
+          >
+            <img 
+              src="assets/servicio-completo-poster.jpg" 
+              alt="Servicio Completo" 
+              class="service-poster w-full h-full object-cover"
+              style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"
+            >
+            <video 
+              class="service-video w-full h-full object-cover"
+              muted
+              playsinline
+              loop
+              preload="none"
+            >
+              <source src="assets/servicio-completo-video.mp4" type="video/mp4">
+            </video>
+            <div class="service-play-hint">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+
+          <!-- Texto en caja blanca -->
+          <div class="bg-white p-7 shadow-xl rounded-lg border border-[color:var(--border)] h-full flex flex-col">
+            <div class="inline-block px-3 py-1 bg-purple-50 text-purple-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4 self-start">
+              Servicio 2
+            </div>
+            <h3 class="font-serif text-2xl font-semibold text-[color:var(--text)] mb-4 leading-tight">
+              Servicio Completo
+            </h3>
+            <p class="text-[color:var(--muted)] leading-relaxed mb-4">
+              Nuestro servicio más completo. Incluye todo lo del servicio integral + gestión logística y de aduana.
+              Ideal si quieres delegar completamente.
+            </p>
+
+            <ul class="text-sm text-[color:var(--muted)] space-y-2 mb-6">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-0.5">•</span>
+                <span>Todo del servicio integral</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-0.5">•</span>
+                <span>Gestión logística internacional</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-0.5">•</span>
+                <span>Coordinación de envío</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-0.5">•</span>
+                <span>Proceso de aduana</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-600 mt-0.5">•</span>
+                <span>Entrega en destino</span>
+              </li>
+            </ul>
+
+            <div class="flex flex-col gap-3 mt-auto">
+              <a href="service-completo.html" class="inline-flex items-center justify-center gap-2 border-2 border-[color:var(--text)] text-[color:var(--text)] px-5 py-2.5 rounded-lg font-semibold hover:bg-[color:var(--text)] hover:text-white transition text-sm">
+                Ver detalles
+              </a>
+              <a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="inline-flex items-center justify-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-purple-600 transition text-sm">
+                Aplicar al servicio
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Servicio 3 -->
+        <div>
+          <!-- Video Preview -->
+          <div 
+            class="service-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer mb-6"
+            tabindex="0"
+            role="button"
+            aria-label="Ver preview de Mentorías 1 a 1"
+            data-poster="assets/mentorias-poster.jpg"
+            data-video="assets/mentorias-video.mp4"
+          >
+            <img 
+              src="assets/mentorias-poster.jpg" 
+              alt="Mentorías 1 a 1" 
+              class="service-poster w-full h-full object-cover"
+              style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"
+            >
+            <video 
+              class="service-video w-full h-full object-cover"
+              muted
+              playsinline
+              loop
+              preload="none"
+            >
+              <source src="assets/mentorias-video.mp4" type="video/mp4">
+            </video>
+            <div class="service-play-hint">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+
+          <!-- Texto en caja blanca -->
+          <div class="bg-white p-7 shadow-xl rounded-lg border border-[color:var(--border)] h-full flex flex-col">
+            <div class="inline-block px-3 py-1 bg-green-50 text-green-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4 self-start">
+              Servicio 3
+            </div>
+            <h3 class="font-serif text-2xl font-semibold text-[color:var(--text)] mb-4 leading-tight">
+              Mentorías 1 a 1
+            </h3>
+            <p class="text-[color:var(--muted)] leading-relaxed mb-4">
+              Mentorías personalizadas para aprender a importar o convertirte en agente de sourcing.
+              Máximo 3 estudiantes por mes.
+            </p>
+
+            <ul class="text-sm text-[color:var(--muted)] space-y-2 mb-6">
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 mt-0.5">•</span>
+                <span>Plan personalizado</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 mt-0.5">•</span>
+                <span>Guía de proveedores y costos</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 mt-0.5">•</span>
+                <span>Proceso de importación</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 mt-0.5">•</span>
+                <span>Ruta agente de sourcing</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 mt-0.5">•</span>
+                <span>Soporte continuo</span>
+              </li>
+            </ul>
+
+            <div class="flex flex-col gap-3 mt-auto">
+              <a href="mentorias-1a1.html" class="inline-flex items-center justify-center gap-2 border-2 border-[color:var(--text)] text-[color:var(--text)] px-5 py-2.5 rounded-lg font-semibold hover:bg-[color:var(--text)] hover:text-white transition text-sm">
+                Ver detalles
+              </a>
+              <a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="inline-flex items-center justify-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-green-600 transition text-sm">
+                Aplicar a mentoría
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Nota importante -->
+      <div class="bg-white border border-[color:var(--border)] rounded-2xl p-8 shadow-xl">
+        <p class="text-[color:var(--muted)] text-lg leading-relaxed">
+          <span class="font-semibold text-[color:var(--text)]">Importante:</span> una vez completes la aplicación,
+          contactaremos directamente a las personas seleccionadas para comenzar a impulsar su negocio.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXTRAS Y VALOR AGREGADO -->
+  <section class="py-24 clean-bg">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5">
+          Extras y valor agregado
+        </h2>
+        <p class="text-[color:var(--muted)] text-lg leading-relaxed">
+          Servicios complementarios que potencian tu marca y te diferencian de la competencia.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-[color:var(--border)] hover:shadow-xl transition">
+          <div class="text-4xl text-[color:var(--accent)] mb-4">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-[color:var(--text)] mb-3">
+            Personalización de logo
+          </h3>
+          <p class="text-[color:var(--muted)] leading-relaxed">
+            Aplicamos tu marca en producto, etiquetas, manuales y empaques.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-[color:var(--border)] hover:shadow-xl transition">
+          <div class="text-4xl text-[color:var(--accent)] mb-4">
+            <i class="fas fa-box"></i>
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-[color:var(--text)] mb-3">
+            Branding y packaging
+          </h3>
+          <p class="text-[color:var(--muted)] leading-relaxed">
+            Diseñamos empaques que reflejan el valor de tu marca y el mercado objetivo.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-[color:var(--border)] hover:shadow-xl transition">
+          <div class="text-4xl text-[color:var(--accent)] mb-4">
+            <i class="fas fa-trademark"></i>
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-[color:var(--text)] mb-3">
+            Marca privada
+          </h3>
+          <p class="text-[color:var(--muted)] leading-relaxed">
+            Te ayudamos a construir tu propia marca sobre productos fabricados en China.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-[color:var(--border)] hover:shadow-xl transition">
+          <div class="text-4xl text-[color:var(--accent)] mb-4">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-[color:var(--text)] mb-3">
+            Mejora de producto
+          </h3>
+          <p class="text-[color:var(--muted)] leading-relaxed">
+            Ajustamos calidad, materiales y presentación según feedback de tus clientes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA (fondo blanco sólido antes del footer) -->
+  <section class="py-20 bg-white relative z-10">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5">
+        ¿Listo para estructurar tu próximo proyecto de importación?
+      </h2>
+      <p class="max-w-2xl mx-auto mb-8 text-[color:var(--muted)] text-lg leading-relaxed">
+        Cuéntanos qué quieres importar, en qué país estás y qué nivel de inversión estimas. 
+        Te proponemos el plan más adecuado para ti.
+      </p>
+      <a href="index.html#contact" class="inline-block bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-[color:var(--accent)] transition text-lg">
+        Hablar con el equipo
       </a>
-    </nav>
-    
-    <button id="mobileMenuBtn" class="md:hidden text-gray-700">
-      <i class="fas fa-bars text-xl"></i>
-    </button>
-  </div>
-  
-  <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
-    <nav class="flex flex-col px-6 py-4 space-y-3">
-      <a href="index.html" class="hover:text-blue-900 transition">Inicio</a>
-      <a href="services.html" class="text-blue-900 font-semibold">Servicios</a>
-      <a href="about.html" class="hover:text-blue-900 transition">Nuestra Historia</a>
-      <a href="resources.html" class="hover:text-blue-900 transition">Recursos</a>
-      <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md text-center hover:bg-blue-900 hover:text-white transition">Contacto</a>
-    </nav>
-  </div>
-</header>
-
-<section class="pt-28 pb-16 bg-white border-b border-slate-100">
-  <div class="max-w-7xl mx-auto px-6">
-    <p class="uppercase tracking-[0.25em] text-xs font-semibold text-blue-600 mb-3">
-      Servicios
-    </p>
-    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4">
-      Soluciones de sourcing y trading a la medida de tu negocio
-    </h1>
-    <p class="text-slate-600 max-w-3xl">
-      Te acompañamos desde la búsqueda de proveedores hasta la llegada del producto a tu país, 
-      con servicios modulares que se adaptan a tu nivel de experiencia, presupuesto y objetivos.
-    </p>
-  </div>
-</section>
-
-<section class="py-16 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-2xl md:text-3xl font-bold mb-6 text-slate-900">Servicios principales</h2>
-    <p class="text-slate-600 mb-10 max-w-2xl">
-      Cada servicio puede contratarse de forma independiente o como parte de un plan integral.
-    </p>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <article class="bg-white rounded-lg shadow-md p-6">
-        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
-          <i class="fas fa-search text-black"></i>
-        </div>
-        <h3 class="font-bold text-lg mb-2">Sourcing de proveedores</h3>
-        <p class="text-sm text-slate-600 mb-3">
-          Búsqueda y selección de fábricas en China alineadas con tu producto, cantidad mínima, 
-          certificaciones requeridas y nivel de calidad.
-        </p>
-        <ul class="text-sm text-slate-600 space-y-1">
-          <li>• Investigación de mercado y benchmarking</li>
-          <li>• Filtro inicial de proveedores</li>
-          <li>• Contacto directo con fábricas</li>
-          <li>• Matriz comparativa de opciones</li>
-        </ul>
-      </article>
-
-      <article class="bg-white rounded-lg shadow-md p-6">
-        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
-          <i class="fas fa-handshake text-black"></i>
-        </div>
-        <h3 class="font-bold text-lg mb-2">Negociación con fábricas</h3>
-        <p class="text-sm text-slate-600 mb-3">
-          Negociamos términos que protejan tu margen y tu marca, sin sacrificar la calidad del producto.
-        </p>
-        <ul class="text-sm text-slate-600 space-y-1">
-          <li>• Negociación de precios y condiciones de pago</li>
-          <li>• Ajuste de MOQ (cantidad mínima de pedido)</li>
-          <li>• Revisión de contratos y cláusulas</li>
-          <li>• Coordinación de muestras</li>
-        </ul>
-      </article>
-
-      <article class="bg-white rounded-lg shadow-md p-6">
-        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
-          <i class="fas fa-cube text-black"></i>
-        </div>
-        <h3 class="font-bold text-lg mb-2">Desarrollo de producto</h3>
-        <p class="text-sm text-slate-600 mb-3">
-          Te ayudamos a transformar una idea en un producto listo para producir y escalar.
-        </p>
-        <ul class="text-sm text-slate-600 space-y-1">
-          <li>• Ajustes en diseño, materiales y especificaciones técnicas</li>
-          <li>• Desarrollo de marca privada (private label)</li>
-          <li>• Diseño de packaging y manuales</li>
-          <li>• Coordinación de prototipos y pruebas</li>
-        </ul>
-      </article>
-
-      <article class="bg-white rounded-lg shadow-md p-6">
-        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
-          <i class="fas fa-ship text-black"></i>
-        </div>
-        <h3 class="font-bold text-lg mb-2">Asesoría en importación</h3>
-        <p class="text-sm text-slate-600 mb-3">
-          Acompañamiento en todo el proceso logístico y documental de la importación.
-        </p>
-        <ul class="text-sm text-slate-600 space-y-1">
-          <li>• Elección del incoterm adecuado</li>
-          <li>• Estimación de costos reales (FOB, CIF, impuestos, etc.)</li>
-          <li>• Coordinación con agencia de carga y aduana</li>
-          <li>• Revisión de documentos (BL, factura, packing list)</li>
-        </ul>
-      </article>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="py-16 bg-white">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-2xl md:text-3xl font-bold mb-6 text-slate-900">Planes de trabajo</h2>
-    <p class="text-slate-600 mb-10 max-w-2xl">
-      Elige el nivel de acompañamiento que necesitas. No mostramos precios públicos; 
-      cada proyecto se cotiza según volumen, categoría de producto y complejidad.
-    </p>
-
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-gray-50 border border-slate-200 rounded-xl p-8 flex flex-col">
-        <h3 class="text-xl font-bold mb-2">Plan Básico</h3>
-        <p class="text-sm text-slate-600 mb-4">Ideal para validar una idea o tu primer producto.</p>
-        <ul class="text-sm text-slate-600 space-y-2 mb-6 flex-1">
-          <li>• Búsqueda y filtro de proveedores</li>
-          <li>• Validación inicial de fábricas</li>
-          <li>• Matriz comparativa con 3–5 opciones</li>
-          <li>• Recomendaciones de siguiente paso</li>
-        </ul>
-        <a href="index.html#contact" class="inline-block text-center bg-white border border-slate-300 text-slate-800 px-6 py-3 rounded-md font-semibold hover:border-blue-900 hover:text-blue-900 transition">
-          Solicitar detalle del plan
-        </a>
+  <!-- FOOTER (idéntico a index) -->
+  <footer class="bg-[#0B1220] text-gray-300 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="text-white font-serif font-semibold text-lg mb-4">Latam Sourcing</h3>
+          <p class="text-sm text-gray-400">
+            Tu socio de confianza para importar desde China de forma segura y rentable.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Secciones</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="about.html" class="hover:text-white transition">Nuestra Historia</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Servicios</a></li>
+            <li><a href="resources.html" class="hover:text-white transition">Recursos</a></li>
+            <li><a href="index.html#contact" class="hover:text-white transition">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Contacto</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="index.html#contact" class="hover:text-white transition">Formulario</a></li>
+            <li><a href="https://wa.me/593XXXXXXXXX" target="_blank" class="hover:text-white transition">Trabaja con nosotros</a></li>
+            <li><a href="mailto:contacto@latamsourcing.com" class="hover:text-white transition">Email</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-white transition">Política de privacidad</a></li>
+            <li><a href="#" class="hover:text-white transition">Términos</a></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="bg-white border-2 border-blue-900 rounded-xl p-8 shadow-md relative flex flex-col">
-        <span class="absolute -top-3 right-6 bg-blue-900 text-white text-xs font-semibold px-3 py-1 rounded-full">
-          Más elegido
-        </span>
-        <h3 class="text-xl font-bold mb-2">Plan Pro</h3>
-        <p class="text-sm text-slate-600 mb-4">Para quienes buscan negociar mejor y reducir riesgos.</p>
-        <ul class="text-sm text-slate-600 space-y-2 mb-6 flex-1">
-          <li>• Todo lo del Plan Básico</li>
-          <li>• Negociación de precios, MOQ y plazos</li>
-          <li>• Análisis de costos reales por unidad</li>
-          <li>• Revisión de condiciones comerciales</li>
-          <li>• Acompañamiento hasta confirmar el pedido</li>
-        </ul>
-        <a href="index.html#contact" class="inline-block text-center bg-black text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-900 hover:text-white transition">
-          Solicitar detalle del plan
-        </a>
-      </div>
-
-      <div class="bg-gray-50 border border-slate-200 rounded-xl p-8 flex flex-col">
-        <h3 class="text-xl font-bold mb-2">Plan Full</h3>
-        <p class="text-sm text-slate-600 mb-4">Acompañamiento completo hasta que el producto llega a tu país.</p>
-        <ul class="text-sm text-slate-600 space-y-2 mb-6 flex-1">
-          <li>• Todo lo del Plan Pro</li>
-          <li>• Coordinación de producción y tiempos</li>
-          <li>• Control de calidad en fábrica (QC)</li>
-          <li>• Coordinación logística con tu freight forwarder</li>
-          <li>• Seguimiento hasta la entrega final</li>
-        </ul>
-        <a href="index.html#contact" class="inline-block text-center bg-white border border-slate-300 text-slate-800 px-6 py-3 rounded-md font-semibold hover:border-blue-900 hover:text-blue-900 transition">
-          Solicitar detalle del plan
-        </a>
+      <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-400">
+        <p>© 2026 Latam Sourcing. Todos los derechos reservados.</p>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<section class="py-16 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-2xl md:text-3xl font-bold mb-6 text-slate-900">Extras y valor agregado</h2>
-    <p class="text-slate-600 mb-10 max-w-2xl">
-      Servicios complementarios que potencian tu marca y te diferencian de la competencia.
-    </p>
+  <!-- BACK TO TOP BUTTON -->
+  <button id="backToTop" aria-label="Volver arriba" title="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="bg-white rounded-lg shadow-sm p-6 text-center">
-        <div class="text-3xl text-blue-600 mb-3">
-          <i class="fas fa-palette"></i>
-        </div>
-        <h3 class="font-semibold mb-1">Personalización de logo</h3>
-        <p class="text-sm text-slate-600">
-          Aplicamos tu marca en producto, etiquetas, manuales y empaques.
-        </p>
-      </div>
+  <script>
+    // Header shadow on scroll
+    (function(){
+      const header = document.getElementById('siteHeader');
+      function onScroll(){
+        if (window.scrollY > 10) header.classList.add('is-scrolled');
+        else header.classList.remove('is-scrolled');
+      }
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+    })();
 
-      <div class="bg-white rounded-lg shadow-sm p-6 text-center">
-        <div class="text-3xl text-blue-600 mb-3">
-          <i class="fas fa-box"></i>
-        </div>
-        <h3 class="font-semibold mb-1">Branding y packaging</h3>
-        <p class="text-sm text-slate-600">
-          Diseñamos empaques que reflejan el valor de tu marca y el mercado objetivo.
-        </p>
-      </div>
+    // Mobile menu
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.toggle('hidden');
+    });
 
-      <div class="bg-white rounded-lg shadow-sm p-6 text-center">
-        <div class="text-3xl text-blue-600 mb-3">
-          <i class="fas fa-trademark"></i>
-        </div>
-        <h3 class="font-semibold mb-1">Marca privada (private label)</h3>
-        <p class="text-sm text-slate-600">
-          Te ayudamos a construir tu propia marca sobre productos fabricados en China.
-        </p>
-      </div>
+    // Back to top show/hide + action
+    (function(){
+      const btn = document.getElementById('backToTop');
+      const showAfter = 420;
 
-      <div class="bg-white rounded-lg shadow-sm p-6 text-center">
-        <div class="text-3xl text-blue-600 mb-3">
-          <i class="fas fa-tools"></i>
-        </div>
-        <h3 class="font-semibold mb-1">Mejora de producto</h3>
-        <p class="text-sm text-slate-600">
-          Ajustamos calidad, materiales y presentación según feedback de tus clientes.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+      function toggle(){
+        if (window.scrollY > showAfter) btn.classList.add('show');
+        else btn.classList.remove('show');
+      }
 
-<section class="py-16 bg-black text-white">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <h2 class="text-2xl md:text-3xl font-bold mb-4">
-      ¿Listo para estructurar tu próximo proyecto de importación?
-    </h2>
-    <p class="max-w-2xl mx-auto mb-6 text-gray-300">
-      Cuéntanos qué quieres importar, en qué país estás y qué nivel de inversión estimas. 
-      Te proponemos el plan más adecuado para ti.
-    </p>
-    <a href="index.html#contact" class="inline-block bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition">
-      Hablar con el equipo
-    </a>
-  </div>
-</section>
+      window.addEventListener('scroll', toggle, { passive: true });
+      toggle();
 
-<footer class="bg-gray-900 text-gray-400 py-12">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="grid md:grid-cols-4 gap-8 mb-8">
-      <div>
-        <h3 class="text-white font-bold text-lg mb-4">Latam Sourcing</h3>
-        <p class="text-sm">
-          Tu socio de confianza para importar desde China de forma segura y rentable.
-        </p>
-      </div>
-      <div>
-        <h4 class="text-white font-semibold mb-4">Servicios</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="services.html" class="hover:text-white transition">Sourcing</a></li>
-          <li><a href="services.html" class="hover:text-white transition">Negociación</a></li>
-          <li><a href="services.html" class="hover:text-white transition">Desarrollo de producto</a></li>
-          <li><a href="services.html" class="hover:text-white transition">Asesoría</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white font-semibold mb-4">Recursos</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="resources.html" class="hover:text-white transition">Guías</a></li>
-          <li><a href="resources.html" class="hover:text-white transition">Clases gratuitas</a></li>
-          <li><a href="resources.html" class="hover:text-white transition">Calculadora</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white font-semibold mb-4">Contacto</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="index.html#contact" class="hover:text-white transition">Formulario</a></li>
-          <li><a href="https://wa.me/593XXXXXXXXX" target="_blank" class="hover:text-white transition">WhatsApp</a></li>
-          <li><a href="mailto:contacto@latamsourcing.com" class="hover:text-white transition">Email</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="border-t border-gray-800 pt-8 text-center text-sm">
-      <p>© 2026 Latam Sourcing. Todos los derechos reservados.</p>
-    </div>
-  </div>
-</footer>
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
 
-<script>
-  document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-    const menu = document.getElementById('mobileMenu');
-    menu.classList.toggle('hidden');
-  });
-</script>
+    // ===== VIDEO PREVIEW INTERACTIVO (estilo Glass Factory) - SIN SONIDO =====
+    (function(){
+      const previews = document.querySelectorAll('.service-video-preview');
+      if (!previews.length) return;
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      previews.forEach(preview => {
+        const poster = preview.querySelector('.service-poster');
+        const video = preview.querySelector('.service-video');
+        const videoSrc = preview.getAttribute('data-video');
+        
+        if (!video || !videoSrc) return;
+
+        let isPlaying = false;
+        let hasLoadedVideo = false;
+
+        // Función para cargar el video (lazy-load)
+        function loadVideo() {
+          if (hasLoadedVideo) return;
+          
+          if (!video.querySelector('source').hasAttribute('src')) {
+            video.querySelector('source').setAttribute('src', videoSrc);
+            video.load();
+          }
+          hasLoadedVideo = true;
+        }
+
+        // Función para reproducir video (SIN SONIDO)
+        function playVideo() {
+          if (prefersReducedMotion) return;
+          
+          loadVideo();
+          preview.classList.add('is-playing');
+          video.play().catch(err => {
+            console.log('Video play prevented:', err);
+          });
+          isPlaying = true;
+        }
+
+        // Función para pausar video
+        function pauseVideo() {
+          preview.classList.remove('is-playing');
+          video.pause();
+          video.currentTime = 0;
+          isPlaying = false;
+        }
+
+        // Función toggle para móvil
+        function toggleVideo() {
+          if (isPlaying) {
+            pauseVideo();
+          } else {
+            playVideo();
+          }
+        }
+
+        // Desktop: hover
+        if (!('ontouchstart' in window)) {
+          preview.addEventListener('mouseenter', playVideo);
+          preview.addEventListener('mouseleave', pauseVideo);
+        }
+
+        // Móvil + Desktop: click/tap
+        preview.addEventListener('click', (e) => {
+          e.preventDefault();
+          toggleVideo();
+        });
+
+        // Accesibilidad: teclado (Enter/Space)
+        preview.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleVideo();
+          }
+        });
+
+        // Cleanup cuando el video se pausa
+        video.addEventListener('pause', () => {
+          if (isPlaying) {
+            preview.classList.remove('is-playing');
+            isPlaying = false;
+          }
+        });
+
+        // Intersection Observer para precargar
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !hasLoadedVideo) {
+                if (!video.querySelector('source').hasAttribute('src')) {
+                  video.querySelector('source').setAttribute('src', videoSrc);
+                  video.setAttribute('preload', 'metadata');
+                  video.load();
+                }
+              }
+            });
+          }, {
+            rootMargin: '200px'
+          });
+
+          observer.observe(preview);
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
+
+
