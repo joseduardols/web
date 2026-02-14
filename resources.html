@@ -6,258 +6,744 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Recursos gratuitos para aprender a importar desde China: guías, clases, herramientas y contenido educativo.">
   
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Font Awesome para iconos -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Fuentes (igual que index) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { 
+      font-family: 'Inter', sans-serif;
+      position: relative;
+    }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-elegant { font-family: "Cormorant Garamond", serif; }
+
+    :root{
+      --accent: #2563EB;
+      --text: #0B1220;
+      --muted: #4B5563;
+      --border: #E5E7EB;
+    }
+
+    /* Degradado global visible (blanco → crema/hueso) - IGUAL QUE INDEX */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        #FFFFFF 0%,
+        #FFFFFF 20%,
+        #FAF8F3 40%,
+        #F5F2EA 60%,
+        #F0EBE3 80%,
+        #EBE6DD 100%
+      );
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Limpiar fondos duros */
+    .clean-bg {
+      background: transparent !important;
+    }
+
+    /* ===== HEADER (estilo Noble) - IGUAL QUE INDEX ===== */
+    #siteHeader{
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 28px rgba(11,18,32,0.08);
+      transition: box-shadow .22s ease, background .22s ease;
+    }
+    #siteHeader.is-scrolled{
+      box-shadow: 0 18px 46px rgba(11,18,32,0.14);
+      background: rgba(255,255,255,0.98);
+    }
+
+    /* Links del nav */
+    .navlink{
+      position: relative;
+      padding: 10px 2px;
+      color: rgba(11,18,32,0.80);
+      transition: color .2s ease;
+    }
+
+    .navlink::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:4px;
+      height:2px;
+      background: rgba(11,18,32,0.95);
+      border-radius:999px;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .2s ease;
+    }
+
+    .navlink:hover{
+      color: rgba(11,18,32,1);
+    }
+
+    .navlink:hover::after{
+      transform: scaleX(1);
+    }
+
+    .navlink.active{
+      color: rgba(11,18,32,1);
+    }
+    .navlink.active::after{
+      transform: scaleX(1);
+    }
+
+    .brandmark{
+      display:block;
+      background: transparent;
+      filter: drop-shadow(0 6px 10px rgba(11,18,32,.12));
+      mix-blend-mode: multiply;
+    }
+
+    /* Back to top */
+    #backToTop{
+      position:fixed;
+      left:50%;
+      bottom:24px;
+      transform: translateX(-50%) translateY(10px);
+      width:56px;
+      height:56px;
+      border-radius:999px;
+      background:#0B1220;
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:0 14px 34px rgba(11,18,32,0.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#FFFFFF;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .2s ease, transform .2s ease, background .2s ease;
+      z-index:9999;
+    }
+    #backToTop:hover{
+      background:#111827;
+    }
+    #backToTop.show{
+      opacity:1;
+      pointer-events:auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ===== VIDEO PREVIEW INTERACTIVO (estilo Glass Factory) ===== */
+    .resource-video-preview {
+      position: relative;
+      background: #E5E7EB;
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+      will-change: transform;
+    }
+
+    .resource-video-preview:hover {
+      transform: scale(1.02);
+      box-shadow: 0 40px 100px rgba(11, 18, 32, 0.15);
+    }
+
+    .resource-poster {
+      display: block;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    .resource-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .resource-video-preview.is-playing .resource-poster {
+      opacity: 0;
+    }
+
+    .resource-video-preview.is-playing .resource-video {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .resource-play-hint {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 8px 24px rgba(11, 18, 32, 0.2);
+    }
+
+    .resource-play-hint i {
+      color: #0B1220;
+      font-size: 20px;
+      margin-left: 3px;
+    }
+
+    .resource-video-preview:hover .resource-play-hint {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .resource-video-preview.is-playing .resource-play-hint {
+      opacity: 0;
+    }
+
+    .resource-video-preview:focus {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .resource-video-preview:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    @media (max-width: 768px) {
+      .resource-video-preview:hover {
+        transform: none;
+      }
+      
+      .resource-play-hint {
+        opacity: 0.8;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .resource-video-preview,
+      .resource-poster,
+      .resource-video,
+      .resource-play-hint {
+        transition: none !important;
+      }
+      
+      .resource-video-preview:hover {
+        transform: none;
+      }
+    }
+  </style>
 </head>
 
-<body class="font-sans text-gray-800 antialiased">
+<body class="text-gray-800 antialiased">
 
-<!-- HEADER (compartido) -->
-<header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <a href="index.html" class="text-2xl font-bold text-gray-900">Latam Sourcing</a>
+  <!-- HEADER (idéntico a index) -->
+  <header id="siteHeader" class="fixed top-0 left-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="relative h-20 flex items-center">
 
-    <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-800">
-      <a href="index.html" class="hover:text-blue-900 transition">Inicio</a>
-      <a href="services.html" class="hover:text-blue-900 transition">Servicios</a>
-      <a href="about.html" class="hover:text-blue-900 transition">Nuestra Historia</a>
-      <a href="resources.html" class="text-blue-900 font-semibold">Recursos</a>
-      <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md hover:bg-blue-900 hover:text-white transition">
-        Contacto
-      </a>
-    </nav>
-    
-    <!-- Mobile menu button -->
-    <button id="mobileMenuBtn" class="md:hidden text-gray-700">
-      <i class="fas fa-bars text-xl"></i>
-    </button>
-  </div>
-  
-  <!-- Mobile menu -->
-  <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
-    <nav class="flex flex-col px-6 py-4 space-y-3">
-      <a href="index.html" class="hover:text-blue-900 transition">Inicio</a>
-      <a href="services.html" class="hover:text-blue-900 transition">Servicios</a>
-      <a href="about.html" class="hover:text-blue-900 transition">Nuestra Historia</a>
-      <a href="resources.html" class="text-blue-900 font-semibold">Recursos</a>
-      <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md text-center hover:bg-blue-900 hover:text-white transition">Contacto</a>
-    </nav>
-  </div>
-</header>
-
-<!-- PAGE HERO / INTRO -->
-<section class="pt-28 pb-16 bg-white border-b border-slate-100">
-  <div class="max-w-7xl mx-auto px-6">
-    <p class="uppercase tracking-[0.25em] text-xs font-semibold text-blue-600 mb-3">
-      Recursos
-    </p>
-    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4">
-      Aprende a importar desde China con recursos prácticos
-    </h1>
-    <p class="text-slate-600 max-w-3xl">
-      Guías, clases y herramientas diseñadas para ayudarte a entender el proceso de importación 
-      desde cero y tomar mejores decisiones en tu negocio.
-    </p>
-  </div>
-</section>
-
-<!-- BLOQUES DE RECURSOS -->
-<section class="py-16 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="grid md:grid-cols-3 gap-8 mb-12">
-      <!-- Guía: Cómo importar desde China -->
-      <article class="bg-white rounded-lg shadow-md p-6 flex flex-col">
-        <div class="text-3xl text-blue-900 mb-3">
-          <i class="fas fa-book"></i>
-        </div>
-        <h2 class="font-bold text-lg mb-2">Guía básica: Cómo importar desde China</h2>
-        <p class="text-sm text-slate-600 mb-4 flex-1">
-          Un recorrido paso a paso por todo el proceso: desde la idea inicial hasta que el producto 
-          llega a tu país.
-        </p>
-        <ul class="text-sm text-slate-600 space-y-1 mb-4">
-          <li>• Qué debes tener claro antes de buscar proveedores.</li>
-          <li>• Conceptos clave: FOB, CIF, incoterms, MOQ, lead time.</li>
-          <li>• Flujo general de una importación bien estructurada.</li>
-        </ul>
-        <a href="index.html#contact" class="text-blue-600 font-semibold text-sm hover:underline">
-          Descargar guía en PDF →
+        <!-- Izquierda: Logo + texto -->
+        <a href="index.html" class="flex items-center gap-3 shrink-0">
+          <img
+            src="assets/logo latam.png"
+            alt="Latam Sourcing"
+            class="h-11 md:h-12 w-auto block brandmark"
+            style="filter: drop-shadow(0 6px 10px rgba(11,18,32,.14));"
+          >
+          <span class="font-serif text-[22px] md:text-2xl font-semibold text-[color:var(--text)] tracking-tight leading-none">
+            Latam Sourcing
+          </span>
         </a>
-      </article>
 
-      <!-- Errores comunes -->
-      <article class="bg-white rounded-lg shadow-md p-6 flex flex-col">
-        <div class="text-3xl text-blue-900 mb-3">
-          <i class="fas fa-exclamation-triangle"></i>
-        </div>
-        <h2 class="font-bold text-lg mb-2">Errores comunes al empezar</h2>
-        <p class="text-sm text-slate-600 mb-4 flex-1">
-          Lecciones aprendidas de proyectos reales para evitar perder tiempo y dinero.
-        </p>
-        <ul class="text-sm text-slate-600 space-y-1 mb-4">
-          <li>• Confiar solo en fotos o catálogos.</li>
-          <li>• Elegir al proveedor solo por precio.</li>
-          <li>• No considerar costos ocultos ni tiempos reales.</li>
-        </ul>
-        <a href="index.html#contact" class="text-blue-600 font-semibold text-sm hover:underline">
-          Acceder al contenido →
-        </a>
-      </article>
+        <!-- Centro: Nav centrado -->
+        <nav class="hidden md:flex items-center gap-10 text-sm font-medium absolute left-1/2 -translate-x-1/2">
+          <a href="index.html" class="navlink">Inicio</a>
+          <a href="services.html" class="navlink">Servicios</a>
+          <a href="about.html" class="navlink">Nuestra Historia</a>
+          <a href="resources.html" class="navlink active">Recursos</a>
+        </nav>
 
-      <!-- Costos reales -->
-      <article class="bg-white rounded-lg shadow-md p-6 flex flex-col">
-        <div class="text-3xl text-blue-900 mb-3">
-          <i class="fas fa-calculator"></i>
-        </div>
-        <h2 class="font-bold text-lg mb-2">Cómo calcular costos reales</h2>
-        <p class="text-sm text-slate-600 mb-4 flex-1">
-          Entiende cuánto te cuesta realmente cada unidad puesta en tu bodega.
-        </p>
-        <ul class="text-sm text-slate-600 space-y-1 mb-4">
-          <li>• Costos de producto, flete, seguros y aduana.</li>
-          <li>• Impuestos, aranceles y gastos locales.</li>
-          <li>• Margen recomendado según categoría.</li>
-        </ul>
-        <a href="index.html#contact" class="text-blue-600 font-semibold text-sm hover:underline">
-          Solicitar plantilla de cálculo →
-        </a>
-      </article>
-    </div>
-
-    <!-- CLASES / VIDEOS -->
-    <div class="bg-white rounded-xl shadow-md p-8 mb-12">
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <div>
-          <h2 class="text-2xl font-bold mb-3 text-slate-900">
-            Clase gratuita: Introducción a la importación desde China
-          </h2>
-          <p class="text-slate-600 mb-4">
-            Una sesión pensada para principiantes donde explicamos el proceso completo de forma clara 
-            y sin tecnicismos innecesarios.
-          </p>
-          <ul class="text-sm text-slate-600 space-y-2 mb-4">
-            <li>• Dónde buscar productos con potencial.</li>
-            <li>• Cómo evaluar si un producto es viable para importar.</li>
-            <li>• Qué puedes esperar en tiempos y montos mínimos.</li>
-          </ul>
-          <a href="index.html#contact" class="inline-block bg-black text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-900 hover:text-white transition text-sm">
-            Acceder a la clase gratuita
+        <!-- Derecha: CTA -->
+        <div class="hidden md:flex items-center ml-auto">
+          <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md hover:bg-[color:var(--accent)] transition">
+            Contacto
           </a>
         </div>
-        <div class="bg-gray-50 rounded-lg p-6 text-center">
-          <div class="text-4xl text-blue-900 mb-4">
-            <i class="fas fa-video"></i>
+
+        <!-- Mobile -->
+        <button id="mobileMenuBtn" class="md:hidden ml-auto text-gray-700">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t" style="border-color: var(--border);">
+      <nav class="flex flex-col px-6 py-4 space-y-3 text-sm font-medium">
+        <a href="index.html" class="hover:text-[color:var(--accent)] transition">Inicio</a>
+        <a href="services.html" class="hover:text-[color:var(--accent)] transition">Servicios</a>
+        <a href="about.html" class="hover:text-[color:var(--accent)] transition">Nuestra Historia</a>
+        <a href="resources.html" class="hover:text-[color:var(--accent)] transition">Recursos</a>
+        <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md text-center hover:bg-[color:var(--accent)] transition">
+          Contacto
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="pt-32 md:pt-36 pb-16 clean-bg">
+    <div class="max-w-7xl mx-auto px-6">
+      <p class="uppercase tracking-[0.25em] text-xs font-bold text-[color:var(--accent)] mb-3">
+        Recursos
+      </p>
+      <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+        Aprende a importar desde China con recursos prácticos
+      </h1>
+      <p class="text-[color:var(--muted)] text-lg md:text-xl max-w-3xl leading-relaxed">
+        Guías, clases y herramientas diseñadas para ayudarte a entender el proceso de importación 
+        desde cero y tomar mejores decisiones en tu negocio.
+      </p>
+    </div>
+  </section>
+
+  <!-- RECURSOS CON VIDEO PREVIEW (copiados exactamente del index) -->
+  <section class="py-28 clean-bg">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- Header centrado -->
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5">
+          Recursos para principiantes
+        </h2>
+        <p class="text-[color:var(--muted)] text-lg leading-relaxed">
+          Guías y materiales prácticos para entender el proceso de importación desde cero.
+        </p>
+      </div>
+
+      <!-- Recurso 1: Imagen IZQUIERDA -->
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-28">
+        <div class="order-2 md:order-1">
+          <!-- Video Preview Container -->
+          <div 
+            class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
+            tabindex="0"
+            role="button"
+            aria-label="Ver preview de Guía paso a paso"
+            data-poster="assets/guia-paso-poster.jpg"
+            data-video="assets/guia-paso-video.mp4"
+          >
+            <img 
+              src="assets/guia-paso-poster.jpg" 
+              alt="Guía paso a paso" 
+              class="resource-poster w-full h-full object-cover"
+              style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"
+            >
+            <video 
+              class="resource-video w-full h-full object-cover"
+              playsinline
+              loop
+              preload="none"
+            >
+              <source src="assets/guia-paso-video.mp4" type="video/mp4">
+            </video>
+            <!-- Play hint overlay -->
+            <div class="resource-play-hint">
+              <i class="fas fa-play"></i>
+            </div>
           </div>
-          <p class="text-sm text-slate-600 mb-2">
-            La clase se envía en formato video con material complementario descargable.
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="inline-block px-3 py-1 bg-blue-50 text-[color:var(--accent)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+            GUÍA GRATUITA
+          </div>
+          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+            Guía paso a paso
+          </h3>
+          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-6">
+            Desde encontrar proveedores hasta recibir tu mercancía. Un recorrido completo por cada etapa del proceso de importación desde China, con ejemplos reales y plantillas descargables.
           </p>
-          <p class="text-sm text-slate-600">
-            Solo tienes que dejarnos tu email y país para recibir el acceso.
+          <a href="index.html#contact" class="inline-flex items-center gap-2 text-[color:var(--accent)] font-semibold text-lg hover:gap-3 transition-all">
+            Descargar guía gratuita
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Recurso 2: Imagen DERECHA -->
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-28">
+        <div>
+          <div class="inline-block px-3 py-1 bg-amber-50 text-amber-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+            CHECKLIST
+          </div>
+          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+            Errores comunes
+          </h3>
+          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-6">
+            Evita las pérdidas típicas al comenzar. Lista completa de errores frecuentes que cometen los importadores novatos y cómo prevenirlos antes de hacer tu primera orden.
           </p>
+          <a href="index.html#contact" class="inline-flex items-center gap-2 text-amber-600 font-semibold text-lg hover:gap-3 transition-all">
+            Ver checklist completo
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div>
+          <!-- Video Preview Container -->
+          <div 
+            class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
+            tabindex="0"
+            role="button"
+            aria-label="Ver preview de Errores comunes"
+            data-poster="assets/errores-poster.jpg"
+            data-video="assets/errores-video.mp4"
+          >
+            <img 
+              src="assets/errores-poster.jpg" 
+              alt="Errores comunes" 
+              class="resource-poster w-full h-full object-cover"
+              style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"
+            >
+            <video 
+              class="resource-video w-full h-full object-cover"
+              playsinline
+              loop
+              preload="none"
+            >
+              <source src="assets/errores-video.mp4" type="video/mp4">
+            </video>
+            <!-- Play hint overlay -->
+            <div class="resource-play-hint">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recurso 3: Imagen IZQUIERDA -->
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="order-2 md:order-1">
+          <!-- Video Preview Container -->
+          <div 
+            class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
+            tabindex="0"
+            role="button"
+            aria-label="Ver preview de Costos reales"
+            data-poster="assets/costos-poster.jpg"
+            data-video="assets/costos-video.mp4"
+          >
+            <img 
+              src="assets/costos-poster.jpg" 
+              alt="Calculadora de costos" 
+              class="resource-poster w-full h-full object-cover"
+              style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"
+            >
+            <video 
+              class="resource-video w-full h-full object-cover"
+              playsinline
+              loop
+              preload="none"
+            >
+              <source src="assets/costos-video.mp4" type="video/mp4">
+            </video>
+            <!-- Play hint overlay -->
+            <div class="resource-play-hint">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="inline-block px-3 py-1 bg-green-50 text-green-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+            CALCULADORA
+          </div>
+          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+            Costos reales
+          </h3>
+          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-6">
+            Cómo calcular tu costo por unidad y margen real. Herramienta práctica para estimar inversión total incluyendo todos los gastos ocultos que nadie te cuenta.
+          </p>
+          <a href="index.html#contact" class="inline-flex items-center gap-2 text-green-600 font-semibold text-lg hover:gap-3 transition-all">
+            Usar calculadora
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 clean-bg">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl shadow-lg p-8 border border-[color:var(--border)] hover:shadow-xl transition">
+          <h2 class="font-serif text-2xl font-semibold text-[color:var(--text)] mb-4">
+            ¿Es para mí importar desde China?
+          </h2>
+          <p class="text-[color:var(--muted)] leading-relaxed mb-4">
+            Si tienes una idea de producto, ya vendes en tu país o quieres lanzar tu propia marca, 
+            probablemente sí. La clave está en elegir bien qué importar y en qué etapa estás.
+          </p>
+          <p class="text-[color:var(--muted)] leading-relaxed">
+            En nuestros recursos te damos criterios claros para evaluar si tiene sentido para ti 
+            en este momento.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-8 border border-[color:var(--border)] hover:shadow-xl transition">
+          <h2 class="font-serif text-2xl font-semibold text-[color:var(--text)] mb-4">
+            ¿Cómo acceso a estos recursos?
+          </h2>
+          <p class="text-[color:var(--muted)] leading-relaxed mb-4">
+            De momento no están disponibles para descarga directa. Te los compartimos de forma 
+            personalizada según tu proyecto.
+          </p>
+          <p class="text-[color:var(--muted)] leading-relaxed mb-4">
+            Solo tienes que escribirnos por WhatsApp o completar el formulario de contacto indicando 
+            que vienes desde la sección de recursos.
+          </p>
+          <a href="index.html#contact" class="inline-flex items-center gap-2 text-[color:var(--accent)] font-semibold hover:gap-3 transition-all">
+            Ir al formulario de contacto
+            <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- FAQ -->
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-white rounded-lg shadow-sm p-6">
-        <h2 class="font-bold text-lg mb-3 text-slate-900">¿Es para mí importar desde China?</h2>
-        <p class="text-sm text-slate-600 mb-3">
-          Si tienes una idea de producto, ya vendes en tu país o quieres lanzar tu propia marca, 
-          probablemente sí. La clave está en elegir bien qué importar y en qué etapa estás.
-        </p>
-        <p class="text-sm text-slate-600">
-          En nuestros recursos te damos criterios claros para evaluar si tiene sentido para ti 
-          en este momento.
-        </p>
+  <!-- CTA (fondo blanco sólido antes del footer) -->
+  <section class="py-20 bg-white relative z-10">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5">
+        ¿Quieres que te enviemos el recurso más adecuado para tu caso?
+      </h2>
+      <p class="max-w-2xl mx-auto mb-8 text-[color:var(--muted)] text-lg leading-relaxed">
+        Cuéntanos si estás empezando, si ya importas o si estás lanzando una marca nueva. 
+        Te sugerimos por dónde empezar.
+      </p>
+      <a href="index.html#contact" class="inline-block bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-[color:var(--accent)] transition text-lg">
+        Hablar con el equipo
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER (idéntico a index) -->
+  <footer class="bg-[#0B1220] text-gray-300 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="text-white font-serif font-semibold text-lg mb-4">Latam Sourcing</h3>
+          <p class="text-sm text-gray-400">
+            Tu socio de confianza para importar desde China de forma segura y rentable.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Secciones</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="about.html" class="hover:text-white transition">Nuestra Historia</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Servicios</a></li>
+            <li><a href="resources.html" class="hover:text-white transition">Recursos</a></li>
+            <li><a href="index.html#contact" class="hover:text-white transition">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Contacto</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="index.html#contact" class="hover:text-white transition">Formulario</a></li>
+            <li><a href="https://wa.me/593XXXXXXXXX" target="_blank" class="hover:text-white transition">Trabaja con nosotros</a></li>
+            <li><a href="mailto:contacto@latamsourcing.com" class="hover:text-white transition">Email</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-white transition">Política de privacidad</a></li>
+            <li><a href="#" class="hover:text-white transition">Términos</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="bg-white rounded-lg shadow-sm p-6">
-        <h2 class="font-bold text-lg mb-3 text-slate-900">¿Cómo acceso a estos recursos?</h2>
-        <p class="text-sm text-slate-600 mb-3">
-          De momento no están disponibles para descarga directa. Te los compartimos de forma 
-          personalizada según tu proyecto.
-        </p>
-        <p class="text-sm text-slate-600 mb-3">
-          Solo tienes que escribirnos por WhatsApp o completar el formulario de contacto indicando 
-          que vienes desde la sección de recursos.
-        </p>
-        <a href="index.html#contact" class="text-blue-600 font-semibold text-sm hover:underline">
-          Ir al formulario de contacto →
-        </a>
+
+      <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-400">
+        <p>© 2026 Latam Sourcing. Todos los derechos reservados.</p>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- CTA FINAL -->
-<section class="py-16 bg-black text-white">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <h2 class="text-2xl md:text-3xl font-bold mb-4">
-      ¿Quieres que te enviemos el recurso más adecuado para tu caso?
-    </h2>
-    <p class="max-w-2xl mx-auto mb-6 text-gray-300">
-      Cuéntanos si estás empezando, si ya importas o si estás lanzando una marca nueva. 
-      Te sugerimos por dónde empezar.
-    </p>
-    <a href="index.html#contact" class="inline-block bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition">
-      Hablar con el equipo
-    </a>
-  </div>
-</section>
+  <!-- BACK TO TOP BUTTON -->
+  <button id="backToTop" aria-label="Volver arriba" title="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-<!-- FOOTER -->
-<footer class="bg-gray-900 text-gray-400 py-12">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="grid md:grid-cols-4 gap-8 mb-8">
-      <div>
-        <h3 class="text-white font-bold text-lg mb-4">Latam Sourcing</h3>
-        <p class="text-sm">
-          Tu socio de confianza para importar desde China de forma segura y rentable.
-        </p>
-      </div>
-      <div>
-        <h4 class="text-white font-semibold mb-4">Servicios</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="services.html" class="hover:text-white transition">Sourcing</a></li>
-          <li><a href="services.html" class="hover:text-white transition">Negociación</a></li>
-          <li><a href="services.html" class="hover:text-white transition">Desarrollo de producto</a></li>
-          <li><a href="services.html" class="hover:text-white transition">Asesoría</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white font-semibold mb-4">Recursos</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="resources.html" class="hover:text-white transition">Guías</a></li>
-          <li><a href="resources.html" class="hover:text-white transition">Clases gratuitas</a></li>
-          <li><a href="resources.html" class="hover:text-white transition">Calculadora</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white font-semibold mb-4">Contacto</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="index.html#contact" class="hover:text-white transition">Formulario</a></li>
-          <li><a href="https://wa.me/593XXXXXXXXX" target="_blank" class="hover:text-white transition">WhatsApp</a></li>
-          <li><a href="mailto:contacto@latamsourcing.com" class="hover:text-white transition">Email</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="border-t border-gray-800 pt-8 text-center text-sm">
-      <p>© 2026 Latam Sourcing. Todos los derechos reservados.</p>
-    </div>
-  </div>
-</footer>
+  <script>
+    // Header shadow on scroll
+    (function(){
+      const header = document.getElementById('siteHeader');
+      function onScroll(){
+        if (window.scrollY > 10) header.classList.add('is-scrolled');
+        else header.classList.remove('is-scrolled');
+      }
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+    })();
 
-<!-- JavaScript para menú móvil -->
-<script>
-  document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-    const menu = document.getElementById('mobileMenu');
-    menu.classList.toggle('hidden');
-  });
-</script>
+    // Mobile menu
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.toggle('hidden');
+    });
+
+    // Back to top show/hide + action
+    (function(){
+      const btn = document.getElementById('backToTop');
+      const showAfter = 420;
+
+      function toggle(){
+        if (window.scrollY > showAfter) btn.classList.add('show');
+        else btn.classList.remove('show');
+      }
+
+      window.addEventListener('scroll', toggle, { passive: true });
+      toggle();
+
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+
+    // ===== VIDEO PREVIEW INTERACTIVO (estilo Glass Factory) =====
+    (function(){
+      const previews = document.querySelectorAll('.resource-video-preview');
+      if (!previews.length) return;
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      previews.forEach(preview => {
+        const poster = preview.querySelector('.resource-poster');
+        const video = preview.querySelector('.resource-video');
+        const videoSrc = preview.getAttribute('data-video');
+        
+        if (!video || !videoSrc) return;
+
+        let isPlaying = false;
+        let hasLoadedVideo = false;
+
+        // Configurar volumen inicial (0.7 = 70%)
+        video.volume = 0.7;
+
+        function loadVideo() {
+          if (hasLoadedVideo) return;
+          
+          if (!video.querySelector('source').hasAttribute('src')) {
+            video.querySelector('source').setAttribute('src', videoSrc);
+            video.load();
+          }
+          hasLoadedVideo = true;
+        }
+
+        function playVideo() {
+          if (prefersReducedMotion) return;
+          
+          loadVideo();
+          preview.classList.add('is-playing');
+          
+          video.play().catch(err => {
+            console.log('Video play prevented:', err);
+            video.muted = true;
+            video.play().catch(e => console.log('Muted play also failed:', e));
+          });
+          
+          isPlaying = true;
+        }
+
+        function pauseVideo() {
+          preview.classList.remove('is-playing');
+          video.pause();
+          video.currentTime = 0;
+          isPlaying = false;
+        }
+
+        function toggleVideo() {
+          if (isPlaying) {
+            pauseVideo();
+          } else {
+            playVideo();
+          }
+        }
+
+        // Desktop: hover
+        if (!('ontouchstart' in window)) {
+          preview.addEventListener('mouseenter', playVideo);
+          preview.addEventListener('mouseleave', pauseVideo);
+        }
+
+        // Móvil + Desktop: click/tap
+        preview.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          if (video.muted && isPlaying) {
+            video.muted = false;
+            return;
+          }
+          
+          toggleVideo();
+        });
+
+        // Accesibilidad: teclado
+        preview.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            
+            if (video.muted && isPlaying) {
+              video.muted = false;
+              return;
+            }
+            
+            toggleVideo();
+          }
+        });
+
+        video.addEventListener('pause', () => {
+          if (isPlaying) {
+            preview.classList.remove('is-playing');
+            isPlaying = false;
+          }
+        });
+
+        // Intersection Observer
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !hasLoadedVideo) {
+                if (!video.querySelector('source').hasAttribute('src')) {
+                  video.querySelector('source').setAttribute('src', videoSrc);
+                  video.setAttribute('preload', 'metadata');
+                  video.load();
+                }
+              }
+            });
+          }, {
+            rootMargin: '200px'
+          });
+
+          observer.observe(preview);
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
+
 
