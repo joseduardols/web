@@ -2,24 +2,32 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
   <title>Nuestra Historia - Latam Sourcing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Conoce la historia, filosofía y enfoque de Latam Sourcing, empresa de sourcing y trading especializada en China.">
-  
+
+  <!-- Performance: preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Fuentes (igual que index) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     html { scroll-behavior: smooth; }
-    body { 
+    body {
       font-family: 'Inter', sans-serif;
       position: relative;
+      color: #64748b;
+      line-height: 1.7;
     }
     .font-serif { font-family: 'Playfair Display', serif; }
     .font-elegant { font-family: "Cormorant Garamond", serif; }
@@ -31,7 +39,7 @@
       --border: #E5E7EB;
     }
 
-    /* Degradado global visible (blanco → crema/hueso) - IGUAL QUE INDEX */
+    /* Degradado global visible (blanco → crema/hueso) */
     body::before {
       content: '';
       position: fixed;
@@ -53,11 +61,9 @@
     }
 
     /* Limpiar fondos duros */
-    .clean-bg {
-      background: transparent !important;
-    }
+    .clean-bg { background: transparent !important; }
 
-    /* ===== HEADER (estilo Noble) - IGUAL QUE INDEX ===== */
+    /* ===== HEADER (estilo Noble) ===== */
     #siteHeader{
       background: rgba(255,255,255,0.96);
       backdrop-filter: blur(10px);
@@ -77,7 +83,6 @@
       color: rgba(11,18,32,0.80);
       transition: color .2s ease;
     }
-
     .navlink::after{
       content:"";
       position:absolute;
@@ -91,21 +96,10 @@
       transform-origin: center;
       transition: transform .2s ease;
     }
-
-    .navlink:hover{
-      color: rgba(11,18,32,1);
-    }
-
-    .navlink:hover::after{
-      transform: scaleX(1);
-    }
-
-    .navlink.active{
-      color: rgba(11,18,32,1);
-    }
-    .navlink.active::after{
-      transform: scaleX(1);
-    }
+    .navlink:hover{ color: rgba(11,18,32,1); }
+    .navlink:hover::after{ transform: scaleX(1); }
+    .navlink.active{ color: rgba(11,18,32,1); }
+    .navlink.active::after{ transform: scaleX(1); }
 
     .brandmark{
       display:block;
@@ -135,9 +129,7 @@
       transition: opacity .2s ease, transform .2s ease, background .2s ease;
       z-index:9999;
     }
-    #backToTop:hover{
-      background:#111827;
-    }
+    #backToTop:hover{ background:#111827; }
     #backToTop.show{
       opacity:1;
       pointer-events:auto;
@@ -151,27 +143,22 @@
       transform-origin: center;
       will-change: transform;
     }
-
     .about-zoom-shell:hover{
       transform: scale(1.03);
       z-index: 20;
     }
-
     .about-zoom{
       position: relative;
       border-radius: 14px;
       overflow: hidden;
     }
-
     .about-zoom-img{
       transition: transform .55s cubic-bezier(.2,.8,.2,1);
       will-change: transform;
     }
-
     .about-zoom-shell:hover .about-zoom-img{
       transform: scale(1.06);
     }
-
     .about-zoom-hint{
       position:absolute;
       left:14px;
@@ -208,18 +195,15 @@
       pointer-events: none;
       transition: opacity .3s ease;
     }
-
     #imgLightbox.show{
       opacity: 1;
       pointer-events: auto;
     }
-
     #imgLightboxInner{
       position: relative;
       max-width: 90vw;
       max-height: 90vh;
     }
-
     #imgLightboxImg{
       max-width: 100%;
       max-height: 90vh;
@@ -227,7 +211,6 @@
       border-radius: 8px;
       box-shadow: 0 25px 80px rgba(0,0,0,0.5);
     }
-
     #imgLightboxClose{
       position: fixed;
       top: 24px;
@@ -245,10 +228,7 @@
       align-items: center;
       justify-content: center;
     }
-
-    #imgLightboxClose:hover{
-      background: rgba(255,255,255,0.25);
-    }
+    #imgLightboxClose:hover{ background: rgba(255,255,255,0.25); }
   </style>
 </head>
 
@@ -266,6 +246,9 @@
             alt="Latam Sourcing"
             class="h-11 md:h-12 w-auto block brandmark"
             style="filter: drop-shadow(0 6px 10px rgba(11,18,32,.14));"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
           >
           <span class="font-serif text-[22px] md:text-2xl font-semibold text-[color:var(--text)] tracking-tight leading-none">
             Latam Sourcing
@@ -318,7 +301,7 @@
         La historia detrás de Latam Sourcing
       </h1>
       <p class="text-[color:var(--muted)] text-lg md:text-xl max-w-3xl leading-relaxed">
-        Nacimos en la intersección entre Latinoamérica y China, con el objetivo de hacer que importar 
+        Nacimos en la intersección entre Latinoamérica y China, con el objetivo de hacer que importar
         sea un proceso estructurado, transparente y enfocado en el producto correcto.
       </p>
     </div>
@@ -342,7 +325,7 @@
 
       <!-- HISTORIAS (grid 2 columnas) -->
       <div class="grid md:grid-cols-2 gap-10 md:gap-16 mb-16">
-        
+
         <!-- Historia José -->
         <div>
           <!-- Imagen con zoom -->
@@ -352,6 +335,8 @@
                 src="assets/jose.JPG"
                 alt="José - Latam Sourcing"
                 class="w-full h-full object-cover about-zoom-img story-zoom-img"
+                loading="lazy"
+                decoding="async"
               >
               <div class="about-zoom-hint">Click para ampliar</div>
             </div>
@@ -360,10 +345,10 @@
           <!-- Texto en caja blanca -->
           <div class="bg-white p-8 md:p-10 shadow-xl rounded-lg border border-[color:var(--border)]">
             <h3 class="font-serif text-2xl md:text-3xl font-semibold text-[color:var(--text)] mb-2">José</h3>
-            <p class="text-sm text-[color:var(--muted)] mb-5">Ecuador • Co-Founder Latam Sourcing</p>
+            <p class="text-sm text-[color:var(--muted)] mb-5">Ecuador • CoFunder Latam Sourcing</p>
 
             <p class="text-[color:var(--muted)] leading-relaxed mb-5">
-              Soy de Ecuador. Desde joven estuve involucrado en negocios de
+              Soy de Ecuador y crecí en Santo Domingo. Desde joven estuve involucrado en negocios de
               ferretería y agricultura, desarrollando una obsesión por la logística, el control y la eficiencia.
             </p>
 
@@ -397,6 +382,8 @@
                 src="assets/yuchi.JPG"
                 alt="Yuchi - Latam Sourcing"
                 class="w-full h-full object-cover about-zoom-img story-zoom-img"
+                loading="lazy"
+                decoding="async"
               >
               <div class="about-zoom-hint">Click para ampliar</div>
             </div>
@@ -405,10 +392,10 @@
           <!-- Texto en caja blanca -->
           <div class="bg-white p-8 md:p-10 shadow-xl rounded-lg border border-[color:var(--border)]">
             <h3 class="font-serif text-2xl md:text-3xl font-semibold text-[color:var(--text)] mb-2">Yuchi</h3>
-            <p class="text-sm text-[color:var(--muted)] mb-5">China • Co-Founder Latama Sourcing</p>
+            <p class="text-sm text-[color:var(--muted)] mb-5">China • CoFunder Latam Sourcing</p>
 
             <p class="text-[color:var(--muted)] leading-relaxed mb-5">
-              Yuchi es un profesional chino y creció dentro del mundo de fábricas. Su familia tiene una
+              Yuchi es estudiante chino y creció dentro del mundo de fábricas. Su familia tiene una
               fábrica de alimentos para peces, y desde joven ha estado involucrado en producción,
               procesos y control de calidad.
             </p>
@@ -424,7 +411,7 @@
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-[color:var(--accent)] mt-1 font-bold">•</span>
-                <span>Apasionado producción y manufactura.</span>
+                <span>Apasionado por optimización, detalles técnicos y ejecución.</span>
               </li>
             </ul>
           </div>
@@ -453,7 +440,7 @@
           Metas y enfoque
         </h2>
         <p class="text-[color:var(--muted)] text-lg leading-relaxed">
-          Nuestra meta es que cada proyecto de importación que acompañamos tenga una base sólida, 
+          Nuestra meta es que cada proyecto de importación que acompañamos tenga una base sólida,
           métricas claras y una ejecución profesional.
         </p>
       </div>
@@ -464,7 +451,7 @@
             Para emprendedores
           </h3>
           <p class="text-[color:var(--muted)] leading-relaxed">
-            Ayudarte a lanzar tu primera importación con claridad, controlando riesgos y 
+            Ayudarte a lanzar tu primera importación con claridad, controlando riesgos y
             entendiendo números desde el primer día.
           </p>
         </div>
@@ -474,7 +461,7 @@
             Para marcas en crecimiento
           </h3>
           <p class="text-[color:var(--muted)] leading-relaxed">
-            Optimizar tu estructura de costos, mejorar producto y consolidar tu marca con 
+            Optimizar tu estructura de costos, mejorar producto y consolidar tu marca con
             proveedores confiables.
           </p>
         </div>
@@ -484,7 +471,7 @@
             Para empresas establecidas
           </h3>
           <p class="text-[color:var(--muted)] leading-relaxed">
-            Revisar tu cadena de suministro, detectar oportunidades de mejora y abrir nuevas 
+            Revisar tu cadena de suministro, detectar oportunidades de mejora y abrir nuevas
             líneas de producto con soporte en China.
           </p>
         </div>
@@ -492,14 +479,14 @@
     </div>
   </section>
 
-  <!-- CTA (fondo blanco sólido antes del footer) -->
+  <!-- CTA -->
   <section class="py-20 bg-white relative z-10">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5">
         ¿Quieres que te acompañemos en tu próximo proyecto de importación?
       </h2>
       <p class="max-w-2xl mx-auto mb-8 text-[color:var(--muted)] text-lg leading-relaxed">
-        Cuéntanos dónde estás hoy y a dónde quieres llegar. A partir de ahí, diseñamos 
+        Cuéntanos dónde estás hoy y a dónde quieres llegar. A partir de ahí, diseñamos
         un plan de trabajo juntos.
       </p>
       <a href="index.html#contact" class="inline-block bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-[color:var(--accent)] transition text-lg">
@@ -508,7 +495,7 @@
     </div>
   </section>
 
-  <!-- FOOTER (idéntico a index) -->
+  <!-- FOOTER -->
   <footer class="bg-[#0B1220] text-gray-300 py-12">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-4 gap-8 mb-8">
@@ -531,7 +518,7 @@
           <h4 class="text-white font-semibold mb-4">Contacto</h4>
           <ul class="space-y-2 text-sm text-gray-400">
             <li><a href="index.html#contact" class="hover:text-white transition">Formulario</a></li>
-            <li><a href="https://wa.me/593XXXXXXXXX" target="_blank" class="hover:text-white transition">Trabaja con nosotros</a></li>
+            <li><a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="hover:text-white transition">Trabaja con nosotros</a></li>
             <li><a href="mailto:contacto@latamsourcing.com" class="hover:text-white transition">Email</a></li>
           </ul>
         </div>
@@ -647,6 +634,7 @@
 
 </body>
 </html>
+
 
 
 
