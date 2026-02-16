@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Empresa de sourcing y trading especializada en conectar negocios con fabricantes confiables en China. Importación segura, rentable y sin improvisar.">
 
+  <!-- Performance: preconnect -->
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+  <link rel="dns-prefetch" href="https://res.cloudinary.com">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -14,11 +18,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-  
+
   <style>
-    
     html { scroll-behavior: smooth; }
-    body { 
+    body {
       font-family: 'Inter', sans-serif;
       position: relative;
       color: #64748b;
@@ -466,7 +469,7 @@
       .resource-video-preview:hover {
         transform: none;
       }
-      
+
       .resource-play-hint {
         opacity: 0.8;
       }
@@ -480,7 +483,7 @@
       .resource-play-hint {
         transition: none !important;
       }
-      
+
       .resource-video-preview:hover {
         transform: none;
       }
@@ -512,10 +515,7 @@
         transparent 100%
       );
     }
-
   </style>
-
- 
 </head>
 
 <body class="text-gray-800 antialiased">
@@ -532,12 +532,14 @@
             alt="Latam Sourcing"
             class="h-11 md:h-12 w-auto block brandmark"
             style="filter: drop-shadow(0 6px 10px rgba(11,18,32,.14));"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
           >
           <span class="font-serif text-[22px] md:text-2xl font-semibold text-[color:var(--text)] tracking-tight leading-none">
             Latam Sourcing
           </span>
         </a>
-        
 
         <!-- Centro: Nav realmente centrado -->
         <nav class="hidden md:flex items-center gap-10 text-sm font-medium absolute left-1/2 -translate-x-1/2">
@@ -596,28 +598,28 @@
 
         <div class="marquee-wrap">
           <div class="marquee-track">
-            <div class="marquee-item"><img src="assets/prada logo.png" alt="Prada" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/nike logo.png" alt="Nike" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/adidas logo.webp" alt="Adidas" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/levi logo.webp" alt="Levi's" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/chanel logo.webp" alt="Chanel" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/gucci logo.webp" alt="Gucci" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/Bode logo.webp" alt="Bode" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/lululemon logo.webp" alt="Lululemon" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/zara.svg" alt="Zara" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/lv logo.webp" alt="Louis Vuitton" loading="lazy"></div>
+            <div class="marquee-item"><img src="assets/prada logo.png" alt="Prada" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/nike logo.png" alt="Nike" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/adidas logo.webp" alt="Adidas" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/levi logo.webp" alt="Levi's" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/chanel logo.webp" alt="Chanel" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/gucci logo.webp" alt="Gucci" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/Bode logo.webp" alt="Bode" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/lululemon logo.webp" alt="Lululemon" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/zara.svg" alt="Zara" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/lv logo.webp" alt="Louis Vuitton" loading="lazy" decoding="async"></div>
 
             <!-- duplicado para loop perfecto -->
-            <div class="marquee-item"><img src="assets/prada logo.png" alt="Prada" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/nike logo.png" alt="Nike" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/adidas logo.webp" alt="Adidas" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/levi logo.webp" alt="Levi's" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/chanel logo.webp" alt="Chanel" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/gucci logo.webp" alt="Gucci" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/Bode logo.webp" alt="Bode" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/lululemon logo.webp" alt="Lululemon" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/zara.svg" alt="Zara" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/lv logo.webp" alt="Louis Vuitton" loading="lazy"></div>
+            <div class="marquee-item"><img src="assets/prada logo.png" alt="Prada" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/nike logo.png" alt="Nike" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/adidas logo.webp" alt="Adidas" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/levi logo.webp" alt="Levi's" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/chanel logo.webp" alt="Chanel" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/gucci logo.webp" alt="Gucci" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/Bode logo.webp" alt="Bode" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/lululemon logo.webp" alt="Lululemon" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/zara.svg" alt="Zara" loading="lazy" decoding="async"></div>
+            <div class="marquee-item"><img src="assets/lv logo.webp" alt="Louis Vuitton" loading="lazy" decoding="async"></div>
           </div>
         </div>
       </div>
@@ -639,6 +641,7 @@
               class="w-full h-full object-cover about-zoom-img"
               id="aboutZoomImg"
               loading="lazy"
+              decoding="async"
             >
             <div class="about-zoom-hint">Click para ampliar</div>
           </div>
@@ -678,7 +681,7 @@
   <!-- SERVICIOS (layout intercalado como antes) -->
   <section id="services" class="py-16 clean-bg">
     <div class="max-w-7xl mx-auto px-6">
-      
+
       <!-- Header centrado -->
       <div class="text-center max-w-3xl mx-auto mb-16">
         <h2 class="font-serif text-4xl md:text-5xl font-semibold text-[color:var(--text)] mb-5">
@@ -694,11 +697,12 @@
         <div class="order-2 md:order-1">
           <div class="about-zoom-shell">
             <div class="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl about-zoom cursor-zoom-in service-zoom-wrap">
-              <img 
-                src="assets/servicio.JPG" 
-                alt="Servicio Integral en China" 
+              <img
+                src="assets/servicio.JPG"
+                alt="Servicio Integral en China"
                 class="w-full h-full object-cover about-zoom-img service-zoom-img"
                 loading="lazy"
+                decoding="async"
               >
               <div class="about-zoom-hint">Click para ampliar</div>
             </div>
@@ -745,11 +749,12 @@
         <div>
           <div class="about-zoom-shell">
             <div class="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl about-zoom cursor-zoom-in service-zoom-wrap">
-              <img 
-                src="assets/serviiciologistica.JPG" 
-                alt="Servicio Completo" 
+              <img
+                src="assets/serviiciologistica.JPG"
+                alt="Servicio Completo"
                 class="w-full h-full object-cover about-zoom-img service-zoom-img"
                 loading="lazy"
+                decoding="async"
               >
               <div class="about-zoom-hint">Click para ampliar</div>
             </div>
@@ -762,11 +767,12 @@
         <div class="order-2 md:order-1">
           <div class="about-zoom-shell">
             <div class="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl about-zoom cursor-zoom-in service-zoom-wrap">
-              <img 
-                src="assets/mentoria.JPG" 
-                alt="Mentorías 1 a 1" 
+              <img
+                src="assets/mentoria.JPG"
+                alt="Mentorías 1 a 1"
                 class="w-full h-full object-cover about-zoom-img service-zoom-img"
                 loading="lazy"
+                decoding="async"
               >
               <div class="about-zoom-hint">Click para ampliar</div>
             </div>
@@ -802,7 +808,7 @@
   <!-- RECURSOS (3 columnas bien estructuradas) -->
   <section id="resources" class="py-16 clean-bg">
     <div class="max-w-7xl mx-auto px-6">
-      
+
       <!-- Header centrado -->
       <div class="text-center max-w-3xl mx-auto mb-16">
         <h2 class="font-serif text-4xl md:text-5xl font-semibold text-[color:var(--text)] mb-5">
@@ -818,7 +824,7 @@
 
         <!-- Recurso 1: Guía paso a paso -->
         <div class="flex flex-col">
-          <div 
+          <div
             class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer mb-6"
             tabindex="0"
             role="button"
@@ -826,19 +832,21 @@
             data-poster="assets/guia.jpg"
             data-video="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771100088/0214_1_rae6cy.mp4"
           >
-            <img 
-              src="assets/guia.jpg" 
-              alt="Guía paso a paso" 
+            <img
+              src="assets/guia.jpg"
+              alt="Guía paso a paso"
               class="resource-poster w-full h-full object-cover"
               loading="lazy"
+              decoding="async"
             >
-            <video 
+            <video
               class="resource-video w-full h-full object-cover"
               playsinline
               loop
+              muted
               preload="none"
             >
-              <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771100088/0214_1_rae6cy.mp4" type="video/mp4">
+              <source data-src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771100088/0214_1_rae6cy.mp4" type="video/mp4">
             </video>
             <div class="resource-play-hint">
               <i class="fas fa-play"></i>
@@ -865,7 +873,7 @@
 
         <!-- Recurso 2: Errores comunes -->
         <div class="flex flex-col">
-          <div 
+          <div
             class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer mb-6"
             tabindex="0"
             role="button"
@@ -873,19 +881,21 @@
             data-poster="assets/errores.jpg"
             data-video="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099511/0214_gapxgh.mp4"
           >
-            <img 
-              src="assets/errores.jpg" 
-              alt="Errores comunes" 
+            <img
+              src="assets/errores.jpg"
+              alt="Errores comunes"
               class="resource-poster w-full h-full object-cover"
               loading="lazy"
+              decoding="async"
             >
-            <video 
+            <video
               class="resource-video w-full h-full object-cover"
               playsinline
               loop
+              muted
               preload="none"
             >
-              <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099511/0214_gapxgh.mp4" type="video/mp4">
+              <source data-src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099511/0214_gapxgh.mp4" type="video/mp4">
             </video>
             <div class="resource-play-hint">
               <i class="fas fa-play"></i>
@@ -912,7 +922,7 @@
 
         <!-- Recurso 3: Costos reales -->
         <div class="flex flex-col">
-          <div 
+          <div
             class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer mb-6"
             tabindex="0"
             role="button"
@@ -920,19 +930,21 @@
             data-poster="assets/exel.jpg"
             data-video="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099872/exel_zwwdvl.mp4"
           >
-            <img 
-              src="assets/exel.jpg" 
-              alt="Calculadora de costos" 
+            <img
+              src="assets/exel.jpg"
+              alt="Calculadora de costos"
               class="resource-poster w-full h-full object-cover"
               loading="lazy"
+              decoding="async"
             >
-            <video 
+            <video
               class="resource-video w-full h-full object-cover"
               playsinline
               loop
+              muted
               preload="none"
             >
-              <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099872/exel_zwwdvl.mp4" type="video/mp4">
+              <source data-src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099872/exel_zwwdvl.mp4" type="video/mp4">
             </video>
             <div class="resource-play-hint">
               <i class="fas fa-play"></i>
@@ -979,7 +991,7 @@
             Rellena el siguiente formulario y comienza tu proceso de importación con nosotros.
           </p>
           <a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-[color:var(--accent)] transition w-full justify-center">
-            <i class="fas fa-clipboard-check"></i> 
+            <i class="fas fa-clipboard-check"></i>
             Trabaja con Nosotros
           </a>
         </div>
@@ -1043,7 +1055,6 @@
       <img id="imgLightboxImg" src="" alt="Imagen ampliada">
     </div>
   </div>
-
 
   <script>
     // Header shadow on scroll
@@ -1138,117 +1149,111 @@
       });
     })();
 
-    // ===== VIDEO PREVIEW INTERACTIVO (estilo Glass Factory) =====
+    // ===== VIDEO PREVIEW INTERACTIVO (lazy + hover/click) =====
     (function(){
       const previews = document.querySelectorAll('.resource-video-preview');
       if (!previews.length) return;
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+      function setSourceIfNeeded(video, videoUrl){
+        const source = video.querySelector('source');
+        if (!source) return false;
+
+        if (source.getAttribute('src')) return true;
+
+        source.setAttribute('src', videoUrl);
+        video.load();
+        return true;
+      }
+
       previews.forEach(preview => {
-        const poster = preview.querySelector('.resource-poster');
         const video = preview.querySelector('.resource-video');
-        const videoSrc = preview.getAttribute('data-video');
-        
-        if (!video || !videoSrc) return;
+        const source = video?.querySelector('source');
+        const videoUrl = (source?.getAttribute('data-src')) || preview.getAttribute('data-video');
+        if (!video || !videoUrl) return;
 
         let isPlaying = false;
-        let hasLoadedVideo = false;
+        let hasLoaded = false;
 
+        // volumen por si el usuario desmutea
         video.volume = 0.7;
 
-        function loadVideo() {
-          if (hasLoadedVideo) return;
-          
-          if (!video.querySelector('source').hasAttribute('src')) {
-            video.querySelector('source').setAttribute('src', videoSrc);
-            video.load();
-          }
-          hasLoadedVideo = true;
+        function loadVideo(){
+          if (hasLoaded) return;
+          setSourceIfNeeded(video, videoUrl);
+          hasLoaded = true;
         }
 
-        function playVideo() {
+        function playVideo(){
           if (prefersReducedMotion) return;
-          
+
           loadVideo();
           preview.classList.add('is-playing');
-          
-          video.play().catch(err => {
-            console.log('Video play prevented:', err);
+
+          video.play().then(() => {
+            isPlaying = true;
+          }).catch(() => {
             video.muted = true;
-            video.play().catch(e => console.log('Muted play also failed:', e));
+            video.play().catch(() => {});
+            isPlaying = true;
           });
-          
-          isPlaying = true;
         }
 
-        function pauseVideo() {
+        function pauseVideo(){
           preview.classList.remove('is-playing');
           video.pause();
           video.currentTime = 0;
           isPlaying = false;
         }
 
-        function toggleVideo() {
-          if (isPlaying) {
-            pauseVideo();
-          } else {
-            playVideo();
-          }
+        function toggle(){
+          if (isPlaying) pauseVideo();
+          else playVideo();
         }
 
+        // Desktop hover
         if (!('ontouchstart' in window)) {
           preview.addEventListener('mouseenter', playVideo);
           preview.addEventListener('mouseleave', pauseVideo);
         }
 
+        // Click: play/pause; si está muted y ya está playing -> unmute
         preview.addEventListener('click', (e) => {
           e.preventDefault();
-          
-          if (video.muted && isPlaying) {
+          if (isPlaying && video.muted) {
             video.muted = false;
             return;
           }
-          
-          toggleVideo();
+          toggle();
         });
 
+        // Accesibilidad teclado
         preview.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            
-            if (video.muted && isPlaying) {
+            if (isPlaying && video.muted) {
               video.muted = false;
               return;
             }
-            
-            toggleVideo();
+            toggle();
           }
         });
 
-        video.addEventListener('pause', () => {
-          if (isPlaying) {
-            preview.classList.remove('is-playing');
-            isPlaying = false;
-          }
-        });
-
+        // Precarga cuando el usuario se acerca (scroll)
         if ('IntersectionObserver' in window) {
-          const observer = new IntersectionObserver((entries) => {
+          const io = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-              if (entry.isIntersecting && !hasLoadedVideo) {
-                if (!video.querySelector('source').hasAttribute('src')) {
-                  video.querySelector('source').setAttribute('src', videoSrc);
-                  video.setAttribute('preload', 'metadata');
-                  video.load();
-                }
+              if (!entry.isIntersecting) return;
+              if (!hasLoaded) {
+                loadVideo();
+                video.setAttribute('preload', 'metadata');
               }
+              io.unobserve(preview);
             });
-          }, {
-            rootMargin: '50px'
-          });
+          }, { rootMargin: '300px' });
 
-          observer.observe(preview);
+          io.observe(preview);
         }
       });
     })();
@@ -1295,11 +1300,12 @@
         if(e.key === 'Escape' && lb.classList.contains('show')) closeLightbox();
       });
     })();
-
   </script>
 
 </body>
 </html>
+
+
 
 
 
