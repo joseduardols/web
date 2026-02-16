@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -20,6 +20,8 @@
     body { 
       font-family: 'Inter', sans-serif;
       position: relative;
+      color: #64748b;
+      line-height: 1.7;
     }
     .font-serif { font-family: 'Playfair Display', serif; }
     .font-elegant { font-family: "Cormorant Garamond", serif; }
@@ -144,7 +146,33 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* ===== VIDEO PREVIEW INTERACTIVO (estilo Glass Factory) ===== */
+    /* ===== LÍNEA DIVISORIA (la “rayita” que separa hero y recursos) ===== */
+    .section-divider {
+      position: relative;
+      height: 1px;
+      margin: 22px 0 10px 0;
+      overflow: visible;
+    }
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(11, 18, 32, 0.08) 5%,
+        rgba(11, 18, 32, 0.15) 25%,
+        rgba(11, 18, 32, 0.2) 50%,
+        rgba(11, 18, 32, 0.15) 75%,
+        rgba(11, 18, 32, 0.08) 95%,
+        transparent 100%
+      );
+    }
+
+    /* ===== VIDEO PREVIEW INTERACTIVO (estilo Glass Factory / index) ===== */
     .resource-video-preview {
       position: relative;
       background: #E5E7EB;
@@ -224,13 +252,8 @@
     }
 
     @media (max-width: 768px) {
-      .resource-video-preview:hover {
-        transform: none;
-      }
-      
-      .resource-play-hint {
-        opacity: 0.8;
-      }
+      .resource-video-preview:hover { transform: none; }
+      .resource-play-hint { opacity: 0.8; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -240,22 +263,18 @@
       .resource-play-hint {
         transition: none !important;
       }
-      
-      .resource-video-preview:hover {
-        transform: none;
-      }
+      .resource-video-preview:hover { transform: none; }
     }
   </style>
 </head>
 
 <body class="text-gray-800 antialiased">
 
-  <!-- HEADER (idéntico a index) -->
+  <!-- HEADER -->
   <header id="siteHeader" class="fixed top-0 left-0 w-full z-50">
     <div class="max-w-7xl mx-auto px-6">
       <div class="relative h-20 flex items-center">
 
-        <!-- Izquierda: Logo + texto -->
         <a href="index.html" class="flex items-center gap-3 shrink-0">
           <img
             src="assets/logo latam.png"
@@ -268,7 +287,6 @@
           </span>
         </a>
 
-        <!-- Centro: Nav centrado -->
         <nav class="hidden md:flex items-center gap-10 text-sm font-medium absolute left-1/2 -translate-x-1/2">
           <a href="index.html" class="navlink">Inicio</a>
           <a href="services.html" class="navlink">Servicios</a>
@@ -276,21 +294,18 @@
           <a href="resources.html" class="navlink active">Recursos</a>
         </nav>
 
-        <!-- Derecha: CTA -->
         <div class="hidden md:flex items-center ml-auto">
           <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md hover:bg-[color:var(--accent)] transition">
             Contacto
           </a>
         </div>
 
-        <!-- Mobile -->
         <button id="mobileMenuBtn" class="md:hidden ml-auto text-gray-700">
           <i class="fas fa-bars text-xl"></i>
         </button>
       </div>
     </div>
 
-    <!-- Mobile menu -->
     <div id="mobileMenu" class="hidden md:hidden bg-white border-t" style="border-color: var(--border);">
       <nav class="flex flex-col px-6 py-4 space-y-3 text-sm font-medium">
         <a href="index.html" class="hover:text-[color:var(--accent)] transition">Inicio</a>
@@ -305,7 +320,7 @@
   </header>
 
   <!-- HERO -->
-  <section class="pt-32 md:pt-36 pb-16 clean-bg">
+  <section class="pt-32 md:pt-36 pb-14 clean-bg">
     <div class="max-w-7xl mx-auto px-6">
       <p class="uppercase tracking-[0.25em] text-xs font-bold text-[color:var(--accent)] mb-3">
         Recursos
@@ -320,8 +335,13 @@
     </div>
   </section>
 
-  <!-- RECURSOS CON VIDEO PREVIEW (copiados exactamente del index) -->
-  <section class="py-28 clean-bg">
+  <!-- RAYITA DIVISORIA (separa el hero del bloque de recursos) -->
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="section-divider"></div>
+  </div>
+
+  <!-- RECURSOS -->
+  <section class="py-24 clean-bg">
     <div class="max-w-7xl mx-auto px-6">
       
       <!-- Header centrado -->
@@ -335,19 +355,18 @@
       </div>
 
       <!-- Recurso 1: Imagen IZQUIERDA -->
-      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-28">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-24">
         <div class="order-2 md:order-1">
-          <!-- Video Preview Container -->
           <div 
             class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
             tabindex="0"
             role="button"
             aria-label="Ver preview de Guía paso a paso"
-            data-poster="assets/guia-paso-poster.jpg"
-            data-video="assets/guia-paso-video.mp4"
+            data-poster="assets/guia.jpg"
+            data-video="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771100088/0214_1_rae6cy.mp4"
           >
             <img 
-              src="assets/guia-paso-poster.jpg" 
+              src="assets/guia.jpg" 
               alt="Guía paso a paso" 
               class="resource-poster w-full h-full object-cover"
               style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"
@@ -358,60 +377,70 @@
               loop
               preload="none"
             >
-              <source src="assets/guia-paso-video.mp4" type="video/mp4">
+              <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771100088/0214_1_rae6cy.mp4" type="video/mp4">
             </video>
-            <!-- Play hint overlay -->
             <div class="resource-play-hint">
               <i class="fas fa-play"></i>
             </div>
           </div>
         </div>
+
+        <!-- TEXTO CON FONDO BLANCO (igual al index) -->
         <div class="order-1 md:order-2">
-          <div class="inline-block px-3 py-1 bg-blue-50 text-[color:var(--accent)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-            GUÍA GRATUITA
+          <div class="bg-white p-8 md:p-10 shadow-2xl rounded-lg border border-[color:var(--border)]">
+            <div class="inline-block px-3 py-1 bg-blue-50 text-[color:var(--accent)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+              GUÍA GRATUITA
+            </div>
+            <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+              Guía paso a paso
+            </h3>
+            <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-7">
+              Desde encontrar proveedores hasta recibir tu mercancía. Un recorrido completo por cada etapa del proceso de importación desde China, con ejemplos reales y plantillas descargables.
+            </p>
+
+            <a href="https://youtu.be/Ov4nKG32VSg" target="_blank"
+               class="inline-flex items-center justify-center gap-2 bg-[color:var(--accent)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+              <i class="fab fa-youtube text-lg"></i>
+              Ver video
+            </a>
           </div>
-          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
-            Guía paso a paso
-          </h3>
-          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-6">
-            Desde encontrar proveedores hasta recibir tu mercancía. Un recorrido completo por cada etapa del proceso de importación desde China, con ejemplos reales y plantillas descargables.
-          </p>
-          <a href="index.html#contact" class="inline-flex items-center gap-2 text-[color:var(--accent)] font-semibold text-lg hover:gap-3 transition-all">
-            Descargar guía gratuita
-            <i class="fas fa-arrow-right"></i>
-          </a>
         </div>
       </div>
 
       <!-- Recurso 2: Imagen DERECHA -->
-      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-28">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-24">
+        <!-- TEXTO CON FONDO BLANCO -->
         <div>
-          <div class="inline-block px-3 py-1 bg-amber-50 text-amber-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-            CHECKLIST
+          <div class="bg-white p-8 md:p-10 shadow-2xl rounded-lg border border-[color:var(--border)]">
+            <div class="inline-block px-3 py-1 bg-amber-50 text-amber-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+              CHECKLIST
+            </div>
+            <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+              Errores comunes
+            </h3>
+            <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-7">
+              Evita las pérdidas típicas al comenzar. Lista completa de errores frecuentes que cometen los importadores novatos y cómo prevenirlos antes de hacer tu primera orden.
+            </p>
+
+            <a href="https://youtu.be/mg_XrmzGJKk" target="_blank"
+               class="inline-flex items-center justify-center gap-2 bg-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-amber-700 transition">
+              <i class="fab fa-youtube text-lg"></i>
+              Ver video
+            </a>
           </div>
-          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
-            Errores comunes
-          </h3>
-          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-6">
-            Evita las pérdidas típicas al comenzar. Lista completa de errores frecuentes que cometen los importadores novatos y cómo prevenirlos antes de hacer tu primera orden.
-          </p>
-          <a href="index.html#contact" class="inline-flex items-center gap-2 text-amber-600 font-semibold text-lg hover:gap-3 transition-all">
-            Ver checklist completo
-            <i class="fas fa-arrow-right"></i>
-          </a>
         </div>
+
         <div>
-          <!-- Video Preview Container -->
           <div 
             class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
             tabindex="0"
             role="button"
             aria-label="Ver preview de Errores comunes"
-            data-poster="assets/errores-poster.jpg"
-            data-video="assets/errores-video.mp4"
+            data-poster="assets/errores.jpg"
+            data-video="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099511/0214_gapxgh.mp4"
           >
             <img 
-              src="assets/errores-poster.jpg" 
+              src="assets/errores.jpg" 
               alt="Errores comunes" 
               class="resource-poster w-full h-full object-cover"
               style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"
@@ -422,9 +451,8 @@
               loop
               preload="none"
             >
-              <source src="assets/errores-video.mp4" type="video/mp4">
+              <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099511/0214_gapxgh.mp4" type="video/mp4">
             </video>
-            <!-- Play hint overlay -->
             <div class="resource-play-hint">
               <i class="fas fa-play"></i>
             </div>
@@ -435,17 +463,16 @@
       <!-- Recurso 3: Imagen IZQUIERDA -->
       <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
         <div class="order-2 md:order-1">
-          <!-- Video Preview Container -->
           <div 
             class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
             tabindex="0"
             role="button"
             aria-label="Ver preview de Costos reales"
-            data-poster="assets/costos-poster.jpg"
-            data-video="assets/costos-video.mp4"
+            data-poster="assets/exel.jpg"
+            data-video="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099872/exel_zwwdvl.mp4"
           >
             <img 
-              src="assets/costos-poster.jpg" 
+              src="assets/exel.jpg" 
               alt="Calculadora de costos" 
               class="resource-poster w-full h-full object-cover"
               style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"
@@ -456,28 +483,33 @@
               loop
               preload="none"
             >
-              <source src="assets/costos-video.mp4" type="video/mp4">
+              <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099872/exel_zwwdvl.mp4" type="video/mp4">
             </video>
-            <!-- Play hint overlay -->
             <div class="resource-play-hint">
               <i class="fas fa-play"></i>
             </div>
           </div>
         </div>
+
+        <!-- TEXTO CON FONDO BLANCO -->
         <div class="order-1 md:order-2">
-          <div class="inline-block px-3 py-1 bg-green-50 text-green-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-            CALCULADORA
+          <div class="bg-white p-8 md:p-10 shadow-2xl rounded-lg border border-[color:var(--border)]">
+            <div class="inline-block px-3 py-1 bg-green-50 text-green-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+              CALCULADORA
+            </div>
+            <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+              Costos reales
+            </h3>
+            <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-7">
+              Cómo calcular tu costo por unidad y margen real. Herramienta práctica para estimar inversión total incluyendo todos los gastos ocultos que nadie te cuenta.
+            </p>
+
+            <a href="https://youtu.be/vAoCyXpiVTU" target="_blank"
+               class="inline-flex items-center justify-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+              <i class="fab fa-youtube text-lg"></i>
+              Ver video
+            </a>
           </div>
-          <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
-            Costos reales
-          </h3>
-          <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-6">
-            Cómo calcular tu costo por unidad y margen real. Herramienta práctica para estimar inversión total incluyendo todos los gastos ocultos que nadie te cuenta.
-          </p>
-          <a href="index.html#contact" class="inline-flex items-center gap-2 text-green-600 font-semibold text-lg hover:gap-3 transition-all">
-            Usar calculadora
-            <i class="fas fa-arrow-right"></i>
-          </a>
         </div>
       </div>
 
@@ -504,7 +536,7 @@
 
         <div class="bg-white rounded-2xl shadow-lg p-8 border border-[color:var(--border)] hover:shadow-xl transition">
           <h2 class="font-serif text-2xl font-semibold text-[color:var(--text)] mb-4">
-            ¿Cómo acceso a estos recursos?
+            ¿Cómo accedo a estos recursos?
           </h2>
           <p class="text-[color:var(--muted)] leading-relaxed mb-4">
             De momento no están disponibles para descarga directa. Te los compartimos de forma 
@@ -523,7 +555,7 @@
     </div>
   </section>
 
-  <!-- CTA (fondo blanco sólido antes del footer) -->
+  <!-- CTA -->
   <section class="py-20 bg-white relative z-10">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5">
@@ -539,7 +571,7 @@
     </div>
   </section>
 
-  <!-- FOOTER (idéntico a index) -->
+  <!-- FOOTER -->
   <footer class="bg-[#0B1220] text-gray-300 py-12">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-4 gap-8 mb-8">
@@ -562,7 +594,7 @@
           <h4 class="text-white font-semibold mb-4">Contacto</h4>
           <ul class="space-y-2 text-sm text-gray-400">
             <li><a href="index.html#contact" class="hover:text-white transition">Formulario</a></li>
-            <li><a href="https://wa.me/593XXXXXXXXX" target="_blank" class="hover:text-white transition">Trabaja con nosotros</a></li>
+            <li><a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="hover:text-white transition">Trabaja con nosotros</a></li>
             <li><a href="mailto:contacto@latamsourcing.com" class="hover:text-white transition">Email</a></li>
           </ul>
         </div>
@@ -622,7 +654,7 @@
       });
     })();
 
-    // ===== VIDEO PREVIEW INTERACTIVO (estilo Glass Factory) =====
+    // ===== VIDEO PREVIEW INTERACTIVO (igual al index) =====
     (function(){
       const previews = document.querySelectorAll('.resource-video-preview');
       if (!previews.length) return;
@@ -630,23 +662,20 @@
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       previews.forEach(preview => {
-        const poster = preview.querySelector('.resource-poster');
         const video = preview.querySelector('.resource-video');
         const videoSrc = preview.getAttribute('data-video');
-        
         if (!video || !videoSrc) return;
 
         let isPlaying = false;
         let hasLoadedVideo = false;
 
-        // Configurar volumen inicial (0.7 = 70%)
         video.volume = 0.7;
 
         function loadVideo() {
           if (hasLoadedVideo) return;
-          
-          if (!video.querySelector('source').hasAttribute('src')) {
-            video.querySelector('source').setAttribute('src', videoSrc);
+          const source = video.querySelector('source');
+          if (source && !source.getAttribute('src')) {
+            source.setAttribute('src', videoSrc);
             video.load();
           }
           hasLoadedVideo = true;
@@ -654,16 +683,15 @@
 
         function playVideo() {
           if (prefersReducedMotion) return;
-          
           loadVideo();
           preview.classList.add('is-playing');
-          
+
           video.play().catch(err => {
             console.log('Video play prevented:', err);
             video.muted = true;
             video.play().catch(e => console.log('Muted play also failed:', e));
           });
-          
+
           isPlaying = true;
         }
 
@@ -675,11 +703,8 @@
         }
 
         function toggleVideo() {
-          if (isPlaying) {
-            pauseVideo();
-          } else {
-            playVideo();
-          }
+          if (isPlaying) pauseVideo();
+          else playVideo();
         }
 
         // Desktop: hover
@@ -688,28 +713,18 @@
           preview.addEventListener('mouseleave', pauseVideo);
         }
 
-        // Móvil + Desktop: click/tap
+        // Click/tap
         preview.addEventListener('click', (e) => {
           e.preventDefault();
-          
-          if (video.muted && isPlaying) {
-            video.muted = false;
-            return;
-          }
-          
+          if (video.muted && isPlaying) { video.muted = false; return; }
           toggleVideo();
         });
 
-        // Accesibilidad: teclado
+        // Teclado
         preview.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            
-            if (video.muted && isPlaying) {
-              video.muted = false;
-              return;
-            }
-            
+            if (video.muted && isPlaying) { video.muted = false; return; }
             toggleVideo();
           }
         });
@@ -721,21 +736,20 @@
           }
         });
 
-        // Intersection Observer
+        // Lazy preload cerca del viewport
         if ('IntersectionObserver' in window) {
           const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               if (entry.isIntersecting && !hasLoadedVideo) {
-                if (!video.querySelector('source').hasAttribute('src')) {
-                  video.querySelector('source').setAttribute('src', videoSrc);
+                const source = video.querySelector('source');
+                if (source && !source.getAttribute('src')) {
+                  source.setAttribute('src', videoSrc);
                   video.setAttribute('preload', 'metadata');
                   video.load();
                 }
               }
             });
-          }, {
-            rootMargin: '200px'
-          });
+          }, { rootMargin: '200px' });
 
           observer.observe(preview);
         }
@@ -745,5 +759,6 @@
 
 </body>
 </html>
+
 
 
