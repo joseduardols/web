@@ -5,6 +5,7 @@
   <title>Servicios - Latam Sourcing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Servicios de sourcing, negociación con fábricas, desarrollo de producto y asesoría en importación desde China para negocios de Latinoamérica.">
+  <link rel="canonical" href="https://latamsourcin.com/services/">
 
   <!-- Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -248,7 +249,7 @@
     }
     #imgLightboxClose:hover{ background: rgba(255,255,255,0.25); }
 
-    /* ===== Chips tipo "metodología" (optimiza claridad) ===== */
+    /* ===== Chips ===== */
     .chip{
       display:inline-flex;
       align-items:center;
@@ -307,7 +308,7 @@
       background: rgba(37,99,235,.10);
     }
 
-    /* ===== Sticky CTA móvil (optimiza conversión) ===== */
+    /* ===== Sticky CTA móvil ===== */
     .sticky-mobile-cta{
       position: fixed;
       left: 0;
@@ -323,7 +324,7 @@
     }
     @media (max-width: 768px){
       .sticky-mobile-cta{ display:block; }
-      body{ padding-bottom: 72px; } /* deja espacio al sticky */
+      body{ padding-bottom: 72px; }
     }
 
     /* Reduce motion */
@@ -344,9 +345,10 @@
       <div class="relative h-20 flex items-center">
 
         <!-- Logo -->
+        <!-- FIX 1: rutas correctas desde /services/ -> usar ../assets/... -->
         <a href="/" class="flex items-center gap-3 shrink-0">
           <img
-            src="assets/logo latam.png"
+            src="../assets/logo latam.png"
             alt="Latam Sourcing"
             class="h-11 md:h-12 w-auto block brandmark"
             style="filter: drop-shadow(0 6px 10px rgba(11,18,32,.14));"
@@ -368,8 +370,9 @@
         </nav>
 
         <!-- CTA -->
+        <!-- FIX 2: nunca uses index.html#... en subcarpetas, usa /#contact -->
         <div class="hidden md:flex items-center ml-auto">
-          <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md hover:bg-[color:var(--accent)] transition">
+          <a href="/#contact" class="bg-black text-white px-4 py-2 rounded-md hover:bg-[color:var(--accent)] transition">
             Contacto
           </a>
         </div>
@@ -388,7 +391,7 @@
         <a href="/services/" class="hover:text-[color:var(--accent)] transition">Servicios</a>
         <a href="/about/" class="hover:text-[color:var(--accent)] transition">Nuestra Historia</a>
         <a href="/resources/" class="hover:text-[color:var(--accent)] transition">Recursos</a>
-        <a href="index.html#contact" class="bg-black text-white px-4 py-2 rounded-md text-center hover:bg-[color:var(--accent)] transition">
+        <a href="/#contact" class="bg-black text-white px-4 py-2 rounded-md text-center hover:bg-[color:var(--accent)] transition">
           Contacto
         </a>
       </nav>
@@ -412,7 +415,7 @@
             con servicios modulares que se adaptan a tu experiencia, presupuesto y objetivos.
           </p>
 
-          <!-- Chips para claridad -->
+          <!-- Chips -->
           <div class="mt-7 flex flex-wrap gap-3">
             <span class="chip"><i class="fas fa-shield-halved"></i> Proveedores verificados</span>
             <span class="chip"><i class="fas fa-language"></i> Negociación en mandarín</span>
@@ -432,7 +435,7 @@
           </div>
         </div>
 
-        <!-- Panel compacto de “cómo trabajamos” (optimiza conversión) -->
+        <!-- Cómo trabajamos -->
         <div class="lg:col-span-4">
           <div class="bg-white border border-[color:var(--border)] rounded-2xl p-7 shadow-xl">
             <p class="text-xs font-bold uppercase tracking-[0.25em] text-slate-500 mb-3">Cómo trabajamos</p>
@@ -452,7 +455,6 @@
             </ol>
 
             <div class="mt-6">
-
               <p class="text-xs text-slate-500 mt-3 leading-relaxed">
                 Recibimos muchas solicitudes. Contactamos primero a proyectos con claridad de producto y presupuesto.
               </p>
@@ -489,7 +491,7 @@
           <div class="service-zoom-shell mb-6">
             <div class="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl service-zoom cursor-zoom-in service-zoom-wrap" tabindex="0" role="button" aria-label="Abrir imagen Servicio Integral en China">
               <img
-                src="assets/busquedaFabrica.jpg"
+                src="../assets/busquedaFabrica.jpg"
                 alt="Servicio Integral en China"
                 class="w-full h-full object-cover service-zoom-img"
                 loading="lazy"
@@ -538,7 +540,7 @@
           <div class="service-zoom-shell mb-6">
             <div class="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl service-zoom cursor-zoom-in service-zoom-wrap" tabindex="0" role="button" aria-label="Abrir imagen Servicio Completo">
               <img
-                src="assets/logistica.webp"
+                src="../assets/logistica.webp"
                 alt="Servicio Completo"
                 class="w-full h-full object-cover service-zoom-img"
                 loading="lazy"
@@ -573,8 +575,6 @@
               <li class="flex items-start gap-2"><span class="text-purple-600 mt-0.5">•</span><span>Coordinación logística internacional</span></li>
               <li class="flex items-start gap-2"><span class="text-purple-600 mt-0.5">•</span><span>Acompañamiento en pagos internacionales</span></li>
               <li class="flex items-start gap-2"><span class="text-purple-600 mt-0.5">•</span><span>Análisis de riesgos y recomendación final</span></li>
-
-              
             </ul>
 
             <div class="mt-auto">
@@ -590,8 +590,9 @@
         <article class="flex flex-col">
           <div class="service-zoom-shell mb-6">
             <div class="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl service-zoom cursor-zoom-in service-zoom-wrap" tabindex="0" role="button" aria-label="Abrir imagen Mentorías 1 a 1">
+              <!-- FIX 3: usar / en rutas (no \) y ../assets -->
               <img
-                src="assets\historiaOp.webp"
+                src="../assets/historiaOp.webp"
                 alt="Mentorías 1 a 1"
                 class="w-full h-full object-cover service-zoom-img"
                 loading="lazy"
@@ -633,7 +634,7 @@
 
       </div>
 
-      <!-- Nota importante (más “premium”) -->
+      <!-- Nota importante -->
       <div class="bg-white border border-[color:var(--border)] rounded-2xl p-8 shadow-xl">
         <p class="text-slate-600 text-lg leading-relaxed">
           <span class="font-semibold text-[color:var(--text)]">Importante:</span> al completar la aplicación,
@@ -684,7 +685,7 @@
     </div>
   </section>
 
-  <!-- FAQ (optimiza objeciones) -->
+  <!-- FAQ -->
   <section class="py-20 clean-bg">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center max-w-3xl mx-auto mb-12">
@@ -737,10 +738,6 @@
           </p>
         </details>
       </div>
-
-      <div class="text-center mt-10">
-        
-      </div>
     </div>
   </section>
 
@@ -754,7 +751,7 @@
         Cuéntanos qué quieres importar, en qué país estás y qué nivel de inversión estimas.
         Te proponemos el plan más adecuado para ti.
       </p>
-      <a href="index.html#contact" class="inline-block bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-[color:var(--accent)] transition text-lg">
+      <a href="/#contact" class="inline-block bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-[color:var(--accent)] transition text-lg">
         Hablar con el equipo
       </a>
     </div>
@@ -772,17 +769,18 @@
         </div>
         <div>
           <h4 class="text-white font-semibold mb-4">Secciones</h4>
+          <!-- FIX 4: links correctos por carpeta, no about.html/services.html -->
           <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="about.html" class="hover:text-white transition">Nuestra Historia</a></li>
-            <li><a href="services.html" class="hover:text-white transition">Servicios</a></li>
-            <li><a href="resources.html" class="hover:text-white transition">Recursos</a></li>
-            <li><a href="index.html#contact" class="hover:text-white transition">Contacto</a></li>
+            <li><a href="/about/" class="hover:text-white transition">Nuestra Historia</a></li>
+            <li><a href="/services/" class="hover:text-white transition">Servicios</a></li>
+            <li><a href="/resources/" class="hover:text-white transition">Recursos</a></li>
+            <li><a href="/#contact" class="hover:text-white transition">Contacto</a></li>
           </ul>
         </div>
         <div>
           <h4 class="text-white font-semibold mb-4">Contacto</h4>
           <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="index.html#contact" class="hover:text-white transition">Formulario</a></li>
+            <li><a href="/#contact" class="hover:text-white transition">Formulario</a></li>
             <li><a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="hover:text-white transition">Trabaja con nosotros</a></li>
             <li><a href="mailto:contacto@latamsourcing.com" class="hover:text-white transition">Email</a></li>
           </ul>
@@ -926,7 +924,6 @@
         });
       });
 
-      // si llega con hash en URL
       window.addEventListener('load', () => {
         if(window.location.hash) scrollToHash(window.location.hash);
       });
