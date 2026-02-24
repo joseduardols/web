@@ -6,485 +6,259 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Recursos gratuitos para aprender a importar desde China: guías, clases, herramientas y contenido educativo.">
   <link rel="canonical" href="https://latamsourcin.com/resources/">
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Fuentes (igual que index) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      position: relative;
-      color: #64748b;
-      line-height: 1.7;
-    }
+    body { font-family: 'DM Sans', sans-serif; color: #1a1a1a; line-height: 1.7; overflow-x: hidden; }
     .font-serif { font-family: 'Playfair Display', serif; }
-    .font-elegant { font-family: "Cormorant Garamond", serif; }
+    :root { --text: #0B1220; --border: #E5E7EB; }
 
-    :root{
-      --accent: #2563EB;
-      --text: #0B1220;
-      --muted: #4B5563;
-      --border: #E5E7EB;
-    }
+    body::before { content:''; position:fixed; inset:0; background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 20%,#FAF8F3 40%,#F5F2EA 60%,#F0EBE3 80%,#EBE6DD 100%); z-index:-1; pointer-events:none; }
 
-    /* Degradado global visible (blanco → crema/hueso) */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        to bottom,
-        #FFFFFF 0%,
-        #FFFFFF 20%,
-        #FAF8F3 40%,
-        #F5F2EA 60%,
-        #F0EBE3 80%,
-        #EBE6DD 100%
-      );
-      z-index: -1;
-      pointer-events: none;
-    }
+    /* Header */
+    #siteHeader { background:rgba(11,18,32,0.92); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid rgba(255,255,255,0.06); transition:background .3s,box-shadow .3s; }
+    #siteHeader.is-scrolled { background:rgba(11,18,32,0.98); box-shadow:0 4px 30px rgba(0,0,0,0.3); }
+    .navlink { position:relative; padding:10px 2px; color:rgba(255,255,255,0.60); transition:color .2s; font-size:14px; font-weight:500; }
+    .navlink::after { content:''; position:absolute; left:0; right:0; bottom:4px; height:1px; background:rgba(255,255,255,0.85); border-radius:999px; transform:scaleX(0); transform-origin:center; transition:transform .25s; }
+    .navlink:hover { color:#fff; }
+    .navlink:hover::after, .navlink.active::after { transform:scaleX(1); }
+    .navlink.active { color:#fff; }
 
-    .clean-bg { background: transparent !important; }
+    /* Language dropdown */
+    .lang-dropdown-wrap { position:relative; display:inline-block; }
+    .lang-btn { display:inline-flex; align-items:center; gap:7px; padding:7px 13px; border:1px solid rgba(255,255,255,0.16); border-radius:8px; color:rgba(255,255,255,0.65); font-size:13px; font-weight:500; cursor:pointer; background:transparent; transition:background .2s,color .2s,border-color .2s; user-select:none; font-family:'DM Sans',sans-serif; }
+    .lang-btn:hover { background:rgba(255,255,255,0.07); color:#fff; border-color:rgba(255,255,255,0.30); }
+    .lang-btn.open { background:rgba(255,255,255,0.09); color:#fff; border-color:rgba(255,255,255,0.30); }
+    .lang-btn .lang-chevron { font-size:9px; opacity:.5; transition:transform .22s; }
+    .lang-btn.open .lang-chevron { transform:rotate(180deg); }
+    .lang-panel { position:absolute; top:calc(100% + 8px); right:0; min-width:148px; background:#fff; border-radius:12px; border:1px solid rgba(11,18,32,0.09); box-shadow:0 8px 32px rgba(11,18,32,0.18),0 2px 8px rgba(11,18,32,0.10); overflow:hidden; opacity:0; transform:translateY(-6px) scale(0.97); pointer-events:none; transition:opacity .2s,transform .2s; z-index:9999; }
+    .lang-panel.open { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+    .lang-panel-header { padding:10px 14px 8px; font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(11,18,32,0.35); border-bottom:1px solid rgba(11,18,32,0.06); font-family:'DM Sans',sans-serif; }
+    .lang-option { display:flex; align-items:center; gap:10px; padding:11px 14px; cursor:pointer; font-size:13px; font-weight:500; color:#0B1220; transition:background .15s; border-bottom:1px solid rgba(11,18,32,0.05); font-family:'DM Sans',sans-serif; }
+    .lang-option:last-child { border-bottom:none; }
+    .lang-option:hover { background:#F5F3EF; }
+    .lang-option.active { background:#F0EDE8; }
+    .lang-option .lang-flag { font-size:18px; line-height:1; flex-shrink:0; }
+    .lang-option .lang-name { flex:1; }
+    .lang-option .lang-check { font-size:11px; color:#0B1220; opacity:0; transition:opacity .15s; }
+    .lang-option.active .lang-check { opacity:1; }
+    .header-contact-btn { display:inline-flex; align-items:center; gap:10px; padding:9px 18px; border-radius:10px; background:#fff; color:#0B1220; font-size:14px; font-weight:600; font-family:'DM Sans',sans-serif; transition:background .2s,transform .2s; box-shadow:0 2px 12px rgba(255,255,255,0.10); }
+    .header-contact-btn:hover { background:#f0f0f0; transform:translateY(-1px); }
+    .header-contact-btn .arrow-circle { width:26px; height:26px; border-radius:50%; background:#0B1220; color:#fff; display:flex; align-items:center; justify-content:center; font-size:10px; transition:transform .25s; }
+    .header-contact-btn:hover .arrow-circle { transform:translate(2px,-2px); }
 
-    /* ===== HEADER (estilo Noble) ===== */
-    #siteHeader{
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 10px 28px rgba(11,18,32,0.08);
-      transition: box-shadow .22s ease, background .22s ease;
-    }
-    #siteHeader.is-scrolled{
-      box-shadow: 0 18px 46px rgba(11,18,32,0.14);
-      background: rgba(255,255,255,0.98);
-    }
+    .section-label { font-size:10px; letter-spacing:.22em; font-weight:700; text-transform:uppercase; color:rgba(11,18,32,0.38); display:block; margin-bottom:12px; }
+    .section-divider { height:1px; background:linear-gradient(to right,transparent 0%,rgba(11,18,32,0.10) 20%,rgba(11,18,32,0.16) 50%,rgba(11,18,32,0.10) 80%,transparent 100%); }
 
-    .navlink{
-      position: relative;
-      padding: 10px 2px;
-      color: rgba(11,18,32,0.80);
-      transition: color .2s ease;
-    }
-    .navlink::after{
-      content:"";
-      position:absolute;
-      left:0;
-      right:0;
-      bottom:4px;
-      height:2px;
-      background: rgba(11,18,32,0.95);
-      border-radius:999px;
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform .2s ease;
-    }
-    .navlink:hover{ color: rgba(11,18,32,1); }
-    .navlink:hover::after{ transform: scaleX(1); }
-    .navlink.active{ color: rgba(11,18,32,1); }
-    .navlink.active::after{ transform: scaleX(1); }
+    .reveal { opacity:0; transform:translateY(36px); transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94); }
+    .reveal.from-left { transform:translateX(-50px); }
+    .reveal.from-right { transform:translateX(50px); }
+    .reveal.is-visible { opacity:1; transform:translateY(0) translateX(0); }
+    .reveal-delay-1{transition-delay:.10s} .reveal-delay-2{transition-delay:.20s} .reveal-delay-3{transition-delay:.30s}
 
-    .brandmark{
-      display:block;
-      background: transparent;
-      filter: drop-shadow(0 6px 10px rgba(11,18,32,.12));
-      mix-blend-mode: multiply;
-    }
+    /* Resource rows */
+    .resource-row { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-bottom:80px; }
+    .resource-row:last-child { margin-bottom:0; }
+    @media(max-width:768px){ .resource-row{grid-template-columns:1fr; gap:28px; margin-bottom:56px;} .resource-row .order-md-2{order:-1;} }
 
-    /* Back to top */
-    #backToTop{
-      position:fixed;
-      left:50%;
-      bottom:24px;
-      transform: translateX(-50%) translateY(10px);
-      width:56px;
-      height:56px;
-      border-radius:999px;
-      background:#0B1220;
-      border:1px solid rgba(255,255,255,0.14);
-      box-shadow:0 14px 34px rgba(11,18,32,0.22);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#FFFFFF;
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .2s ease, transform .2s ease, background .2s ease;
-      z-index:9999;
-    }
-    #backToTop:hover{ background:#111827; }
-    #backToTop.show{
-      opacity:1;
-      pointer-events:auto;
-      transform: translateX(-50%) translateY(0);
-    }
+    /* Resource card (text side) */
+    .resource-text-card { background:#fff; border-radius:20px; border:1px solid rgba(11,18,32,0.07); padding:40px 36px; box-shadow:0 2px 16px rgba(11,18,32,0.05); }
+    .resource-tag { display:inline-block; padding:4px 12px; background:rgba(11,18,32,0.07); color:#0B1220; font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; border-radius:999px; margin-bottom:16px; }
+    .resource-btn { display:inline-flex; align-items:center; justify-content:space-between; background:#0B1220; color:#fff; padding:13px 20px; border-radius:10px; font-size:14px; font-weight:600; transition:background .2s,transform .15s; width:100%; font-family:'DM Sans',sans-serif; }
+    .resource-btn:hover { background:#1e2d45; transform:translateY(-1px); }
+    .resource-btn .yt-icon { font-size:16px; color:rgba(255,255,255,0.40); transition:color .2s; }
+    .resource-btn:hover .yt-icon { color:#ff4444; }
 
-    /* ===== LÍNEA DIVISORIA ===== */
-    .section-divider {
-      position: relative;
-      height: 1px;
-      margin: 22px 0 10px 0;
-      overflow: visible;
-    }
-    .section-divider::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(11, 18, 32, 0.08) 5%,
-        rgba(11, 18, 32, 0.15) 25%,
-        rgba(11, 18, 32, 0.2) 50%,
-        rgba(11, 18, 32, 0.15) 75%,
-        rgba(11, 18, 32, 0.08) 95%,
-        transparent 100%
-      );
-    }
+    /* Video preview */
+    .resource-video-preview { position:relative; border-radius:20px; overflow:hidden; background:#E5E7EB; transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s; will-change:transform; box-shadow:0 8px 40px rgba(11,18,32,0.12); }
+    .resource-video-preview:hover { transform:scale(1.02); box-shadow:0 20px 60px rgba(11,18,32,0.16); }
+    .resource-poster { display:block; opacity:1; transition:opacity .4s; }
+    .resource-video { position:absolute; top:0; left:0; opacity:0; pointer-events:none; transition:opacity .4s; }
+    .resource-video-preview.is-playing .resource-poster { opacity:0; }
+    .resource-video-preview.is-playing .resource-video { opacity:1; pointer-events:auto; }
+    .resource-play-hint { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:56px; height:56px; background:rgba(255,255,255,0.95); border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s,transform .3s; pointer-events:none; box-shadow:0 8px 24px rgba(11,18,32,0.18); }
+    .resource-play-hint i { color:#0B1220; font-size:18px; margin-left:3px; }
+    .resource-video-preview:hover .resource-play-hint { opacity:1; transform:translate(-50%,-50%) scale(1.1); }
+    .resource-video-preview.is-playing .resource-play-hint { opacity:0; }
 
-    /* ===== VIDEO PREVIEW ===== */
-    .resource-video-preview {
-      position: relative;
-      background: #E5E7EB;
-      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
-      will-change: transform;
-    }
-    .resource-video-preview:hover {
-      transform: scale(1.02);
-      box-shadow: 0 40px 100px rgba(11, 18, 32, 0.15);
-    }
+    /* FAQ info cards */
+    .info-card { background:#fff; border-radius:20px; border:1px solid rgba(11,18,32,0.07); padding:36px 32px; box-shadow:0 2px 16px rgba(11,18,32,0.05); transition:transform .3s,box-shadow .3s; }
+    .info-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(11,18,32,0.09); }
 
-    .resource-poster {
-      display: block;
-      opacity: 1;
-      transition: opacity 0.4s ease;
-    }
+    /* CTA */
+    .cta-btn { display:inline-flex; align-items:center; justify-content:space-between; background:#0B1220; color:#fff; padding:20px 28px; border-radius:16px; font-weight:600; font-size:16px; transition:background .25s,transform .25s,box-shadow .25s; box-shadow:0 4px 24px rgba(11,18,32,0.16); width:100%; max-width:480px; font-family:'DM Sans',sans-serif; }
+    .cta-btn:hover { background:#18273e; transform:translateY(-2px); box-shadow:0 12px 40px rgba(11,18,32,0.24); }
+    .cta-arrow { width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,0.09); border:1px solid rgba(255,255,255,0.16); display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; transition:background .25s,transform .25s; }
+    .cta-btn:hover .cta-arrow { background:rgba(255,255,255,0.16); transform:translate(3px,-3px); }
+    .cta-sublabel { font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,0.38); }
 
-    .resource-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
+    #backToTop { position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(10px); width:44px; height:44px; border-radius:999px; background:#0B1220; border:1px solid rgba(255,255,255,0.14); box-shadow:0 14px 34px rgba(11,18,32,0.22); display:flex; align-items:center; justify-content:center; color:#fff; opacity:0; pointer-events:none; transition:opacity .2s,transform .2s; z-index:9999; cursor:pointer; }
+    #backToTop.show { opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+    #backToTop:hover { background:#1a2535; }
 
-    .resource-video-preview.is-playing .resource-poster { opacity: 0; }
-    .resource-video-preview.is-playing .resource-video  { opacity: 1; pointer-events: auto; }
-
-    .resource-play-hint {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60px;
-      height: 60px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      pointer-events: none;
-      box-shadow: 0 8px 24px rgba(11, 18, 32, 0.2);
-    }
-
-    .resource-play-hint i {
-      color: #0B1220;
-      font-size: 20px;
-      margin-left: 3px;
-    }
-
-    .resource-video-preview:hover .resource-play-hint {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-
-    .resource-video-preview.is-playing .resource-play-hint { opacity: 0; }
-
-    .resource-video-preview:focus {
-      outline: 3px solid var(--accent);
-      outline-offset: 4px;
-    }
-    .resource-video-preview:focus:not(:focus-visible) { outline: none; }
-
-    @media (max-width: 768px) {
-      .resource-video-preview:hover { transform: none; }
-      .resource-play-hint { opacity: 0.8; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .resource-video-preview,
-      .resource-poster,
-      .resource-video,
-      .resource-play-hint {
-        transition: none !important;
-      }
-      .resource-video-preview:hover { transform: none; }
-    }
+    @media(max-width:768px){ .resource-video-preview:hover{transform:none} .resource-play-hint{opacity:.8} }
+    @media(prefers-reduced-motion:reduce){ .reveal{transition:none!important} .resource-video-preview{transition:none!important} }
   </style>
 </head>
+<body class="antialiased">
 
-<body class="text-gray-800 antialiased">
-
-  <!-- HEADER -->
+  <!-- ════════ HEADER ════════ -->
   <header id="siteHeader" class="fixed top-0 left-0 w-full z-50">
     <div class="max-w-7xl mx-auto px-6">
       <div class="relative h-20 flex items-center">
-
-        <!-- FIX: rutas correctas desde /resources/ -> ../assets/...  y links absolutos -->
         <a href="/" class="flex items-center gap-3 shrink-0">
-          <img
-            src="../assets/logo latam.png"
-            alt="Latam Sourcing"
-            class="h-11 md:h-12 w-auto block brandmark"
-            style="filter: drop-shadow(0 6px 10px rgba(11,18,32,.14));"
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          >
-          <span class="font-serif text-[22px] md:text-2xl font-semibold text-[color:var(--text)] tracking-tight leading-none">
-            Latam Sourcing
-          </span>
+          <img src="../assets/logo latam.png" alt="Latam Sourcing" class="h-11 w-auto block" loading="eager" fetchpriority="high">
+          <span class="font-serif text-[21px] font-semibold text-white tracking-tight leading-none">Latam Sourcing</span>
         </a>
-
         <nav class="hidden md:flex items-center gap-10 text-sm font-medium absolute left-1/2 -translate-x-1/2">
           <a href="/" class="navlink">Inicio</a>
           <a href="/services/" class="navlink">Servicios</a>
           <a href="/about/" class="navlink">Nuestra Historia</a>
           <a href="/resources/" class="navlink active">Recursos</a>
         </nav>
-
-        <div class="hidden md:flex items-center ml-auto">
-          <a href="/#contact" class="bg-black text-white px-4 py-2 rounded-md hover:bg-[color:var(--accent)] transition">
-            Contacto
+        <div class="hidden md:flex items-center gap-3 ml-auto">
+          <div class="lang-dropdown-wrap" id="langDropdownWrap">
+            <button id="langBtn" class="lang-btn" aria-haspopup="listbox" aria-expanded="false">
+              <i class="fas fa-globe" style="font-size:12px;opacity:.60;"></i>
+              <span id="langLabel">ES</span>
+              <i class="fas fa-chevron-down lang-chevron"></i>
+            </button>
+            <div id="langPanel" class="lang-panel" role="listbox">
+              <div class="lang-panel-header">Idioma / Language</div>
+              <div class="lang-option active" role="option" data-lang="es"><span class="lang-flag">🇪🇸</span><span class="lang-name">Español</span><i class="fas fa-check lang-check"></i></div>
+              <div class="lang-option" role="option" data-lang="en"><span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><i class="fas fa-check lang-check"></i></div>
+            </div>
+          </div>
+          <a href="/#contact" class="header-contact-btn">
+            <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
+            <span data-i18n="nav.contact">Contacto</span>
           </a>
         </div>
-
-        <button id="mobileMenuBtn" class="md:hidden ml-auto text-gray-700" aria-label="Abrir menú">
-          <i class="fas fa-bars text-xl"></i>
-        </button>
+        <div class="md:hidden ml-auto flex items-center gap-3">
+          <div class="lang-dropdown-wrap" id="langDropdownWrapMobile">
+            <button id="langBtnMobile" class="lang-btn" style="padding:6px 10px;" aria-haspopup="listbox" aria-expanded="false">
+              <i class="fas fa-globe" style="font-size:12px;opacity:.60;"></i>
+              <span id="langLabelMobile">ES</span>
+              <i class="fas fa-chevron-down lang-chevron"></i>
+            </button>
+            <div id="langPanelMobile" class="lang-panel" role="listbox">
+              <div class="lang-panel-header">Idioma / Language</div>
+              <div class="lang-option active" role="option" data-lang="es"><span class="lang-flag">🇪🇸</span><span class="lang-name">Español</span><i class="fas fa-check lang-check"></i></div>
+              <div class="lang-option" role="option" data-lang="en"><span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><i class="fas fa-check lang-check"></i></div>
+            </div>
+          </div>
+          <button id="mobileMenuBtn" class="text-white/75 hover:text-white transition"><i class="fas fa-bars text-xl"></i></button>
+        </div>
       </div>
     </div>
-
-    <div id="mobileMenu" class="hidden md:hidden bg-white border-t" style="border-color: var(--border);">
+    <div id="mobileMenu" class="hidden md:hidden bg-[#0B1220] border-t border-white/10">
       <nav class="flex flex-col px-6 py-4 space-y-3 text-sm font-medium">
-        <a href="/" class="hover:text-[color:var(--accent)] transition">Inicio</a>
-        <a href="/services/" class="hover:text-[color:var(--accent)] transition">Servicios</a>
-        <a href="/about/" class="hover:text-[color:var(--accent)] transition">Nuestra Historia</a>
-        <a href="/resources/" class="hover:text-[color:var(--accent)] transition">Recursos</a>
-        <a href="/#contact" class="bg-black text-white px-4 py-2 rounded-md text-center hover:bg-[color:var(--accent)] transition">
-          Contacto
-        </a>
+        <a href="/" class="text-white/75 hover:text-white transition">Inicio</a>
+        <a href="/services/" class="text-white/75 hover:text-white transition">Servicios</a>
+        <a href="/about/" class="text-white/75 hover:text-white transition">Nuestra Historia</a>
+        <a href="/resources/" class="text-white/75 hover:text-white transition">Recursos</a>
+        <a href="/#contact" class="bg-white text-[#0B1220] px-4 py-2 rounded-lg text-center font-semibold">Contacto</a>
       </nav>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="pt-32 md:pt-36 pb-14 clean-bg">
+  <!-- ════════ HERO ════════ -->
+  <section class="pt-36 pb-16">
     <div class="max-w-7xl mx-auto px-6">
-      <p class="uppercase tracking-[0.25em] text-xs font-bold text-[color:var(--accent)] mb-3">
-        Recursos
-      </p>
-      <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
+      <span class="section-label reveal" data-i18n="page.label">Recursos</span>
+      <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-[#0B1220] leading-tight mb-6 max-w-4xl reveal reveal-delay-1" data-i18n="page.title">
         Aprende a importar desde China con recursos prácticos
       </h1>
-      <p class="text-[color:var(--muted)] text-lg md:text-xl max-w-3xl leading-relaxed">
-        Guías, clases y herramientas diseñadas para ayudarte a entender el proceso de importación
-        desde cero y tomar mejores decisiones en tu negocio.
+      <p class="text-slate-500 text-lg md:text-xl max-w-3xl leading-relaxed reveal reveal-delay-2" data-i18n="page.subtitle">
+        Guías, clases y herramientas diseñadas para ayudarte a entender el proceso de importación desde cero y tomar mejores decisiones en tu negocio.
       </p>
     </div>
   </section>
 
-  <!-- DIVIDER -->
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="section-divider"></div>
-  </div>
+  <div class="max-w-7xl mx-auto px-6"><div class="section-divider"></div></div>
 
-  <!-- RECURSOS -->
-  <section class="py-24 clean-bg">
+  <!-- ════════ RECURSOS ════════ -->
+  <section class="py-20">
     <div class="max-w-7xl mx-auto px-6">
 
-      <div class="text-center max-w-3xl mx-auto mb-20">
-        <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5">
-          Recursos para principiantes
-        </h2>
-        <p class="text-[color:var(--muted)] text-lg leading-relaxed">
-          Guías y materiales prácticos para entender el proceso de importación desde cero.
-        </p>
+      <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+        <span class="section-label" data-i18n="sec.label">Aprende</span>
+        <h2 class="font-serif text-3xl md:text-4xl text-[#0B1220] leading-tight mb-4" data-i18n="sec.title">Recursos para principiantes</h2>
+        <p class="text-slate-500 text-lg leading-relaxed" data-i18n="sec.subtitle">Guías y materiales prácticos para entender el proceso de importación desde cero.</p>
       </div>
 
-      <!-- Recurso 1 -->
-      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-24">
-        <div class="order-2 md:order-1">
-          <div
-            class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
-            tabindex="0"
-            role="button"
-            aria-label="Ver preview de Guía paso a paso"
-            data-poster="../assets/guia.jpg"
-            data-video="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771100088/0214_1_rae6cy.mp4"
-          >
-            <img
-              src="../assets/guia.jpg"
-              alt="Guía paso a paso"
-              class="resource-poster w-full h-full object-cover"
-              style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"
-              loading="lazy"
-              decoding="async"
-            >
-            <video
-              class="resource-video w-full h-full object-cover"
-              playsinline
-              loop
-              preload="none"
-            >
+      <!-- R1 -->
+      <div class="resource-row">
+        <div class="reveal from-left" style="order:2;">
+          <div class="resource-video-preview aspect-[4/3] cursor-pointer" tabindex="0" role="button" aria-label="Ver preview Guía paso a paso">
+            <img src="../assets/guia.jpg" alt="Guía paso a paso" class="resource-poster w-full h-full object-cover" loading="lazy" decoding="async">
+            <video class="resource-video w-full h-full object-cover" playsinline loop muted preload="none">
               <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771100088/0214_1_rae6cy.mp4" type="video/mp4">
             </video>
-            <div class="resource-play-hint">
-              <i class="fas fa-play"></i>
-            </div>
+            <div class="resource-play-hint"><i class="fas fa-play"></i></div>
           </div>
         </div>
-
-        <div class="order-1 md:order-2">
-          <div class="bg-white p-8 md:p-10 shadow-2xl rounded-lg border border-[color:var(--border)]">
-            <div class="inline-block px-3 py-1 bg-blue-50 text-[color:var(--accent)] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-              GUÍA GRATUITA
-            </div>
-            <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
-              Guía paso a paso
-            </h3>
-            <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-7">
-              Desde encontrar proveedores hasta recibir tu mercancía. Un recorrido completo por cada etapa del proceso de importación desde China, con ejemplos reales y plantillas descargables.
-            </p>
-
-            <a href="https://youtu.be/Ov4nKG32VSg" target="_blank" rel="noopener"
-               class="inline-flex items-center justify-center gap-2 bg-[color:var(--accent)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-              <i class="fab fa-youtube text-lg"></i>
-              Ver video
+        <div class="reveal from-right reveal-delay-1" style="order:1;">
+          <div class="resource-text-card">
+            <div class="resource-tag" data-i18n="r1.tag">Guía gratuita</div>
+            <h3 class="font-serif text-3xl text-[#0B1220] mb-4 leading-tight" data-i18n="r1.title">Guía paso a paso</h3>
+            <p class="text-slate-500 text-base leading-relaxed mb-8" data-i18n="r1.desc">Desde encontrar proveedores hasta recibir tu mercancía. Un recorrido completo por cada etapa del proceso de importación desde China, con ejemplos reales y plantillas descargables.</p>
+            <a href="https://youtu.be/Ov4nKG32VSg" target="_blank" class="resource-btn">
+              <div class="flex items-center gap-3"><span data-i18n="r1.btn">Ver video</span></div>
+              <i class="fab fa-youtube yt-icon"></i>
             </a>
           </div>
         </div>
       </div>
 
-      <!-- Recurso 2 -->
-      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-24">
-        <div>
-          <div class="bg-white p-8 md:p-10 shadow-2xl rounded-lg border border-[color:var(--border)]">
-            <div class="inline-block px-3 py-1 bg-amber-50 text-amber-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-              CHECKLIST
-            </div>
-            <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
-              Errores comunes
-            </h3>
-            <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-7">
-              Evita las pérdidas típicas al comenzar. Lista completa de errores frecuentes que cometen los importadores novatos y cómo prevenirlos antes de hacer tu primera orden.
-            </p>
-
-            <a href="https://youtu.be/mg_XrmzGJKk" target="_blank" rel="noopener"
-               class="inline-flex items-center justify-center gap-2 bg-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-amber-700 transition">
-              <i class="fab fa-youtube text-lg"></i>
-              Ver video
+      <!-- R2 -->
+      <div class="resource-row">
+        <div class="reveal from-left reveal-delay-1">
+          <div class="resource-text-card">
+            <div class="resource-tag" data-i18n="r2.tag">Checklist</div>
+            <h3 class="font-serif text-3xl text-[#0B1220] mb-4 leading-tight" data-i18n="r2.title">Errores comunes</h3>
+            <p class="text-slate-500 text-base leading-relaxed mb-8" data-i18n="r2.desc">Evita las pérdidas típicas al comenzar. Lista completa de errores frecuentes que cometen los importadores novatos y cómo prevenirlos antes de hacer tu primera orden.</p>
+            <a href="https://youtu.be/mg_XrmzGJKk" target="_blank" class="resource-btn">
+              <div class="flex items-center gap-3"><span data-i18n="r2.btn">Ver video</span></div>
+              <i class="fab fa-youtube yt-icon"></i>
             </a>
           </div>
         </div>
-
-        <div>
-          <div
-            class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
-            tabindex="0"
-            role="button"
-            aria-label="Ver preview de Errores comunes"
-            data-poster="../assets/errores.jpg"
-            data-video="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099511/0214_gapxgh.mp4"
-          >
-            <img
-              src="../assets/errores.jpg"
-              alt="Errores comunes"
-              class="resource-poster w-full h-full object-cover"
-              style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"
-              loading="lazy"
-              decoding="async"
-            >
-            <video
-              class="resource-video w-full h-full object-cover"
-              playsinline
-              loop
-              preload="none"
-            >
+        <div class="reveal from-right">
+          <div class="resource-video-preview aspect-[4/3] cursor-pointer" tabindex="0" role="button" aria-label="Ver preview Errores comunes">
+            <img src="../assets/errores.jpg" alt="Errores comunes" class="resource-poster w-full h-full object-cover" loading="lazy" decoding="async">
+            <video class="resource-video w-full h-full object-cover" playsinline loop muted preload="none">
               <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099511/0214_gapxgh.mp4" type="video/mp4">
             </video>
-            <div class="resource-play-hint">
-              <i class="fas fa-play"></i>
-            </div>
+            <div class="resource-play-hint"><i class="fas fa-play"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- Recurso 3 -->
-      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-        <div class="order-2 md:order-1">
-          <div
-            class="resource-video-preview rounded-2xl overflow-hidden aspect-[4/3] shadow-xl cursor-pointer"
-            tabindex="0"
-            role="button"
-            aria-label="Ver preview de Costos reales"
-            data-poster="../assets/exel.jpg"
-            data-video="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099872/exel_zwwdvl.mp4"
-          >
-            <img
-              src="../assets/exel.jpg"
-              alt="Calculadora de costos"
-              class="resource-poster w-full h-full object-cover"
-              style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"
-              loading="lazy"
-              decoding="async"
-            >
-            <video
-              class="resource-video w-full h-full object-cover"
-              playsinline
-              loop
-              preload="none"
-            >
+      <!-- R3 -->
+      <div class="resource-row">
+        <div class="reveal from-left" style="order:2;">
+          <div class="resource-video-preview aspect-[4/3] cursor-pointer" tabindex="0" role="button" aria-label="Ver preview Costos reales">
+            <img src="../assets/exel.jpg" alt="Costos reales" class="resource-poster w-full h-full object-cover" loading="lazy" decoding="async">
+            <video class="resource-video w-full h-full object-cover" playsinline loop muted preload="none">
               <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099872/exel_zwwdvl.mp4" type="video/mp4">
             </video>
-            <div class="resource-play-hint">
-              <i class="fas fa-play"></i>
-            </div>
+            <div class="resource-play-hint"><i class="fas fa-play"></i></div>
           </div>
         </div>
-
-        <div class="order-1 md:order-2">
-          <div class="bg-white p-8 md:p-10 shadow-2xl rounded-lg border border-[color:var(--border)]">
-            <div class="inline-block px-3 py-1 bg-green-50 text-green-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-              CALCULADORA
-            </div>
-            <h3 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5 leading-tight">
-              Costos reales
-            </h3>
-            <p class="text-[color:var(--muted)] text-lg leading-relaxed mb-7">
-              Cómo calcular tu costo por unidad y margen real. Herramienta práctica para estimar inversión total incluyendo todos los gastos ocultos que nadie te cuenta.
-            </p>
-
-            <a href="https://youtu.be/vAoCyXpiVTU" target="_blank" rel="noopener"
-               class="inline-flex items-center justify-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
-              <i class="fab fa-youtube text-lg"></i>
-              Ver video
+        <div class="reveal from-right reveal-delay-1" style="order:1;">
+          <div class="resource-text-card">
+            <div class="resource-tag" data-i18n="r3.tag">Calculadora</div>
+            <h3 class="font-serif text-3xl text-[#0B1220] mb-4 leading-tight" data-i18n="r3.title">Costos reales</h3>
+            <p class="text-slate-500 text-base leading-relaxed mb-8" data-i18n="r3.desc">Cómo calcular tu costo por unidad y margen real. Herramienta práctica para estimar inversión total incluyendo todos los gastos ocultos que nadie te cuenta.</p>
+            <a href="https://youtu.be/vAoCyXpiVTU" target="_blank" class="resource-btn">
+              <div class="flex items-center gap-3"><span data-i18n="r3.btn">Ver video</span></div>
+              <i class="fab fa-youtube yt-icon"></i>
             </a>
           </div>
         </div>
@@ -493,195 +267,134 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="py-24 clean-bg">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-white rounded-2xl shadow-lg p-8 border border-[color:var(--border)] hover:shadow-xl transition">
-          <h2 class="font-serif text-2xl font-semibold text-[color:var(--text)] mb-4">
-            ¿Es para mí importar desde China?
-          </h2>
-          <p class="text-[color:var(--muted)] leading-relaxed mb-4">
-            Si tienes una idea de producto, ya vendes en tu país o quieres lanzar tu propia marca,
-            probablemente sí. La clave está en elegir bien qué importar y en qué etapa estás.
-          </p>
-          <p class="text-[color:var(--muted)] leading-relaxed">
-            En nuestros recursos te damos criterios claros para evaluar si tiene sentido para ti
-            en este momento.
-          </p>
-        </div>
+  <div class="max-w-7xl mx-auto px-6"><div class="section-divider"></div></div>
 
-        <div class="bg-white rounded-2xl shadow-lg p-8 border border-[color:var(--border)] hover:shadow-xl transition">
-          <h2 class="font-serif text-2xl font-semibold text-[color:var(--text)] mb-4">
-            ¿Cómo accedo a estos recursos?
-          </h2>
-          <p class="text-[color:var(--muted)] leading-relaxed mb-4">
-            De momento no están disponibles para descarga directa. Te los compartimos de forma
-            personalizada según tu proyecto.
-          </p>
-          <p class="text-[color:var(--muted)] leading-relaxed mb-4">
-            Solo tienes que escribirnos por WhatsApp o completar el formulario de contacto indicando
-            que vienes desde la sección de recursos.
-          </p>
-          <a href="/#contact" class="inline-flex items-center gap-2 text-[color:var(--accent)] font-semibold hover:gap-3 transition-all">
-            Ir al formulario de contacto
-            <i class="fas fa-arrow-right"></i>
+  <!-- ════════ INFO CARDS ════════ -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="info-card reveal reveal-delay-1">
+          <h2 class="font-serif text-2xl text-[#0B1220] mb-4" data-i18n="info1.title">¿Es para mí importar desde China?</h2>
+          <p class="text-slate-500 leading-relaxed mb-4" data-i18n="info1.p1">Si tienes una idea de producto, ya vendes en tu país o quieres lanzar tu propia marca, probablemente sí. La clave está en elegir bien qué importar y en qué etapa estás.</p>
+          <p class="text-slate-500 leading-relaxed" data-i18n="info1.p2">En nuestros recursos te damos criterios claros para evaluar si tiene sentido para ti en este momento.</p>
+        </div>
+        <div class="info-card reveal reveal-delay-2">
+          <h2 class="font-serif text-2xl text-[#0B1220] mb-4" data-i18n="info2.title">¿Cómo accedo a estos recursos?</h2>
+          <p class="text-slate-500 leading-relaxed mb-4" data-i18n="info2.p1">De momento no están disponibles para descarga directa. Te los compartimos de forma personalizada según tu proyecto.</p>
+          <p class="text-slate-500 leading-relaxed mb-6" data-i18n="info2.p2">Solo tienes que escribirnos o completar el formulario de contacto indicando que vienes desde la sección de recursos.</p>
+          <a href="/#contact" class="inline-flex items-center gap-2 text-[#0B1220] font-semibold text-sm hover:opacity-60 transition-opacity">
+            <span data-i18n="info2.cta">Ir al formulario de contacto</span>
+            <i class="fas fa-arrow-right text-xs"></i>
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-20 bg-white relative z-10">
+  <div class="max-w-7xl mx-auto px-6"><div class="section-divider"></div></div>
+
+  <!-- ════════ CTA ════════ -->
+  <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="font-serif text-3xl md:text-4xl font-semibold text-[color:var(--text)] mb-5">
-        ¿Quieres que te enviemos el recurso más adecuado para tu caso?
-      </h2>
-      <p class="max-w-2xl mx-auto mb-8 text-[color:var(--muted)] text-lg leading-relaxed">
-        Cuéntanos si estás empezando, si ya importas o si estás lanzando una marca nueva.
-        Te sugerimos por dónde empezar.
-      </p>
-      <a href="/#contact" class="inline-block bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-[color:var(--accent)] transition text-lg">
-        Hablar con el equipo
-      </a>
+      <div class="max-w-2xl mx-auto reveal">
+        <span class="section-label" style="display:block;text-align:center;" data-i18n="cta.label">Empecemos</span>
+        <h2 class="font-serif text-3xl md:text-4xl text-[#0B1220] leading-tight mb-4" data-i18n="cta.title">¿Quieres que te enviemos el recurso más adecuado para tu caso?</h2>
+        <p class="text-slate-500 text-lg leading-relaxed mb-10" data-i18n="cta.subtitle">Cuéntanos si estás empezando, si ya importas o si estás lanzando una marca nueva.</p>
+        <div class="flex justify-center">
+          <a href="/#contact" class="cta-btn">
+            <div class="flex flex-col items-start">
+              <span class="cta-sublabel" data-i18n="cta.fade">Formulario de contacto</span>
+              <span data-i18n="cta.btn">Hablar con el equipo</span>
+            </div>
+            <div class="cta-arrow"><i class="fas fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-[#0B1220] text-gray-300 py-12">
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="bg-[#0B1220] text-gray-300 py-14">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="grid md:grid-cols-4 gap-8 mb-8">
-        <div>
-          <h3 class="text-white font-serif font-semibold text-lg mb-4">Latam Sourcing</h3>
-          <p class="text-sm text-gray-400">
-            Tu socio de confianza para importar desde China de forma segura y rentable.
-          </p>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-4">Secciones</h4>
-          <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="/about/" class="hover:text-white transition">Nuestra Historia</a></li>
-            <li><a href="/services/" class="hover:text-white transition">Servicios</a></li>
-            <li><a href="/resources/" class="hover:text-white transition">Recursos</a></li>
-            <li><a href="/#contact" class="hover:text-white transition">Contacto</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-4">Contacto</h4>
-          <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="/#contact" class="hover:text-white transition">Formulario</a></li>
-            <li><a href="https://form.typeform.com/to/agExuI5g" target="_blank" rel="noopener" class="hover:text-white transition">Trabaja con nosotros</a></li>
-            <li><a href="mailto:contacto@latamsourcing.com" class="hover:text-white transition">Email</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-4">Legal</h4>
-          <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="#" class="hover:text-white transition">Política de privacidad</a></li>
-            <li><a href="#" class="hover:text-white transition">Términos</a></li>
-          </ul>
-        </div>
+      <div class="grid md:grid-cols-4 gap-10 mb-12">
+        <div><h3 class="text-white font-serif font-semibold text-lg mb-4">Latam Sourcing</h3><p class="text-sm text-gray-400 leading-relaxed" data-i18n="footer.tagline">Tu socio de confianza para importar desde China de forma segura y rentable.</p></div>
+        <div><h4 class="text-white font-semibold mb-4 text-sm" data-i18n="footer.sections">Secciones</h4><ul class="space-y-2 text-sm text-gray-400"><li><a href="/about/" class="hover:text-white transition">Nuestra Historia</a></li><li><a href="/services/" class="hover:text-white transition">Servicios</a></li><li><a href="/resources/" class="hover:text-white transition">Recursos</a></li><li><a href="/#contact" class="hover:text-white transition">Contacto</a></li></ul></div>
+        <div><h4 class="text-white font-semibold mb-4 text-sm" data-i18n="footer.contactTitle">Contacto</h4><ul class="space-y-2 text-sm text-gray-400"><li><a href="/#contact" class="hover:text-white transition">Formulario</a></li><li><a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="hover:text-white transition">Trabaja con nosotros</a></li><li><a href="mailto:contacto@latamsourcing.com" class="hover:text-white transition">Email</a></li></ul></div>
+        <div><h4 class="text-white font-semibold mb-4 text-sm" data-i18n="footer.legal">Legal</h4><ul class="space-y-2 text-sm text-gray-400"><li><a href="#" class="hover:text-white transition">Política de privacidad</a></li><li><a href="#" class="hover:text-white transition">Términos</a></li></ul></div>
       </div>
-
-      <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-400">
-        <p>© 2026 Latam Sourcing. Todos los derechos reservados.</p>
-      </div>
+      <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-500"><p data-i18n="footer.copy">© 2026 Latam Sourcing. Todos los derechos reservados.</p></div>
     </div>
   </footer>
 
-  <!-- BACK TO TOP BUTTON -->
-  <button id="backToTop" aria-label="Volver arriba" title="Volver arriba">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+  <button id="backToTop" aria-label="Volver arriba"><i class="fas fa-arrow-up text-sm"></i></button>
 
   <script>
-    // Header shadow on scroll
-    (function(){
-      const header = document.getElementById('siteHeader');
-      function onScroll(){
-        if (window.scrollY > 10) header.classList.add('is-scrolled');
-        else header.classList.remove('is-scrolled');
-      }
-      window.addEventListener('scroll', onScroll, { passive:true });
-      onScroll();
-    })();
+  const t = {
+    es:{
+      'nav.contact':'Contacto','page.label':'Recursos',
+      'page.title':'Aprende a importar desde China con recursos prácticos',
+      'page.subtitle':'Guías, clases y herramientas diseñadas para ayudarte a entender el proceso de importación desde cero y tomar mejores decisiones en tu negocio.',
+      'sec.label':'Aprende','sec.title':'Recursos para principiantes','sec.subtitle':'Guías y materiales prácticos para entender el proceso de importación desde cero.',
+      'r1.tag':'Guía gratuita','r1.title':'Guía paso a paso','r1.desc':'Desde encontrar proveedores hasta recibir tu mercancía. Un recorrido completo por cada etapa del proceso de importación desde China, con ejemplos reales y plantillas descargables.','r1.btn':'Ver video',
+      'r2.tag':'Checklist','r2.title':'Errores comunes','r2.desc':'Evita las pérdidas típicas al comenzar. Lista completa de errores frecuentes que cometen los importadores novatos y cómo prevenirlos antes de hacer tu primera orden.','r2.btn':'Ver video',
+      'r3.tag':'Calculadora','r3.title':'Costos reales','r3.desc':'Cómo calcular tu costo por unidad y margen real. Herramienta práctica para estimar inversión total incluyendo todos los gastos ocultos que nadie te cuenta.','r3.btn':'Ver video',
+      'info1.title':'¿Es para mí importar desde China?',
+      'info1.p1':'Si tienes una idea de producto, ya vendes en tu país o quieres lanzar tu propia marca, probablemente sí. La clave está en elegir bien qué importar y en qué etapa estás.',
+      'info1.p2':'En nuestros recursos te damos criterios claros para evaluar si tiene sentido para ti en este momento.',
+      'info2.title':'¿Cómo accedo a estos recursos?',
+      'info2.p1':'De momento no están disponibles para descarga directa. Te los compartimos de forma personalizada según tu proyecto.',
+      'info2.p2':'Solo tienes que escribirnos o completar el formulario de contacto indicando que vienes desde la sección de recursos.','info2.cta':'Ir al formulario de contacto',
+      'cta.label':'Empecemos','cta.title':'¿Quieres que te enviemos el recurso más adecuado para tu caso?','cta.subtitle':'Cuéntanos si estás empezando, si ya importas o si estás lanzando una marca nueva.','cta.fade':'Formulario de contacto','cta.btn':'Hablar con el equipo',
+      'footer.tagline':'Tu socio de confianza para importar desde China de forma segura y rentable.',
+      'footer.sections':'Secciones','footer.contactTitle':'Contacto','footer.legal':'Legal','footer.copy':'© 2026 Latam Sourcing. Todos los derechos reservados.'
+    },
+    en:{
+      'nav.contact':'Contact','page.label':'Resources',
+      'page.title':'Learn to import from China with practical resources',
+      'page.subtitle':'Guides, classes and tools designed to help you understand the import process from scratch and make better decisions for your business.',
+      'sec.label':'Learn','sec.title':'Resources for beginners','sec.subtitle':'Practical guides and materials to understand the import process from scratch.',
+      'r1.tag':'Free guide','r1.title':'Step-by-step guide','r1.desc':'From finding suppliers to receiving your goods. A complete walkthrough of every stage of the import process from China, with real examples and downloadable templates.','r1.btn':'Watch video',
+      'r2.tag':'Checklist','r2.title':'Common mistakes','r2.desc':'Avoid typical losses when starting out. Complete list of frequent mistakes novice importers make and how to prevent them before your first order.','r2.btn':'Watch video',
+      'r3.tag':'Calculator','r3.title':'Real costs','r3.desc':'How to calculate your cost per unit and real margin. Practical tool to estimate total investment including all hidden costs nobody tells you about.','r3.btn':'Watch video',
+      'info1.title':'Is importing from China right for me?',
+      'info1.p1':'If you have a product idea, already sell in your country, or want to launch your own brand, probably yes. The key is choosing the right thing to import and knowing what stage you are at.',
+      'info1.p2':'Our resources give you clear criteria to evaluate whether it makes sense for you right now.',
+      'info2.title':'How do I access these resources?',
+      'info2.p1':'They are not available for direct download at the moment. We share them in a personalized way based on your project.',
+      'info2.p2':'Just contact us or fill out the contact form indicating you are coming from the resources section.','info2.cta':'Go to contact form',
+      'cta.label':"Let's start",'cta.title':'Want us to send you the most suitable resource for your case?','cta.subtitle':'Tell us if you are starting out, already importing, or launching a new brand.','cta.fade':'Contact form','cta.btn':'Talk to the team',
+      'footer.tagline':'Your trusted partner for importing from China safely and profitably.',
+      'footer.sections':'Sections','footer.contactTitle':'Contact','footer.legal':'Legal','footer.copy':'© 2026 Latam Sourcing. All rights reserved.'
+    }
+  };
 
-    // Mobile menu
-    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-      const menu = document.getElementById('mobileMenu');
-      if (menu) menu.classList.toggle('hidden');
+  let lang = 'es';
+  function applyLang(l){ lang=l; document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if(t[l][k]!==undefined) el.textContent=t[l][k]; }); document.documentElement.lang=l; document.querySelectorAll('#langLabel,#langLabelMobile').forEach(el=>el.textContent=l.toUpperCase()); document.querySelectorAll('.lang-option').forEach(o=>o.classList.toggle('active',o.getAttribute('data-lang')===l)); }
+
+  function setupDrop(btnId, panelId){ const btn=document.getElementById(btnId),panel=document.getElementById(panelId); if(!btn||!panel) return; const open=()=>{btn.classList.add('open');panel.classList.add('open');btn.setAttribute('aria-expanded','true');}; const close=()=>{btn.classList.remove('open');panel.classList.remove('open');btn.setAttribute('aria-expanded','false');}; btn.addEventListener('click',e=>{e.stopPropagation();btn.classList.contains('open')?close():open();}); panel.querySelectorAll('.lang-option').forEach(o=>o.addEventListener('click',e=>{e.stopPropagation();applyLang(o.getAttribute('data-lang'));document.querySelectorAll('.lang-panel').forEach(p=>p.classList.remove('open'));document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.remove('open');b.setAttribute('aria-expanded','false');});})); document.addEventListener('click',e=>{if(!btn.contains(e.target)&&!panel.contains(e.target))close();}); document.addEventListener('keydown',e=>{if(e.key==='Escape')close();}); }
+  setupDrop('langBtn','langPanel');
+  setupDrop('langBtnMobile','langPanelMobile');
+
+  (function(){ const h=document.getElementById('siteHeader'); window.addEventListener('scroll',()=>h.classList.toggle('is-scrolled',window.scrollY>10),{passive:true}); })();
+  document.getElementById('mobileMenuBtn').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('hidden'));
+  (function(){ const btn=document.getElementById('backToTop'); window.addEventListener('scroll',()=>btn.classList.toggle('show',window.scrollY>420),{passive:true}); btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'})); })();
+  (function(){ const els=document.querySelectorAll('.reveal'); if(!els.length)return; const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');obs.unobserve(e.target);}}),{threshold:.10,rootMargin:'0px 0px -50px 0px'}); els.forEach(el=>obs.observe(el)); })();
+
+  // Video preview
+  (function(){
+    const previews=document.querySelectorAll('.resource-video-preview');
+    if(!previews.length) return;
+    const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    previews.forEach(preview=>{
+      const video=preview.querySelector('.resource-video'); if(!video) return;
+      let playing=false;
+      function play(){ if(reduced)return; preview.classList.add('is-playing'); video.play().catch(()=>{video.muted=true;video.play().catch(()=>{})}); playing=true; }
+      function pause(){ preview.classList.remove('is-playing'); video.pause(); video.currentTime=0; playing=false; }
+      if(!('ontouchstart' in window)){ preview.addEventListener('mouseenter',play); preview.addEventListener('mouseleave',pause); }
+      preview.addEventListener('click',e=>{e.preventDefault(); playing?pause():play();});
+      preview.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();playing?pause():play();}});
     });
-
-    // Back to top show/hide + action
-    (function(){
-      const btn = document.getElementById('backToTop');
-      const showAfter = 420;
-
-      function toggle(){
-        if (window.scrollY > showAfter) btn.classList.add('show');
-        else btn.classList.remove('show');
-      }
-
-      window.addEventListener('scroll', toggle, { passive: true });
-      toggle();
-
-      btn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    })();
-
-    // Video preview interactivo
-    (function(){
-      const previews = document.querySelectorAll('.resource-video-preview');
-      if (!previews.length) return;
-
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      previews.forEach(preview => {
-        const video = preview.querySelector('.resource-video');
-        const videoSrc = preview.getAttribute('data-video');
-        if (!video || !videoSrc) return;
-
-        let isPlaying = false;
-
-        function playVideo() {
-          if (prefersReducedMotion) return;
-          preview.classList.add('is-playing');
-          video.play().catch(() => {
-            video.muted = true;
-            video.play().catch(() => {});
-          });
-          isPlaying = true;
-        }
-
-        function pauseVideo() {
-          preview.classList.remove('is-playing');
-          video.pause();
-          video.currentTime = 0;
-          isPlaying = false;
-        }
-
-        function toggleVideo() { isPlaying ? pauseVideo() : playVideo(); }
-
-        if (!('ontouchstart' in window)) {
-          preview.addEventListener('mouseenter', playVideo);
-          preview.addEventListener('mouseleave', pauseVideo);
-        }
-
-        preview.addEventListener('click', (e) => { e.preventDefault(); toggleVideo(); });
-        preview.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleVideo(); }
-        });
-
-        video.addEventListener('pause', () => {
-          if (isPlaying) {
-            preview.classList.remove('is-playing');
-            isPlaying = false;
-          }
-        });
-      });
-    })();
+  })();
   </script>
 
 </body>
