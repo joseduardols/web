@@ -1,615 +1,563 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <title>Latam Sourcing - Importar desde China de forma segura</title>
+  <title>Latam Sourcing - Sostenibilidad y Escala en Importaciones desde China</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Empresa de sourcing y trading especializada en conectar negocios con fabricantes confiables en China. Importación segura, rentable y sin improvisar.">
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Scripts & Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <link rel="canonical" href="https://latamsourcin.com/">
-  <link rel="icon" type="image/webp" href="/assets/logo_latam.webp">
+  <link rel="icon" type="image/webp" href="assets/logo_latam.webp">
+
   <style>
+    :root {
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --color-brand-dark: #0F172A;
+      --color-brand-muted: #64748B;
+      --color-bg-light: #F8FAFC;
+      --color-accent: #EF4444; /* ROJO CORPORATIVO */
+    }
+
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; color: #1a1a1a; line-height: 1.7; background: #0B1220; overflow-x: hidden; }
-    .font-serif { font-family: 'Playfair Display', serif; }
-    .font-elegant { font-family: 'Cormorant Garamond', serif; }
-    :root { --text: #0B1220; --border: #E5E7EB; --hero-bg: #0B1220; }
-
-    /* ── HERO ──────────────────────────────────────── */
-    #home { background: var(--hero-bg); position: relative; overflow: hidden; }
-    #home::before {
-      content:''; position:absolute; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events:none; z-index:0;
+    
+    body {
+      font-family: var(--font-main);
+      color: var(--color-brand-dark);
+      background-color: #FFFFFF;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    #home::after {
-      content:''; position:absolute; top:-20%; left:50%; transform:translateX(-50%);
-      width:900px; height:600px;
-      background:radial-gradient(ellipse at center, rgba(255,255,255,0.025) 0%, transparent 70%);
-      pointer-events:none; z-index:0;
-    }
-    #home > * { position:relative; z-index:1; }
 
-    /* ── HEADER ─────────────────────────────────────── */
-    #siteHeader { background:rgba(11,18,32,0.92); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid rgba(255,255,255,0.06); transition:background .3s,box-shadow .3s; }
-    #siteHeader.is-scrolled { background:rgba(11,18,32,0.98); box-shadow:0 4px 30px rgba(0,0,0,0.3); }
-    .navlink { position:relative; padding:10px 2px; color:rgba(255,255,255,0.60); transition:color .2s; font-size:14px; font-weight:500; }
-    .navlink::after { content:''; position:absolute; left:0; right:0; bottom:4px; height:1px; background:rgba(255,255,255,0.85); border-radius:999px; transform:scaleX(0); transform-origin:center; transition:transform .25s; }
-    .navlink:hover { color:#fff; }
-    .navlink:hover::after, .navlink.active::after { transform:scaleX(1); }
-    .navlink.active { color:#fff; }
+    /* ── ANIMACIÓN DEL PRELOADER (ESTILO KUAIZI) ── */
+    @keyframes loaderBar {
+      0% { width: 0%; left: 0%; }
+      50% { width: 100%; left: 0%; }
+      100% { width: 0%; left: 100%; }
+    }
+    .animate-loader-bar {
+      position: absolute;
+      animation: loaderBar 1.6s infinite ease-in-out;
+    }
+
+    /* ── HEADER FLOATING GLASS ──────── */
+    #siteHeader {
+      transition: all 0.3s ease;
+    }
+
+    /* ── NAV LINKS ──────────────────────────────────── */
+    .navlink {
+      position: relative;
+      padding: 6px 0;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+    .navlink:hover, .navlink.active {
+      color: #FFFFFF;
+    }
+    .navlink::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #EF4444;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .navlink:hover::after, .navlink.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
 
     /* ── LANGUAGE DROPDOWN ─────────────────────────── */
-    .lang-dropdown-wrap {
-      position: relative;
-      display: inline-block;
-    }
+    .lang-dropdown-wrap { position: relative; display: inline-block; }
     .lang-btn {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 7px 13px; border: 1px solid rgba(255,255,255,0.16); border-radius: 8px;
-      color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; cursor: pointer;
-      background: transparent; transition: background .2s, color .2s, border-color .2s;
-      user-select: none;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px;
+      color: #FFFFFF; font-size: 13px; font-weight: 600;
+      background: rgba(255, 255, 255, 0.1); transition: all 0.2s; cursor: pointer;
     }
-    .lang-btn:hover { background: rgba(255,255,255,0.07); color: #fff; border-color: rgba(255,255,255,0.30); }
-    .lang-btn.open { background: rgba(255,255,255,0.09); color: #fff; border-color: rgba(255,255,255,0.30); }
-    .lang-btn .lang-chevron { font-size: 9px; opacity: .5; transition: transform .22s ease; }
-    .lang-btn.open .lang-chevron { transform: rotate(180deg); }
-
-    /* Dropdown panel */
+    .lang-btn:hover { border-color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.2); }
     .lang-panel {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      min-width: 148px;
-      background: #fff;
-      border-radius: 12px;
-      border: 1px solid rgba(11,18,32,0.09);
-      box-shadow: 0 8px 32px rgba(11,18,32,0.18), 0 2px 8px rgba(11,18,32,0.10);
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(-6px) scale(0.97);
-      pointer-events: none;
-      transition: opacity .2s ease, transform .2s ease;
-      z-index: 9999;
+      position: absolute; top: calc(100% + 8px); right: 0; min-width: 150px;
+      background: #0F172A; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      opacity: 0; transform: translateY(-6px); pointer-events: none;
+      transition: all 0.2s ease; z-index: 50;
     }
-    .lang-panel.open {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-    .lang-panel-header {
-      padding: 10px 14px 8px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(11,18,32,0.35);
-      border-bottom: 1px solid rgba(11,18,32,0.06);
-    }
+    .lang-panel.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
     .lang-option {
-      display: flex; align-items: center; gap: 10px;
-      padding: 11px 14px;
-      cursor: pointer;
-      font-size: 13px; font-weight: 500;
-      color: #0B1220;
-      transition: background .15s;
-      border-bottom: 1px solid rgba(11,18,32,0.05);
+      display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+      font-size: 13px; font-weight: 500; color: #CBD5E1; cursor: pointer; transition: background 0.15s;
     }
-    .lang-option:last-child { border-bottom: none; }
-    .lang-option:hover { background: #F5F3EF; }
-    .lang-option.active { background: #F0EDE8; }
-    .lang-option .lang-flag {
-      font-size: 18px;
-      line-height: 1;
-      flex-shrink: 0;
+    .lang-option:hover { background: rgba(255, 255, 255, 0.1); color: #FFF; }
+    .lang-option.active { font-weight: 700; color: #FFFFFF; background: rgba(239, 68, 68, 0.2); }
+
+    /* ── CARDS & COMPONENTS ────────────────────────── */
+    .card-clean {
+      background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .lang-option .lang-name { flex: 1; }
-    .lang-option .lang-check {
+    .card-clean:hover {
+      border-color: #CBD5E1; box-shadow: 0 12px 30px -10px rgba(15, 23, 42, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* ── REVEAL ANIMATION ──────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── INTERACTIVE WHEEL COMPONENT ── */
+    .wheel-node { 
+      position: absolute;
+      transform: translate(-50%, -50%);
+      transition: all 0.3s ease; 
+      cursor: pointer; 
+      z-index: 20;
+    }
+    .wheel-node .node-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 9999px;
+      background-color: #CBD5E1;
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+    .wheel-node:hover .node-dot,
+    .wheel-node.active .node-dot {
+      background-color: #EF4444;
+      border-color: #FFFFFF;
+      box-shadow: 0 0 0 5px rgba(239, 68, 68, 0.25), 0 4px 12px rgba(239, 68, 68, 0.4);
+      transform: scale(1.35);
+    }
+    .wheel-node .node-label {
       font-size: 11px;
-      color: #0B1220;
-      opacity: 0;
-      transition: opacity .15s;
+      font-weight: 700;
+      color: #475569;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid #E2E8F0;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
     }
-    .lang-option.active .lang-check { opacity: 1; }
-
-    /* Contact header button */
-    .header-contact-btn {
-      display:inline-flex; align-items:center; gap:10px;
-      padding:9px 18px; border-radius:10px;
-      background:#fff; color:#0B1220;
-      font-size:14px; font-weight:600;
-      transition:background .2s, transform .2s, box-shadow .2s;
-      box-shadow:0 2px 12px rgba(255,255,255,0.10);
+    .wheel-node:hover .node-label,
+    .wheel-node.active .node-label {
+      color: #0F172A;
+      font-weight: 800;
+      border-color: #EF4444;
+      background: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
     }
-    .header-contact-btn:hover { background:#f0f0f0; transform:translateY(-1px); box-shadow:0 4px 20px rgba(255,255,255,0.15); }
-    .header-contact-btn .arrow-circle {
-      width:26px; height:26px; border-radius:50%;
-      background:#0B1220; color:#fff;
-      display:flex; align-items:center; justify-content:center;
-      font-size:10px;
-      transition:transform .25s;
-    }
-    .header-contact-btn:hover .arrow-circle { transform:translate(2px,-2px); }
 
-    /* ── CONTENT AREA ───────────────────────────────── */
-    .content-area { background:linear-gradient(180deg,#FFFFFF 0%,#FAF8F3 30%,#F5F1E8 70%,#EFE9DA 100%); }
+    .resource-video-preview { position: relative; overflow: hidden; background: #0F172A; }
+    .resource-poster { transition: opacity 0.4s ease; }
+    .resource-video { position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s ease; }
+    .resource-video-preview.is-playing .resource-poster { opacity: 0; }
+    .resource-video-preview.is-playing .resource-video { opacity: 1; }
 
-    /* ── MARQUEE WHITE BOX ─────────────────────────── */
-    .marquee-label { text-align:center; font-size:11px; letter-spacing:.22em; font-weight:700; color:rgba(255,255,255,0.25); text-transform:uppercase; margin-bottom:14px; }
-    .marquee-box {
-      background:rgba(255,255,255,0.97);
-      border-radius:18px;
-      border:1px solid rgba(212, 11, 11, 0.1);
-      box-shadow:0 0 0 1px rgba(255,255,255,0.05), 0 10px 50px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.25);
-      overflow:hidden; position:relative; padding:22px 0;
-    }
-    .marquee-box::before,.marquee-box::after { content:''; position:absolute; top:0; width:80px; height:100%; z-index:2; pointer-events:none; }
-    .marquee-box::before { left:0; background:linear-gradient(to right,#fff 0%,rgba(255,255,255,0) 100%); }
-    .marquee-box::after { right:0; background:linear-gradient(to left,#fff 0%,rgba(255,255,255,0) 100%); }
-    .marquee-track { display:flex; width:max-content; animation:marquee-left 38s linear infinite; will-change:transform; gap:12px; }
-    .marquee-item { width:160px; height:36px; display:flex; align-items:center; justify-content:center; padding:0 18px; flex-shrink:0; opacity:.55; filter:grayscale(100%); transition:opacity .25s,filter .25s; }
-    .marquee-item:hover { opacity:.9; filter:grayscale(0%); }
-    .marquee-item img { height:24px; width:auto; max-width:130px; object-fit:contain; display:block; }
-    @keyframes marquee-left { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-
-    /* ── TYPEWRITER ─────────────────────────────────── */
-    .typewriter { display:inline-block; white-space:nowrap; border-right:2px solid rgba(255,255,255,0.45); padding-right:4px; animation:caret-blink .9s steps(1) infinite; color:rgba(27, 169, 252, 0.92); }
-    @keyframes caret-blink { 0%,49%{border-color:rgba(255,255,255,0.45)} 50%,100%{border-color:transparent} }
-
-    /* ── REVEAL ANIMATIONS ─────────────────────────── */
-    .reveal { opacity:0; transform:translateY(36px); transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94); }
-    .reveal.from-left { transform:translateX(-50px); }
-    .reveal.from-right { transform:translateX(50px); }
-    .reveal.is-visible { opacity:1; transform:translateY(0) translateX(0); }
-    .reveal-delay-1{transition-delay:.10s} .reveal-delay-2{transition-delay:.20s} .reveal-delay-3{transition-delay:.30s} .reveal-delay-4{transition-delay:.40s}
-
-    /* ── SECTION LABEL ──────────────────────────────── */
-    .section-label { font-size:10px; letter-spacing:.22em; font-weight:700; text-transform:uppercase; color:rgba(11,18,32,0.38); display:block; margin-bottom:12px; }
-
-    /* ── SECTION DIVIDER ────────────────────────────── */
-    .section-divider { height:1px; background:linear-gradient(to right,transparent 0%,rgba(11,18,32,0.10) 20%,rgba(11,18,32,0.16) 50%,rgba(11,18,32,0.10) 80%,transparent 100%); }
-
-    /* ── ABOUT STAT BLOCKS ─────────────────────────── */
-    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
-    @media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:32px}}
-    .about-stat-block { padding:26px 28px; background:#0B1220; border-radius:14px; color:#fff; transition:transform .3s; }
-    .about-stat-block:hover { transform:translateY(-3px); }
-
-    /* ── SERVICE CARDS - Monochrome ─────────────────── */
-    .service-card { background:#fff; border-radius:20px; border:1px solid rgba(11,18,32,0.07); padding:42px 34px; position:relative; overflow:hidden; transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s; box-shadow:0 2px 16px rgba(11,18,32,0.05); }
-    .service-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:#0B1220; transform:scaleX(0); transform-origin:left; transition:transform .45s; }
-    .service-card:hover { transform:translateY(-5px); box-shadow:0 20px 50px rgba(11,18,32,0.10); }
-    .service-card:hover::before { transform:scaleX(1); }
-    .service-number { font-family:'Cormorant Garamond',serif; font-size:5rem; font-weight:600; line-height:1; color:rgba(11,18,32,0.05); position:absolute; top:18px; right:22px; user-select:none; transition:color .3s; }
-    .service-card:hover .service-number { color:rgba(11,18,32,0.08); }
-    .service-tag { display:inline-block; padding:4px 12px; background:#0B1220; color:rgba(255,255,255,0.82); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; border-radius:999px; margin-bottom:18px; }
-
-    /* ── PROCESS STEPS ─────────────────────────────── */
-    .step-circle { width:52px; height:52px; border-radius:50%; background:#0B1220; color:#fff; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-family:'Playfair Display',serif; font-size:18px; font-weight:700; transition:transform .3s,box-shadow .3s; }
-    .step-circle:hover { transform:scale(1.08); box-shadow:0 8px 24px rgba(11,18,32,0.18); }
-
-    /* ── RESOURCE CARDS - Monochrome ────────────────── */
-    .resource-card { background:#fff; border-radius:20px; border:1px solid rgba(11,18,32,0.07); overflow:hidden; transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s; box-shadow:0 2px 16px rgba(11,18,32,0.05); }
-    .resource-card:hover { transform:translateY(-5px); box-shadow:0 20px 50px rgba(11,18,32,0.10); }
-    .resource-tag { display:inline-block; padding:4px 12px; background:rgba(11,18,32,0.07); color:#0B1220; font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; border-radius:999px; margin-bottom:14px; }
-    .resource-btn {
-      display:inline-flex; align-items:center; justify-content:space-between;
-      background:#0B1220; color:#fff;
-      padding:12px 18px; border-radius:10px;
-      font-size:13px; font-weight:600;
-      transition:background .2s,transform .15s;
-      width:100%;
-    }
-    .resource-btn:hover { background:#1e2d45; transform:translateY(-1px); }
-    .resource-btn .yt-wrap { display:flex; align-items:center; gap:8px; }
-    .resource-btn .yt-icon { font-size:15px; color:rgba(255,255,255,0.40); transition:color .2s; }
-    .resource-btn:hover .yt-icon { color:#ff4444; }
-
-    /* Video preview */
-    .resource-video-preview { position:relative; background:#E5E7EB; will-change:transform; overflow:hidden; }
-    .resource-poster { display:block; opacity:1; transition:opacity .4s; }
-    .resource-video { position:absolute; top:0; left:0; opacity:0; pointer-events:none; transition:opacity .4s; }
-    .resource-video-preview.is-playing .resource-poster { opacity:0; }
-    .resource-video-preview.is-playing .resource-video { opacity:1; pointer-events:auto; }
-    .resource-play-hint { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:50px; height:50px; background:rgba(255,255,255,0.95); border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s,transform .3s; pointer-events:none; box-shadow:0 8px 24px rgba(11,18,32,0.18); }
-    .resource-play-hint i { color:#0B1220; font-size:15px; margin-left:2px; }
-    .resource-video-preview:hover .resource-play-hint { opacity:1; transform:translate(-50%,-50%) scale(1.1); }
-    .resource-video-preview.is-playing .resource-play-hint { opacity:0; }
-
-    /* ── CONTACT - Arrow fade style ─────────────────── */
-    #contact { background:#fff; }
-    .contact-cta-btn {
-      display:flex; align-items:center; justify-content:space-between;
-      background:#0B1220; color:#fff;
-      padding:20px 28px; border-radius:16px;
-      font-weight:600; font-size:16px;
-      transition:background .25s,transform .25s,box-shadow .25s;
-      box-shadow:0 4px 24px rgba(11,18,32,0.16);
-      width:100%; position:relative; overflow:hidden; text-decoration:none;
-    }
-    .contact-cta-btn::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.04) 0%,transparent 60%); pointer-events:none; }
-    .contact-cta-btn:hover { background:#18273e; transform:translateY(-2px); box-shadow:0 12px 40px rgba(11,18,32,0.24); }
-    .contact-cta-left { display:flex; flex-direction:column; gap:3px; }
-    .contact-cta-sublabel { font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,0.38); }
-    .contact-cta-arrow {
-      width:42px; height:42px; border-radius:50%;
-      background:rgba(255,255,255,0.09); border:1px solid rgba(255,255,255,0.16);
-      display:flex; align-items:center; justify-content:center;
-      font-size:14px; flex-shrink:0;
-      transition:background .25s,transform .25s;
-    }
-    .contact-cta-btn:hover .contact-cta-arrow { background:rgba(255,255,255,0.16); transform:translate(3px,-3px); }
-
-    /* Hero stat */
-    .hero-stat { text-align:center; }
-    .hero-stat-num { font-family:'Playfair Display',serif; font-size:2.1rem; font-weight:700; color:#fff; line-height:1; }
-    .hero-stat-label { font-size:12px; color:rgba(255,255,255,0.42); margin-top:6px; }
-
-    /* Back to top */
-    #backToTop { position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(10px); width:44px; height:44px; border-radius:999px; background:#0B1220; border:1px solid rgba(255,255,255,0.14); box-shadow:0 14px 34px rgba(11,18,32,0.22); display:flex; align-items:center; justify-content:center; color:#fff; opacity:0; pointer-events:none; transition:opacity .2s,transform .2s; z-index:9999; cursor:pointer; }
-    #backToTop.show { opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
-    #backToTop:hover { background:#1a2535; }
-
-    /* Lightbox */
-    #imgLightbox { position:fixed; inset:0; background:rgba(0,0,0,0.92); backdrop-filter:blur(8px); z-index:99999; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; }
-    #imgLightbox.show { opacity:1; pointer-events:auto; }
-    #imgLightboxImg { max-width:90vw; max-height:90vh; object-fit:contain; border-radius:8px; box-shadow:0 25px 80px rgba(0,0,0,0.5); }
-    #imgLightboxClose { position:fixed; top:24px; right:24px; width:48px; height:48px; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); border-radius:50%; color:#fff; font-size:20px; cursor:pointer; transition:background .2s; display:flex; align-items:center; justify-content:center; }
-    #imgLightboxClose:hover { background:rgba(255,255,255,0.25); }
-
-    @media(max-width:768px){ .resource-video-preview:hover{transform:none} .resource-play-hint{opacity:.8} }
-    @media(prefers-reduced-motion:reduce){ .reveal{transition:none!important} }
+    details summary::-webkit-details-marker { display: none; }
+    details[open] summary .faq-icon { transform: rotate(45deg); }
   </style>
 </head>
-<body class="antialiased">
+<body class="antialiased text-slate-900 bg-white">
 
   <!-- ════════════════════════════════════════════════
-       HEADER
+       PRELOADER OVERLAY (PANTALLA DE CARGA KUAIZI STYLE)
   ════════════════════════════════════════════════ -->
-  <header id="siteHeader" class="fixed top-0 left-0 w-full z-50">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="relative h-20 flex items-center">
+  <div id="preloader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#F8FAFC] transition-all duration-700 ease-in-out opacity-100">
+    <!-- Fondo decorativo con cuadrícula de puntos limpia -->
+    <div class="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:20px_20px] opacity-50 pointer-events-none"></div>
 
-        <a href="/" class="flex items-center gap-3 shrink-0">
-          <img src="assets/logo latam.png" alt="Latam Sourcing" class="h-11 w-auto block" loading="eager" fetchpriority="high">
-          <span class="font-serif text-[21px] font-semibold text-white tracking-tight leading-none">Latam Sourcing</span>
-        </a>
-
-        <nav class="hidden md:flex items-center gap-10 text-sm font-medium absolute left-1/2 -translate-x-1/2">
-          <a href="/" class="navlink active" data-i18n="nav.home">Inicio</a>
-          <a href="/services/" class="navlink" data-i18n="nav.services">Servicios</a>
-          <a href="/about/" class="navlink" data-i18n="nav.about">Nuestra Historia</a>
-          <a href="/resources/" class="navlink" data-i18n="nav.resources">Recursos</a>
-        </nav>
-
-        <div class="hidden md:flex items-center gap-3 ml-auto">
-          <!-- Language dropdown combobox -->
-          <div class="lang-dropdown-wrap" id="langDropdownWrap">
-            <button id="langBtn" class="lang-btn" aria-label="Cambiar idioma" aria-haspopup="listbox" aria-expanded="false">
-              <i class="fas fa-globe" style="font-size:12px;opacity:.60;"></i>
-              <span id="langLabel">ES</span>
-              <i class="fas fa-chevron-down lang-chevron"></i>
-            </button>
-            <div id="langPanel" class="lang-panel" role="listbox">
-              <div class="lang-panel-header">Idioma / Language</div>
-              <div class="lang-option active" role="option" data-lang="es" id="optEs">
-                <span class="lang-flag">🇪🇸</span>
-                <span class="lang-name">Español</span>
-                <i class="fas fa-check lang-check"></i>
-              </div>
-              <div class="lang-option" role="option" data-lang="en" id="optEn">
-                <span class="lang-flag">🇬🇧</span>
-                <span class="lang-name">English</span>
-                <i class="fas fa-check lang-check"></i>
-              </div>
-            </div>
-          </div>
-          <a href="#contact" class="header-contact-btn">
-            <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
-            <span data-i18n="nav.contact">Contacto</span>
-          </a>
+    <div class="relative z-10 flex flex-col items-center gap-5 scale-100 transition-transform duration-500">
+      <!-- Logo Branding -->
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center font-black text-2xl shadow-xl shadow-red-600/30 animate-pulse">
+          L
         </div>
+        <span class="font-extrabold text-2xl tracking-tight text-slate-900">LATAM<span class="text-slate-500 font-normal">SOURCING</span></span>
+      </div>
 
-        <div class="md:hidden ml-auto flex items-center gap-3">
-          <!-- Mobile language dropdown -->
-          <div class="lang-dropdown-wrap" id="langDropdownWrapMobile">
-            <button id="langBtnMobile" class="lang-btn" style="padding:6px 10px;" aria-label="Cambiar idioma" aria-haspopup="listbox" aria-expanded="false">
-              <i class="fas fa-globe" style="font-size:12px;opacity:.60;"></i>
-              <span id="langLabelMobile">ES</span>
-              <i class="fas fa-chevron-down lang-chevron"></i>
-            </button>
-            <div id="langPanelMobile" class="lang-panel" role="listbox">
-              <div class="lang-panel-header">Idioma / Language</div>
-              <div class="lang-option active" role="option" data-lang="es">
-                <span class="lang-flag">🇪🇸</span>
-                <span class="lang-name">Español</span>
-                <i class="fas fa-check lang-check"></i>
-              </div>
-              <div class="lang-option" role="option" data-lang="en">
-                <span class="lang-flag">🇬🇧</span>
-                <span class="lang-name">English</span>
-                <i class="fas fa-check lang-check"></i>
-              </div>
-            </div>
-          </div>
-          <button id="mobileMenuBtn" class="text-white/75 hover:text-white transition">
-            <i class="fas fa-bars text-xl"></i>
-          </button>
-        </div>
+      <!-- Barra de progreso pulsante y delgada -->
+      <div class="w-24 h-1 bg-slate-200 rounded-full overflow-hidden relative mt-2">
+        <div class="h-full bg-red-600 rounded-full animate-loader-bar"></div>
       </div>
     </div>
+  </div>
 
-    <div id="mobileMenu" class="hidden md:hidden bg-[#0B1220] border-t border-white/10">
-      <nav class="flex flex-col px-6 py-4 space-y-3 text-sm font-medium">
-        <a href="/" class="text-white/75 hover:text-white transition" data-i18n="nav.home">Inicio</a>
-        <a href="/services/" class="text-white/75 hover:text-white transition" data-i18n="nav.services">Servicios</a>
-        <a href="/about/" class="text-white/75 hover:text-white transition" data-i18n="nav.about">Nuestra Historia</a>
-        <a href="/resources/" class="text-white/75 hover:text-white transition" data-i18n="nav.resources">Recursos</a>
-        <a href="#contact" class="bg-white text-[#0B1220] px-4 py-2 rounded-lg text-center font-semibold hover:bg-gray-100 transition" data-i18n="nav.contact">Contacto</a>
+  <!-- ════════════════════════════════════════════════
+       HEADER (NAVBAR FLOTANTE)
+  ════════════════════════════════════════════════ -->
+  <header id="siteHeader" class="fixed top-4 left-0 w-full z-50 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto bg-slate-900/80 backdrop-blur-md border border-white/15 rounded-full px-6 h-16 flex items-center justify-between shadow-2xl">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+          L
+        </div>
+        <span class="font-extrabold text-lg tracking-tight text-white">LATAM<span class="text-slate-400 font-normal">SOURCING</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-7">
+        <a href="#home" class="navlink active" data-i18n="nav.home">Inicio</a>
+        <a href="#services" class="navlink" data-i18n="nav.services">Servicios</a>
+        <a href="#process" class="navlink" data-i18n="nav.process">Metodología</a>
+        <a href="#resources" class="navlink" data-i18n="nav.resources">Recursos</a>
+        <a href="#faq" class="navlink" data-i18n="nav.faq">Preguntas Frecuentes</a>
       </nav>
+
+      <!-- Actions -->
+      <div class="hidden md:flex items-center gap-3">
+        <div class="lang-dropdown-wrap" id="langDropdownWrap">
+          <button id="langBtn" class="lang-btn" aria-label="Cambiar idioma">
+            <i class="fas fa-globe text-slate-300 text-xs"></i>
+            <span id="langLabel">ES</span>
+            <i class="fas fa-chevron-down text-[10px] text-slate-300"></i>
+          </button>
+          <div id="langPanel" class="lang-panel">
+            <div class="lang-option active" data-lang="es"><span>🇪🇸</span> Español</div>
+            <div class="lang-option" data-lang="en"><span>🇬🇧</span> English</div>
+          </div>
+        </div>
+
+        <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-full text-xs font-bold tracking-wide transition-all shadow-md hover:shadow-red-600/30">
+          <span data-i18n="nav.contact">CONTACTAR</span>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="mobileMenuBtn" class="md:hidden text-white hover:text-slate-300 p-2">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden bg-slate-900 border border-white/10 rounded-2xl mt-2 px-6 py-4 space-y-3 shadow-xl text-white">
+      <a href="#home" class="block font-medium py-1 text-slate-200" data-i18n="nav.home">Inicio</a>
+      <a href="#services" class="block font-medium py-1 text-slate-200" data-i18n="nav.services">Servicios</a>
+      <a href="#process" class="block font-medium py-1 text-slate-200" data-i18n="nav.process">Metodología</a>
+      <a href="#resources" class="block font-medium py-1 text-slate-200" data-i18n="nav.resources">Recursos</a>
+      <a href="#faq" class="block font-medium py-1 text-slate-200" data-i18n="nav.faq">FAQ</a>
+      <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
+        <a href="#contact" class="w-full bg-red-600 text-white text-center py-2.5 rounded-full font-bold text-xs tracking-wider" data-i18n="nav.contact">CONTACTAR</a>
+      </div>
     </div>
   </header>
 
-  <!-- ════════════════════════════════════════════════
-       HERO
+  <main>
+    <!-- ════════════════════════════════════════════════
+         HERO SECTION
   ════════════════════════════════════════════════ -->
-  <section id="home" class="pt-36 pb-20 md:pt-44 md:pb-28">
-    <div class="max-w-5xl mx-auto px-6 text-center">
+    <section id="home" class="relative min-h-screen flex flex-col justify-center items-center pt-28 pb-16 overflow-hidden bg-slate-950 text-white">
+      
+      <!-- Fondo de Video -->
+      <div class="absolute inset-0 z-0">
+        <video class="w-full h-full object-cover opacity-75 scale-105" autoplay loop muted playsinline poster="assets/guia.jpg">
+          <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/v1771107699/Servicio_1_hidjmb.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-black/30 to-black/40 backdrop-blur-[0.5px]"></div>
+      </div>
 
-      <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-[1.08] mb-6 reveal">
-        <span data-i18n="hero.title1">Encuentra fábricas en</span><br>
-        <span class="typewriter" id="cityType"></span><br>
-        <span data-i18n="hero.title2">para tu negocio.</span>
-      </h1>
+      <!-- Contenido Principal del Hero -->
+      <div class="relative z-10 max-w-5xl mx-auto px-6 w-full text-center my-auto">
 
-      <p class="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-14 reveal reveal-delay-1" data-i18n="hero.subtitle">
-        Conectamos negocios latinoamericanos con fabricantes confiables en China, con foco en producto, calidad y marca.
-      </p>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.08] tracking-tight mb-10 drop-shadow-lg reveal reveal-delay-1" data-i18n="hero.title">
+          Manejamos la cadena de suministro que conecta Asia con el mundo.
+        </h1>
 
-      <!-- Stats -->
-      <div class="grid grid-cols-3 gap-6 max-w-md mx-auto pb-12 border-b border-white/10 reveal reveal-delay-2">
-        <div class="hero-stat">
-          <div class="hero-stat-num">+100</div>
-          <div class="hero-stat-label" data-i18n="hero.stat1">Fabricantes verificados</div>
+        <div class="flex flex-wrap items-center justify-center gap-4 reveal reveal-delay-3">
+          <a href="#services" class="bg-red-600 text-white px-8 py-4 rounded-full text-xs md:text-sm font-extrabold tracking-wider uppercase hover:bg-red-700 transition-all shadow-xl hover:shadow-red-600/40 transform hover:-translate-y-0.5">
+            <span data-i18n="hero.btnPrimary">Ver Catálogo Destacado</span>
+          </a>
+          <a href="#resources" class="bg-slate-900/70 border border-white/30 text-white px-8 py-4 rounded-full text-xs md:text-sm font-extrabold tracking-wider uppercase hover:bg-slate-800/90 transition-all backdrop-blur-md transform hover:-translate-y-0.5">
+            <span data-i18n="hero.btnSecondary">Ver Recursos</span>
+          </a>
         </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">2</div>
-          <div class="hero-stat-label" data-i18n="hero.stat2">Países, 1 equipo</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">3</div>
-          <div class="hero-stat-label" data-i18n="hero.stat3">Plazas por mes</div>
+
+      </div>
+
+      <!-- Indicador de Scroll -->
+      <div class="relative z-10 mt-auto pt-6 flex flex-col items-center gap-2 text-slate-300 text-[10px] md:text-xs font-bold uppercase tracking-widest animate-bounce">
+        <span>Desliza para explorar</span>
+        <div class="w-8 h-8 rounded-full border border-white/30 bg-black/20 backdrop-blur-sm flex items-center justify-center">
+          <i class="fas fa-chevron-down text-xs text-white"></i>
         </div>
       </div>
 
-      <!-- Marquee — white illuminated box -->
-      <div class="mt-10 reveal reveal-delay-3">
-        <p class="marquee-label" data-i18n="hero.marquee">Nuestras fábricas producen para</p>
-        <div class="marquee-box">
-          <div class="marquee-track">
-            <div class="marquee-item"><img src="assets/prada logo.png" alt="Prada" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/nike logo.png" alt="Nike" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/adidas logo.webp" alt="Adidas" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/levi logo.webp" alt="Levi's" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/chanel logo.webp" alt="Chanel" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/gucci logo.webp" alt="Gucci" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/Bode logo.webp" alt="Bode" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/lululemon logo.webp" alt="Lululemon" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/zara.svg" alt="Zara" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/lv logo.webp" alt="Louis Vuitton" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/prada logo.png" alt="Prada" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/nike logo.png" alt="Nike" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/adidas logo.webp" alt="Adidas" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/levi logo.webp" alt="Levi's" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/chanel logo.webp" alt="Chanel" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/gucci logo.webp" alt="Gucci" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/Bode logo.webp" alt="Bode" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/lululemon logo.webp" alt="Lululemon" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/zara.svg" alt="Zara" loading="lazy"></div>
-            <div class="marquee-item"><img src="assets/lv logo.webp" alt="Louis Vuitton" loading="lazy"></div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         SECCIÓN DE MÉTRICAS
+    ════════════════════════════════════════════════ -->
+    <section id="stats-section" class="py-16 md:py-20 bg-slate-50 border-b border-slate-200/80 relative z-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-5xl mx-auto text-center">
+          
+          <!-- Métrica 1 -->
+          <div class="reveal reveal-delay-1">
+            <div class="text-4xl md:text-5xl font-black text-[#EF4444] tracking-tight mb-2 counter-value" data-target="3.5" data-prefix="$" data-suffix="M+">$0M+</div>
+            <p class="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-600" data-i18n="stats.stat1">Vendidos en 2025</p>
           </div>
+
+          <!-- Métrica 2 -->
+          <div class="reveal reveal-delay-2">
+            <div class="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight mb-2 counter-value" data-target="1" data-suffix="K+">0K+</div>
+            <p class="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-600" data-i18n="stats.stat2">Proveedores Filtrados</p>
+          </div>
+
+          <!-- Métrica 3 -->
+          <div class="reveal reveal-delay-3">
+            <div class="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight mb-2 counter-value" data-target="40" data-suffix="%">0%</div>
+            <p class="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-600" data-i18n="stats.stat3">Aumento de márgenes ganancia</p>
+          </div>
+
+          <!-- Métrica 4 -->
+          <div class="reveal">
+            <div class="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight mb-2 counter-value" data-target="10" data-suffix="+">0+</div>
+            <p class="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-600" data-i18n="stats.stat4">Marcas desarrolladas</p>
+          </div>
+
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════
-       CONTENT AREA
-  ════════════════════════════════════════════════ -->
-  <div class="content-area">
-
-    <!-- ── NUESTRA HISTORIA ─────────────────────────── -->
-    <section id="about" class="py-24">
+    <!-- ════════════════════════════════════════════════
+         SERVICES SECTION (RUEDA INTERACTIVA 8 SERVICIOS)
+    ════════════════════════════════════════════════ -->
+    <section id="services" class="py-24 bg-white border-b border-slate-100">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="max-w-2xl mb-2 reveal">
-          <span class="section-label" data-i18n="about.label">Quiénes Somos</span>
-          <h2 class="font-serif text-4xl md:text-5xl text-[#0B1220] leading-tight mb-6" data-i18n="about.title">Nuestra Historia</h2>
-        </div>
-        <div class="about-grid">
-          <div class="reveal from-left">
-            <div class="space-y-5">
-              <p class="text-slate-500 text-lg leading-relaxed" data-i18n="about.p2">José, con trayectoria en ferretería y logística, decidió operar desde China tras asistir a la Canton Fair 2024. Yuchi, crecido en una familia de fabricantes, aporta visión interna de producción y calidad.</p>
-              <p class="text-slate-500 text-lg leading-relaxed" data-i18n="about.p3">Juntos creamos un puente entre Latinoamérica y China para que importar sea un proceso claro, estructurado y rentable.</p>
-              <a href="/about/" class="inline-block text-sm font-bold tracking-widest uppercase border-b-2 border-[#0B1220] pb-1 hover:opacity-55 transition-opacity mt-4" data-i18n="about.cta">Conoce más sobre nosotros →</a>
-            </div>
+        
+        <div class="max-w-4xl mb-16 reveal">
+          <h2 class="text-3xl md:text-5xl font-extrabold text-[#0F172A] tracking-tight mb-8 leading-tight" data-i18n="services.title">
+            Creamos la cadena de suministro del futuro
+          </h2>
+
+          <div class="space-y-6 text-slate-600 text-base md:text-lg leading-relaxed">
+            <p data-i18n="services.p1">
+              La gestión tradicional de la cadena de suministro está experimentando una transformación profunda impulsada por nuevas tecnologías y las exigencias del comercio moderno.
+            </p>
+            <p data-i18n="services.p2">
+              En <strong class="text-slate-900 font-semibold">LATAM Sourcing</strong>, estamos transformando el panorama de nuestra industria a través de soluciones y servicios innovadores. Nuestra estructura y alcance nos permiten actuar como un catalizador de cambio y un socio estratégico clave para toda nuestra red de producción.
+            </p>
+            <p data-i18n="services.p3">
+              Desde el diseño y desarrollo de producto, hasta el cumplimiento normativo, el sourcing de materias primas y fábricas, el control de manufactura en planta y la logística integral, ofrecemos servicios <em>end-to-end</em>.
+            </p>
           </div>
-          <div class="flex flex-col gap-4 reveal from-right">
-            <!-- Foto principal -->
-            <div class="rounded-2xl overflow-hidden" style="aspect-ratio:16/9; background:#1a2535;">
-              <img
-                src="assets/mentoria1.1.webp"
-                alt="Latam Sourcing — Nuestra Historia"
-                class="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              >
-            </div>
-            <!-- Dos bloques de stats -->
-            <div class="grid grid-cols-2 gap-4">
-              <div class="about-stat-block reveal-delay-1">
-                <div class="text-2xl font-serif font-bold text-white mb-1">Ecuador</div>
-                <div class="text-white/40 text-sm" data-i18n="about.card2">Perspectiva Latam</div>
+        </div>
+
+        <!-- Rueda Interactivas -->
+        <div class="mt-16 pt-12 border-t border-slate-100 grid lg:grid-cols-12 gap-12 items-center reveal reveal-delay-1">
+          <div class="lg:col-span-7 flex justify-center py-6">
+            
+            <div class="relative w-[340px] h-[340px] sm:w-[440px] sm:h-[440px] flex items-center justify-center">
+              
+              <!-- Anillo del círculo principal -->
+              <div class="absolute inset-2 rounded-full border-[6px] border-red-500/90 shadow-[0_0_25px_rgba(239,68,68,0.2)]"></div>
+              <div class="absolute inset-8 rounded-full border border-dashed border-slate-200"></div>
+
+              <!-- 1. Retail (Top-Left) -->
+              <div class="wheel-node active group" style="top: 18.9%; left: 18.9%;" data-stage="retail">
+                <div class="flex items-center gap-2">
+                  <span class="node-dot"></span>
+                  <span class="node-label" data-i18n="node.retail">Retail</span>
+                </div>
               </div>
-              <div class="about-stat-block reveal-delay-2">
-                <div class="text-2xl font-serif font-bold text-white mb-1">China</div>
-                <div class="text-white/40 text-sm" data-i18n="about.card3">Manufactura directa</div>
+
+              <!-- 2. Producto (Top) -->
+              <div class="wheel-node group" style="top: 6%; left: 50%;" data-stage="producto">
+                <div class="flex flex-col items-center gap-1">
+                  <span class="node-dot"></span>
+                  <span class="node-label" data-i18n="node.producto">Producto</span>
+                </div>
               </div>
+
+              <!-- 3. Diseño (Top-Right) -->
+              <div class="wheel-node group" style="top: 18.9%; left: 81.1%;" data-stage="diseno">
+                <div class="flex items-center gap-2">
+                  <span class="node-label" data-i18n="node.diseno">Diseño</span>
+                  <span class="node-dot"></span>
+                </div>
+              </div>
+
+              <!-- 4. Sourcing (Right) -->
+              <div class="wheel-node group" style="top: 50%; left: 94%;" data-stage="sourcing">
+                <div class="flex items-center gap-2">
+                  <span class="node-label" data-i18n="node.sourcing">Sourcing</span>
+                  <span class="node-dot"></span>
+                </div>
+              </div>
+
+              <!-- 5. Producción (Bottom-Right) -->
+              <div class="wheel-node group" style="top: 81.1%; left: 81.1%;" data-stage="produccion">
+                <div class="flex items-center gap-2">
+                  <span class="node-label" data-i18n="node.produccion">Producción</span>
+                  <span class="node-dot"></span>
+                </div>
+              </div>
+
+              <!-- 6. Calidad (Bottom) -->
+              <div class="wheel-node group" style="top: 94%; left: 50%;" data-stage="calidad">
+                <div class="flex flex-col items-center gap-1">
+                  <span class="node-label" data-i18n="node.calidad">Calidad</span>
+                  <span class="node-dot"></span>
+                </div>
+              </div>
+
+              <!-- 7. Logística (Bottom-Left) -->
+              <div class="wheel-node group" style="top: 81.1%; left: 18.9%;" data-stage="logistica">
+                <div class="flex items-center gap-2">
+                  <span class="node-dot"></span>
+                  <span class="node-label" data-i18n="node.logistica">Logística</span>
+                </div>
+              </div>
+
+              <!-- 8. Aduanas (Left) -->
+              <div class="wheel-node group" style="top: 50%; left: 6%;" data-stage="aduanas">
+                <div class="flex items-center gap-2">
+                  <span class="node-dot"></span>
+                  <span class="node-label" data-i18n="node.aduanas">Aduanas</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Caja informativa de la Rueda -->
+          <div class="lg:col-span-5 bg-slate-50/90 p-8 rounded-2xl border border-slate-200/80 min-h-[280px] flex flex-col justify-center shadow-sm">
+            <div class="pl-6 border-l-4 border-red-500 transition-all duration-300" id="stageContentBox">
+              <h3 id="stageTitle" class="text-2xl font-extrabold text-[#0F172A] mb-4">
+                Retail / E-Commerce
+              </h3>
+              <p id="stageDesc" class="text-slate-600 text-sm md:text-base leading-relaxed">
+                Conectamos tu marca directamente con los canales de venta final. Asesoramos en packaging de cumplimiento, logística directo al consumidor (D2C) y entrega para tiendas o almacenes de e-commerce.
+              </p>
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <div class="max-w-7xl mx-auto px-6"><div class="section-divider"></div></div>
-
-    <!-- ── SERVICIOS ────────────────────────────────── -->
-    <section id="services" class="py-24">
+    <!-- ════════════════════════════════════════════════
+         PROCESS / METHODOLOGY
+    ════════════════════════════════════════════════ -->
+    <section id="process" class="py-24 bg-[#0F172A] text-white relative">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-          <span class="section-label" data-i18n="services.label">Lo que ofrecemos</span>
-          <h2 class="font-serif text-4xl md:text-5xl text-[#0B1220] leading-tight mb-5" data-i18n="services.title">Servicios</h2>
-          <p class="text-slate-500 text-lg leading-relaxed" data-i18n="services.subtitle">Soluciones completas diseñadas para que importes desde China con claridad y sin improvisar.</p>
+        
+        <div class="text-center max-w-2xl mx-auto mb-20 reveal">
+          <span class="text-xs font-bold uppercase tracking-widest text-red-500 block mb-2" data-i18n="process.label">Garantía Operativa</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight" data-i18n="process.title">Nuestra Metodología</h2>
         </div>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="service-card reveal reveal-delay-1">
-            <span class="service-number">01</span>
-            <div class="service-tag" data-i18n="s1.tag">Servicio 1</div>
-            <h3 class="font-serif text-2xl text-[#0B1220] mb-4 leading-tight" data-i18n="s1.title">Importación Estratégica LS</h3>
-            <p class="text-slate-500 text-base leading-relaxed mb-8" data-i18n="s1.desc">Para emprendedores y empresas que ya saben exactamente qué producto necesitan y buscan fabricantes, calidad y procesos verificados en China para ejecutar su importación de forma segura y profesional.</p>
-            <a href="/services/" class="inline-flex items-center gap-2 text-[#0B1220] font-semibold text-sm hover:opacity-55 transition-opacity group" data-i18n="s1.cta">Ver detalles <i class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></a>
+
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="relative p-6 bg-slate-800/40 border border-slate-700/60 rounded-2xl backdrop-blur-sm reveal">
+            <div class="text-2xl font-extrabold text-red-500 mb-4">01</div>
+            <h4 class="text-lg font-bold text-white mb-2" data-i18n="p1.title">Diagnóstico</h4>
+            <p class="text-slate-300 text-sm" data-i18n="p1.desc">Análisis de la ficha técnica, requerimientos normativos y viabilidad comercial del producto.</p>
           </div>
-          <div class="service-card reveal reveal-delay-2">
-            <span class="service-number">02</span>
-            <div class="service-tag" data-i18n="s2.tag">Servicio 2</div>
-            <h3 class="font-serif text-2xl text-[#0B1220] mb-4 leading-tight" data-i18n="s2.title">Importación Ejecutiva LS</h3>
-            <p class="text-slate-500 text-base leading-relaxed mb-8" data-i18n="s2.desc">Para emprendedores que aún no tienen claro su producto y quieren desarrollarlo con nosotros, construir una marca sólida y delegar completamente el proceso de importación.</p>
-            <a href="/services/" class="inline-flex items-center gap-2 text-[#0B1220] font-semibold text-sm hover:opacity-55 transition-opacity group" data-i18n="s2.cta">Ver detalles <i class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></a>
+          <div class="relative p-6 bg-slate-800/40 border border-slate-700/60 rounded-2xl backdrop-blur-sm reveal reveal-delay-1">
+            <div class="text-2xl font-extrabold text-red-500 mb-4">02</div>
+            <h4 class="text-lg font-bold text-white mb-2" data-i18n="p2.title">Sourcing</h4>
+            <p class="text-slate-300 text-sm" data-i18n="p2.desc">Filtro presencial y auditoría documental de fabricantes certificados dentro de nuestra red.</p>
           </div>
-          <div class="service-card reveal reveal-delay-3">
-            <span class="service-number">03</span>
-            <div class="service-tag" data-i18n="s3.tag">Servicio 3</div>
-            <h3 class="font-serif text-2xl text-[#0B1220] mb-4 leading-tight" data-i18n="s3.title">Mentorías 1 a 1</h3>
-            <p class="text-slate-500 text-base leading-relaxed mb-4" data-i18n="s3.desc">Para emprendedores que quieren aprender a importar por su cuenta, dominar nuestros procesos y tener acceso a nuestra red de más de 100 fabricantes verificados en China.</p>
-            <div class="flex items-center gap-2 text-sm text-[#0B1220]/50 font-medium mb-7">
-              <span class="w-2 h-2 rounded-full bg-[#0B1220]/40 animate-pulse inline-block"></span>
-              <span data-i18n="s3.note">Cupos limitados: solo 3 plazas por mes.</span>
-            </div>
-            <a href="/services/" class="inline-flex items-center gap-2 text-[#0B1220] font-semibold text-sm hover:opacity-55 transition-opacity group" data-i18n="s3.cta">Ver detalles <i class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></a>
+          <div class="relative p-6 bg-slate-800/40 border border-slate-700/60 rounded-2xl backdrop-blur-sm reveal reveal-delay-2">
+            <div class="text-2xl font-extrabold text-red-500 mb-4">03</div>
+            <h4 class="text-lg font-bold text-white mb-2" data-i18n="p3.title">Inspección</h4>
+            <p class="text-slate-300 text-sm" data-i18n="p3.desc">Control de calidad durante producción y previo al embarque (Quality Assurance Control).</p>
+          </div>
+          <div class="relative p-6 bg-slate-800/40 border border-slate-700/60 rounded-2xl backdrop-blur-sm reveal reveal-delay-3">
+            <div class="text-2xl font-extrabold text-red-500 mb-4">04</div>
+            <h4 class="text-lg font-bold text-white mb-2" data-i18n="p4.title">Logística</h4>
+            <p class="text-slate-300 text-sm" data-i18n="p4.desc">Gestión aduanera y coordinación de transporte marítimo/aéreo directo a tu almacén.</p>
           </div>
         </div>
+
       </div>
     </section>
 
-    <div class="max-w-7xl mx-auto px-6"><div class="section-divider"></div></div>
-
-    <!-- ── PROCESO ──────────────────────────────────── -->
-    <section class="py-24">
+    <!-- ════════════════════════════════════════════════
+         RESOURCES
+    ════════════════════════════════════════════════ -->
+    <section id="resources" class="py-24 bg-[#F8FAFC] border-t border-slate-200/60">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-          <span class="section-label" data-i18n="process.label">El Proceso</span>
-          <h2 class="font-serif text-4xl md:text-5xl text-[#0B1220] leading-tight" data-i18n="process.title">Cómo trabajamos</h2>
+        
+        <div class="max-w-2xl mb-16 reveal">
+          <span class="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-2" data-i18n="resources.label">Conocimiento Especializado</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-[#0F172A] tracking-tight" data-i18n="resources.title">Recursos Prácticos</h2>
         </div>
-        <div class="grid md:grid-cols-4 gap-10">
-          <div class="text-center reveal reveal-delay-1">
-            <div class="step-circle">1</div>
-            <h4 class="font-serif text-xl text-[#0B1220] mb-3" data-i18n="p1.title">Diagnóstico</h4>
-            <p class="text-slate-500 text-sm leading-relaxed" data-i18n="p1.desc">Entendemos tu producto, mercado y objetivos de negocio.</p>
-          </div>
-          <div class="text-center reveal reveal-delay-2">
-            <div class="step-circle">2</div>
-            <h4 class="font-serif text-xl text-[#0B1220] mb-3" data-i18n="p2.title">Búsqueda</h4>
-            <p class="text-slate-500 text-sm leading-relaxed" data-i18n="p2.desc">Identificamos y verificamos fabricantes en nuestra red de +100 proveedores.</p>
-          </div>
-          <div class="text-center reveal reveal-delay-3">
-            <div class="step-circle">3</div>
-            <h4 class="font-serif text-xl text-[#0B1220] mb-3" data-i18n="p3.title">Negociación</h4>
-            <p class="text-slate-500 text-sm leading-relaxed" data-i18n="p3.desc">Gestionamos precios, muestras y condiciones de producción directamente en China.</p>
-          </div>
-          <div class="text-center reveal reveal-delay-4">
-            <div class="step-circle">4</div>
-            <h4 class="font-serif text-xl text-[#0B1220] mb-3" data-i18n="p4.title">Entrega</h4>
-            <p class="text-slate-500 text-sm leading-relaxed" data-i18n="p4.desc">Coordinamos logística y control de calidad hasta que recibes tu mercancía.</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <div class="max-w-7xl mx-auto px-6"><div class="section-divider"></div></div>
-
-    <!-- ── RECURSOS ─────────────────────────────────── -->
-    <section id="resources" class="py-24">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center max-w-3xl mx-auto mb-20 reveal">
-          <span class="section-label" data-i18n="resources.label">Aprende</span>
-          <h2 class="font-serif text-4xl md:text-5xl text-[#0B1220] leading-tight mb-5" data-i18n="resources.title">Recursos</h2>
-          <p class="text-slate-500 text-lg leading-relaxed" data-i18n="resources.subtitle">Guías y herramientas prácticas para entender el proceso de importación desde cero.</p>
-        </div>
         <div class="grid lg:grid-cols-3 gap-8">
 
           <!-- R1 -->
-          <div class="resource-card reveal reveal-delay-1">
-            <div class="resource-video-preview aspect-[16/9] cursor-pointer" tabindex="0" role="button" aria-label="Ver preview">
-              <img src="assets/guia.jpg" alt="Guía paso a paso" class="resource-poster w-full h-full object-cover" loading="lazy">
+          <div class="card-clean overflow-hidden reveal">
+            <div class="resource-video-preview aspect-video cursor-pointer">
+              <img src="assets/guia.jpg" alt="Guía paso a paso" class="resource-poster w-full h-full object-cover">
               <video class="resource-video w-full h-full object-cover" playsinline loop muted preload="none">
                 <source data-src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771100088/0214_1_rae6cy.mp4" type="video/mp4">
               </video>
-              <div class="resource-play-hint"><i class="fas fa-play"></i></div>
             </div>
-            <div class="p-7">
-              <div class="resource-tag" data-i18n="r1.tag">Guía gratuita</div>
-              <h3 class="font-serif text-2xl text-[#0B1220] mb-3 leading-tight" data-i18n="r1.title">Guía paso a paso</h3>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6" data-i18n="r1.desc">Desde encontrar proveedores hasta recibir tu mercancía. Proceso completo con ejemplos reales.</p>
-              <a href="https://youtu.be/Ov4nKG32VSg" target="_blank" class="resource-btn">
-                <div class="yt-wrap"><span data-i18n="r1.btn">Ver video</span></div>
-                <i class="fab fa-youtube yt-icon"></i>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-[#0F172A] mb-2" data-i18n="r1.title">Guía de Importación Paso a Paso</h3>
+              <p class="text-slate-600 text-sm leading-relaxed mb-4" data-i18n="r1.desc">Metodología para verificar fabricantes y evitar estafas en el comercio internacional.</p>
+              <a href="https://youtu.be/Ov4nKG32VSg" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-[#0F172A] hover:text-red-600 transition-colors">
+                <i class="fab fa-youtube text-red-600"></i> <span data-i18n="r1.btn">Ver Video Explicativo</span>
               </a>
             </div>
           </div>
 
           <!-- R2 -->
-          <div class="resource-card reveal reveal-delay-2">
-            <div class="resource-video-preview aspect-[16/9] cursor-pointer" tabindex="0" role="button" aria-label="Ver preview">
-              <img src="assets/errores.jpg" alt="Errores comunes" class="resource-poster w-full h-full object-cover" loading="lazy">
+          <div class="card-clean overflow-hidden reveal reveal-delay-1">
+            <div class="resource-video-preview aspect-video cursor-pointer">
+              <img src="assets/errores.jpg" alt="Errores comunes" class="resource-poster w-full h-full object-cover">
               <video class="resource-video w-full h-full object-cover" playsinline loop muted preload="none">
                 <source data-src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099511/0214_gapxgh.mp4" type="video/mp4">
               </video>
-              <div class="resource-play-hint"><i class="fas fa-play"></i></div>
             </div>
-            <div class="p-7">
-              <div class="resource-tag" data-i18n="r2.tag">Checklist</div>
-              <h3 class="font-serif text-2xl text-[#0B1220] mb-3 leading-tight" data-i18n="r2.title">Errores comunes</h3>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6" data-i18n="r2.desc">Evita pérdidas típicas. Errores frecuentes de importadores novatos y cómo prevenirlos.</p>
-              <a href="https://youtu.be/mg_XrmzGJKk" target="_blank" class="resource-btn">
-                <div class="yt-wrap"><span data-i18n="r2.btn">Ver video</span></div>
-                <i class="fab fa-youtube yt-icon"></i>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-[#0F172A] mb-2" data-i18n="r2.title">Errores Críticos al Importar</h3>
+              <p class="text-slate-600 text-sm leading-relaxed mb-4" data-i18n="r2.desc">Análisis de los fallos más costosos en logística, pagos e inspección de calidad.</p>
+              <a href="https://youtu.be/mg_XrmzGJKk" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-[#0F172A] hover:text-red-600 transition-colors">
+                <i class="fab fa-youtube text-red-600"></i> <span data-i18n="r2.btn">Ver Video Explicativo</span>
               </a>
             </div>
           </div>
 
           <!-- R3 -->
-          <div class="resource-card reveal reveal-delay-3">
-            <div class="resource-video-preview aspect-[16/9] cursor-pointer" tabindex="0" role="button" aria-label="Ver preview">
-              <img src="assets/exel.jpg" alt="Costos reales" class="resource-poster w-full h-full object-cover" loading="lazy">
+          <div class="card-clean overflow-hidden reveal reveal-delay-2">
+            <div class="resource-video-preview aspect-video cursor-pointer">
+              <img src="assets/exel.jpg" alt="Costos reales" class="resource-poster w-full h-full object-cover">
               <video class="resource-video w-full h-full object-cover" playsinline loop muted preload="none">
                 <source data-src="https://res.cloudinary.com/dzjjcsfr0/video/upload/q_auto:low,f_auto,w_800/v1771099872/exel_zwwdvl.mp4" type="video/mp4">
               </video>
-              <div class="resource-play-hint"><i class="fas fa-play"></i></div>
             </div>
-            <div class="p-7">
-              <div class="resource-tag" data-i18n="r3.tag">Calculadora</div>
-              <h3 class="font-serif text-2xl text-[#0B1220] mb-3 leading-tight" data-i18n="r3.title">Costos reales</h3>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6" data-i18n="r3.desc">Calcula tu costo por unidad. Herramienta para estimar inversión total con gastos ocultos.</p>
-              <a href="https://youtu.be/vAoCyXpiVTU" target="_blank" class="resource-btn">
-                <div class="yt-wrap"><span data-i18n="r3.btn">Ver video</span></div>
-                <i class="fab fa-youtube yt-icon"></i>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-[#0F172A] mb-2" data-i18n="r3.title">Cálculo de Costos Totales</h3>
+              <p class="text-slate-600 text-sm leading-relaxed mb-4" data-i18n="r3.desc">Cómo proyectar aranceles, fletes e imprevistos en tu precio final por unidad.</p>
+              <a href="https://youtu.be/vAoCyXpiVTU" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-[#0F172A] hover:text-red-600 transition-colors">
+                <i class="fab fa-youtube text-red-600"></i> <span data-i18n="r3.btn">Ver Video Explicativo</span>
               </a>
             </div>
           </div>
@@ -618,318 +566,369 @@
       </div>
     </section>
 
-    <div class="max-w-7xl mx-auto px-6"><div class="section-divider"></div></div>
-
-    <!-- ── CONTACTO ─────────────────────────────────── -->
-    <section id="contact" class="py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center max-w-3xl mx-auto mb-14 reveal">
-          <span class="section-label" data-i18n="contact.label">Empecemos</span>
-          <h2 class="font-serif text-4xl md:text-5xl text-[#0B1220] leading-tight mb-5" data-i18n="contact.title">Contacto</h2>
-          <p class="text-slate-500 text-lg" data-i18n="contact.subtitle">Estamos aquí para ayudarte a importar desde China de forma segura y rentable.</p>
+    <!-- ════════════════════════════════════════════════
+         FAQ SECTION
+    ════════════════════════════════════════════════ -->
+    <section id="faq" class="py-24 bg-white border-t border-slate-200/80">
+      <div class="max-w-4xl mx-auto px-6">
+        
+        <div class="text-center mb-16 reveal">
+          <span class="text-red-600 font-extrabold text-lg md:text-xl tracking-tight block mb-2 uppercase" data-i18n="faq.subtitle">
+            ¿Tienes dudas?
+          </span>
+          <h2 class="text-3xl md:text-5xl font-black text-[#0F172A] tracking-tight uppercase" data-i18n="faq.title">
+            Preguntas Frecuentes
+          </h2>
         </div>
 
-        <div class="max-w-lg mx-auto reveal reveal-delay-1">
-          <div class="rounded-2xl border border-[#E8E4DC] p-10 text-center" style="background:#F9F7F4; box-shadow:0 2px 20px rgba(11,18,32,0.05);">
-            <!-- Icon with fade rings -->
-            <div class="flex justify-center mb-7">
-              <div class="relative w-16 h-16 flex items-center justify-center">
-                <div class="absolute w-16 h-16 rounded-full bg-[#0B1220]" style="opacity:.05; transform:scale(1.45);"></div>
-                <div class="absolute w-16 h-16 rounded-full bg-[#0B1220]" style="opacity:.07; transform:scale(1.22);"></div>
-                <div class="w-14 h-14 rounded-full bg-[#0B1220] flex items-center justify-center relative z-10">
-                  <i class="fas fa-clipboard-check text-white text-xl"></i>
-                </div>
-              </div>
+        <div class="space-y-4 reveal reveal-delay-1">
+
+          <details class="group border-b border-dashed border-slate-300 pb-6 transition-all">
+            <summary class="flex items-center justify-between cursor-pointer list-none py-2 group-hover:text-red-600 transition-colors">
+              <h3 class="text-base md:text-xl font-extrabold text-[#0F172A] uppercase tracking-tight pr-6 group-hover:text-red-600" data-i18n="faq.q1">
+                ¿CUÁL ES SU ORDEN MÍNIMA?
+              </h3>
+              <span class="faq-icon text-red-500 text-2xl font-black transition-transform duration-300 flex-shrink-0">
+                <i class="fas fa-plus"></i>
+              </span>
+            </summary>
+            <div class="mt-4 text-slate-700 text-sm md:text-base leading-relaxed space-y-3 pl-1">
+              <p data-i18n="faq.a1_p1">
+                <strong>$5,000 USD por embarque.</strong> Es el volumen que se necesita con la mayoría de nuestros productos para que una primera orden tenga sentido.
+              </p>
+              <p data-i18n="faq.a1_p2">
+                La razón es matemática, no capricho: por debajo de ese monto, el flete, la documentación y los costos fijos de aduana se reparten entre tan pocas unidades que tu precio final deja de ser competitivo.
+              </p>
             </div>
+          </details>
 
-            <h4 class="font-serif text-2xl text-[#0B1220] mb-2" data-i18n="contact.cardTitle">¿Listo para Crecer?</h4>
-            <p class="text-slate-500 text-sm mb-8 leading-relaxed" data-i18n="contact.cardDesc">Rellena el siguiente formulario y comienza tu proceso de importación con nosotros.</p>
+          <details class="group border-b border-dashed border-slate-300 pb-6 transition-all">
+            <summary class="flex items-center justify-between cursor-pointer list-none py-2 group-hover:text-red-600 transition-colors">
+              <h3 class="text-base md:text-xl font-extrabold text-[#0F172A] uppercase tracking-tight pr-6 group-hover:text-red-600" data-i18n="faq.q2">
+                ¿QUÉ SIGNIFICA QUE SEAN UN "ONE-STOP SHOP"?
+              </h3>
+              <span class="faq-icon text-red-500 text-2xl font-black transition-transform duration-300 flex-shrink-0">
+                <i class="fas fa-plus"></i>
+              </span>
+            </summary>
+            <div class="mt-4 text-slate-700 text-sm md:text-base leading-relaxed space-y-3 pl-1">
+              <p data-i18n="faq.a2_p1">
+                Significa que dejas de hacer de coordinador entre cinco proveedores.
+              </p>
+              <p data-i18n="faq.a2_p2">
+                Con nosotros es un solo contacto, un solo cronograma y una sola factura. Bajo ese mismo precio va la búsqueda y verificación de la fábrica, la negociación en mandarín, el control de calidad, la logística y la documentación de exportación.
+              </p>
+            </div>
+          </details>
 
-            <!-- Arrow-fade CTA -->
-            <a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="contact-cta-btn">
-              <div class="contact-cta-left">
-                <span class="contact-cta-sublabel" data-i18n="contact.fadeLabel">Formulario de trabajo</span>
-                <span data-i18n="contact.btnText">Trabaja con Nosotros</span>
-              </div>
-              <div class="contact-cta-arrow">
-                <i class="fas fa-arrow-right"></i>
-              </div>
-            </a>
-          </div>
+          <details class="group border-b border-dashed border-slate-300 pb-6 transition-all">
+            <summary class="flex items-center justify-between cursor-pointer list-none py-2 group-hover:text-red-600 transition-colors">
+              <h3 class="text-base md:text-xl font-extrabold text-[#0F172A] uppercase tracking-tight pr-6 group-hover:text-red-600" data-i18n="faq.q3">
+                ¿DÓNDE ESTÁN SUS FÁBRICAS?
+              </h3>
+              <span class="faq-icon text-red-500 text-2xl font-black transition-transform duration-300 flex-shrink-0">
+                <i class="fas fa-plus"></i>
+              </span>
+            </summary>
+            <div class="mt-4 text-slate-700 text-sm md:text-base leading-relaxed space-y-3 pl-1">
+              <p data-i18n="faq.a3_p1">
+                En los hubs industriales donde realmente se fabrica cada producto, no en un solo lugar.
+              </p>
+              <p data-i18n="faq.a3_p2">
+                Ropa y textil en Guangzhou. Maquinaria agrícola en Linyi y Taizhou. Herramienta en Yongkang. Electrónica en Shenzhen.
+              </p>
+            </div>
+          </details>
+
+          <details class="group border-b border-dashed border-slate-300 pb-6 transition-all">
+            <summary class="flex items-center justify-between cursor-pointer list-none py-2 group-hover:text-red-600 transition-colors">
+              <h3 class="text-base md:text-xl font-extrabold text-[#0F172A] uppercase tracking-tight pr-6 group-hover:text-red-600" data-i18n="faq.q4">
+                ¿CON QUÉ INCOTERM COTIZAN? ¿EXW, FOB, CIF O DDP?
+              </h3>
+              <span class="faq-icon text-red-500 text-2xl font-black transition-transform duration-300 flex-shrink-0">
+                <i class="fas fa-plus"></i>
+              </span>
+            </summary>
+            <div class="mt-4 text-slate-700 text-sm md:text-base leading-relaxed space-y-3 pl-1">
+              <p data-i18n="faq.a4_p1">
+                En los cuatro, según lo que te convenga y según el país (EXW, FOB, CIF, DDP).
+              </p>
+            </div>
+          </details>
+
         </div>
+
       </div>
     </section>
 
-  </div><!-- /content-area -->
+    <!-- ════════════════════════════════════════════════
+         CONTACT / CTA
+    ════════════════════════════════════════════════ -->
+    <section id="contact" class="py-24 bg-[#0F172A] text-white">
+      <div class="max-w-4xl mx-auto px-6 text-center reveal">
+        
+        <span class="text-xs font-bold uppercase tracking-widest text-red-400 block mb-3" data-i18n="contact.label">Contacto Directo</span>
+        <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-6" data-i18n="contact.title">
+          Comienza tu proyecto de importación de forma segura.
+        </h2>
+        <p class="text-slate-300 text-base md:text-lg mb-10 max-w-xl mx-auto" data-i18n="contact.subtitle">
+          Completa nuestra solicitud inicial para evaluar tu proyecto y ponernos en contacto con las mejores fábricas para tu marca.
+        </p>
+
+        <a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="inline-flex items-center justify-between gap-6 bg-red-600 text-white px-8 py-5 rounded-full text-base font-extrabold hover:bg-red-700 transition-all shadow-xl hover:shadow-red-600/30 group">
+          <span data-i18n="contact.btnText">Iniciar Formulario de Trabajo</span>
+          <i class="fas fa-arrow-right text-white group-hover:translate-x-1 transition-transform"></i>
+        </a>
+
+      </div>
+    </section>
+  </main>
 
   <!-- ════════════════════════════════════════════════
        FOOTER
   ════════════════════════════════════════════════ -->
-  <footer class="bg-[#0B1220] text-gray-300 py-14">
+  <footer class="bg-[#070C18] text-white py-16 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        
         <div>
-          <h3 class="text-white font-serif font-semibold text-lg mb-4">Latam Sourcing</h3>
-          <p class="text-sm text-gray-400 leading-relaxed" data-i18n="footer.tagline">Tu socio de confianza para importar desde China de forma segura y rentable.</p>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-7 h-7 bg-red-600 text-white rounded-full font-bold flex items-center justify-center text-sm">L</div>
+            <span class="font-extrabold text-lg tracking-tight">LATAM SOURCING</span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed" data-i18n="footer.tagline">
+            Socio estratégico en Asia para la gestión de compras, control de calidad e importaciones seguras.
+          </p>
         </div>
+
         <div>
-          <h4 class="text-white font-semibold mb-4 text-sm" data-i18n="footer.sections">Secciones</h4>
-          <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="/about/" class="hover:text-white transition" data-i18n="nav.about">Nuestra Historia</a></li>
-            <li><a href="/services/" class="hover:text-white transition" data-i18n="nav.services">Servicios</a></li>
-            <li><a href="/resources/" class="hover:text-white transition" data-i18n="nav.resources">Recursos</a></li>
-            <li><a href="#contact" class="hover:text-white transition" data-i18n="nav.contact">Contacto</a></li>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4" data-i18n="footer.sections">Navegación</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="#home" class="hover:text-white transition">Inicio</a></li>
+            <li><a href="#services" class="hover:text-white transition">Servicios</a></li>
+            <li><a href="#process" class="hover:text-white transition">Metodología</a></li>
+            <li><a href="#resources" class="hover:text-white transition">Recursos</a></li>
+            <li><a href="#faq" class="hover:text-white transition">Preguntas Frecuentes</a></li>
           </ul>
         </div>
+
         <div>
-          <h4 class="text-white font-semibold mb-4 text-sm" data-i18n="footer.contactTitle">Contacto</h4>
-          <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="#contact" class="hover:text-white transition" data-i18n="footer.form">Formulario</a></li>
-            <li><a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="hover:text-white transition" data-i18n="footer.work">Trabaja con nosotros</a></li>
-            
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4" data-i18n="footer.contactTitle">Contacto</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="https://form.typeform.com/to/agExuI5g" target="_blank" class="hover:text-white transition">Formulario de Trabajo</a></li>
+            <li><a href="#contact" class="hover:text-white transition">Soporte Corporativo</a></li>
           </ul>
         </div>
+
         <div>
-          <h4 class="text-white font-semibold mb-4 text-sm" data-i18n="footer.legal">Legal</h4>
-          <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="/politica-privacidad/" class="hover:text-white transition" data-i18n="footer.privacy">Política de privacidad</a></li><li><a href="/terminos-condiciones/" class="hover:text-white transition" data-i18n="footer.terms">Términos y condiciones</a></li>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4" data-i18n="footer.legal">Legal</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="/politica-privacidad/" class="hover:text-white transition">Política de Privacidad</a></li>
+            <li><a href="/terminos-condiciones/" class="hover:text-white transition">Términos y Condiciones</a></li>
           </ul>
         </div>
+
       </div>
-      <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-500">
-        <p data-i18n="footer.copy">© 2026 Latam Sourcing. Todos los derechos reservados.</p>
+
+      <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500" data-i18n="footer.copy">
+        © 2026 Latam Sourcing. Todos los derechos reservados.
       </div>
     </div>
   </footer>
 
-  <button id="backToTop" aria-label="Volver arriba"><i class="fas fa-arrow-up text-sm"></i></button>
-
-  <div id="imgLightbox" aria-hidden="true">
-    <div id="imgLightboxInner">
-      <button id="imgLightboxClose" aria-label="Cerrar"><i class="fas fa-times"></i></button>
-      <img id="imgLightboxImg" src="" alt="">
-    </div>
-  </div>
+  <!-- ════════════════════════════════════════════════
+       JAVASCRIPT
+  ════════════════════════════════════════════════ -->
   <script>
-  // ── I18N ──────────────────────────────────────────────
-  const translations = {
+  // 1. Control del Preloader
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      setTimeout(() => {
+        preloader.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 700);
+      }, 400);
+    }
+  });
+
+  // 2. Datos de la Rueda de Servicios (Multidioma)
+  const wheelStagesData = {
     es: {
-      'nav.home':'Inicio','nav.services':'Servicios','nav.about':'Nuestra Historia','nav.resources':'Recursos','nav.contact':'Contacto',
-      'hero.title1':'Encuentra fábricas en','hero.title2':'para tu negocio.',
-      'hero.subtitle':'Conectamos negocios latinoamericanos con fabricantes confiables en China, con foco en producto, calidad y marca.',
-      'hero.stat1':'Fabricantes verificados','hero.stat2':'Países, 1 equipo','hero.stat3':'Plazas por mes',
-      'hero.marquee':'Nuestras fábricas producen para',
-      'about.label':'Quiénes Somos','about.title':'Nuestra Historia',
-      'about.p1':'nació de la unión entre José (Ecuador) y Yuchi (China), combinando experiencia latinoamericana en negocios con conocimiento directo de manufactura china.',
-      'about.p2':'José, con trayectoria en ferretería y logística, decidió operar desde China tras asistir a la Canton Fair 2024. Yuchi, crecido en una familia de fabricantes, aporta visión interna de producción y calidad.',
-      'about.p3':'Juntos creamos un puente entre Latinoamérica y China para que importar sea un proceso claro, estructurado y rentable.',
-      'about.cta':'Conoce más sobre nosotros →','about.card1':'Donde todo comenzó','about.card2':'Perspectiva Latam','about.card3':'Manufactura directa',
-      'services.label':'Lo que ofrecemos','services.title':'Servicios','services.subtitle':'Soluciones completas diseñadas para que importes desde China con claridad y sin improvisar.',
-      's1.tag':'Servicio 1','s1.title':'Importación Estratégica LS','s1.desc':'Para emprendedores y empresas que ya saben exactamente qué producto necesitan y buscan fabricantes, calidad y procesos verificados en China para ejecutar su importación de forma segura y profesional.','s1.cta':'Ver detalles',
-      's2.tag':'Servicio 2','s2.title':'Importación Ejecutiva LS','s2.desc':'Para emprendedores que aún no tienen claro su producto y quieren desarrollarlo con nosotros, construir una marca sólida y delegar completamente el proceso de importación.','s2.cta':'Ver detalles',
-      's3.tag':'Servicio 3','s3.title':'Mentorías 1 a 1','s3.desc':'Para emprendedores que quieren aprender a importar por su cuenta, dominar nuestros procesos y tener acceso a nuestra red de más de 100 fabricantes verificados en China.','s3.note':'Cupos limitados: solo 3 plazas por mes.','s3.cta':'Ver detalles',
-      'process.label':'El Proceso','process.title':'Cómo trabajamos',
-      'p1.title':'Diagnóstico','p1.desc':'Entendemos tu producto, mercado y objetivos de negocio.',
-      'p2.title':'Búsqueda','p2.desc':'Identificamos y verificamos fabricantes en nuestra red de +100 proveedores.',
-      'p3.title':'Negociación','p3.desc':'Gestionamos precios, muestras y condiciones de producción directamente en China.',
-      'p4.title':'Entrega','p4.desc':'Coordinamos logística y control de calidad hasta que recibes tu mercancía.',
-      'resources.label':'Aprende','resources.title':'Recursos','resources.subtitle':'Guías y herramientas prácticas para entender el proceso de importación desde cero.',
-      'r1.tag':'Guía gratuita','r1.title':'Guía paso a paso','r1.desc':'Desde encontrar proveedores hasta recibir tu mercancía. Proceso completo con ejemplos reales.','r1.btn':'Ver video',
-      'r2.tag':'Checklist','r2.title':'Errores comunes','r2.desc':'Evita pérdidas típicas. Errores frecuentes de importadores novatos y cómo prevenirlos.','r2.btn':'Ver video',
-      'r3.tag':'Calculadora','r3.title':'Costos reales','r3.desc':'Calcula tu costo por unidad. Herramienta para estimar inversión total con gastos ocultos.','r3.btn':'Ver video',
-      'contact.label':'Empecemos','contact.title':'Contacto','contact.subtitle':'Estamos aquí para ayudarte a importar desde China de forma segura y rentable.',
-      'contact.cardTitle':'¿Listo para Crecer?','contact.cardDesc':'Rellena el siguiente formulario y comienza tu proceso de importación con nosotros.',
-      'contact.fadeLabel':'Formulario de trabajo','contact.btnText':'Trabaja con Nosotros',
-      'footer.tagline':'Tu socio de confianza para importar desde China de forma segura y rentable.',
-      'footer.sections':'Secciones','footer.contactTitle':'Contacto','footer.legal':'Legal',
-      'footer.form':'Formulario','footer.work':'Trabaja con nosotros','footer.privacy':'Política de privacidad','footer.terms':'Términos y condiciones',
-      'footer.copy':'© 2026 Latam Sourcing. Todos los derechos reservados.'
+      retail: { title: "Retail / E-Commerce", desc: "Conectamos tu marca directamente con los canales de venta final. Asesoramos en packaging de cumplimiento, logística D2C y distribución comercial." },
+      producto: { title: "Desarrollo de Producto", desc: "Definición de especificaciones técnicas, selección de materiales, muestras iniciales y validación de prototipos." },
+      diseno: { title: "Diseño & Branding", desc: "Diseño industrial de empaques, etiquetado normativo, manuales de uso y desarrollo de imagen corporativa." },
+      sourcing: { title: "Sourcing de Proveedores", desc: "Búsqueda, auditoría presencial y negociación directa con los fabricantes de mayor estándar en China." },
+      produccion: { title: "Gestión de Producción", desc: "Supervisión del calendario de manufactura en planta, control de materias primas y aseguramiento del proceso." },
+      calidad: { title: "Control de Calidad (QA/QC)", desc: "Inspecciones técnicas en línea y auditorías finales previas al embarque bajo especificaciones estrictas." },
+      logistica: { title: "Logística Internacional", desc: "Consolidación de carga, transporte marítimo o aéreo y optimización de rutas internacionales de origen a destino." },
+      aduanas: { title: "Gestión Aduanera", desc: "Tramitación de licencias de importación, clasificación arancelaria y cumplimiento de regulaciones locales." }
     },
     en: {
-      'nav.home':'Home','nav.services':'Services','nav.about':'Our Story','nav.resources':'Resources','nav.contact':'Contact',
-      'hero.title1':'Find factories in','hero.title2':'for your business.',
-      'hero.subtitle':'We connect Latin American businesses with reliable manufacturers in China, focused on product, quality and brand.',
-      'hero.stat1':'Verified manufacturers','hero.stat2':'Countries, 1 team','hero.stat3':'Spots per month',
-      'hero.marquee':'Our factories produce for',
-      'about.label':'Who We Are','about.title':'Our Story',
-      'about.p1':'was born from the union of José (Ecuador) and Yuchi (China), combining Latin American business experience with direct knowledge of Chinese manufacturing.',
-      'about.p2':'José, with a background in hardware and logistics, decided to operate from China after attending Canton Fair 2024. Yuchi, raised in a manufacturing family, brings insider knowledge of production and quality.',
-      'about.p3':'Together we built a bridge between Latin America and China so that importing is a clear, structured and profitable process.',
-      'about.cta':'Learn more about us →','about.card1':'Where it all began','about.card2':'Latam perspective','about.card3':'Direct manufacturing',
-      'services.label':'What we offer','services.title':'Services','services.subtitle':'Complete solutions designed so you can import from China with clarity and no guesswork.',
-      's1.tag':'Service 1','s1.title':'Strategic Import LS','s1.desc':'For entrepreneurs and companies who already know exactly what product they need and are looking for verified manufacturers, quality and processes in China to execute their import safely and professionally.','s1.cta':'View details',
-      's2.tag':'Service 2','s2.title':'Executive Import LS','s2.desc':'For entrepreneurs who are not yet clear on their product and want to develop it with us, build a solid brand and fully delegate the import process.','s2.cta':'View details',
-      's3.tag':'Service 3','s3.title':'1-on-1 Mentorship','s3.desc':'For entrepreneurs who want to learn to import on their own, master our processes and gain access to our network of 100+ verified manufacturers in China.','s3.note':'Limited spots: only 3 per month.','s3.cta':'View details',
-      'process.label':'The Process','process.title':'How we work',
-      'p1.title':'Diagnosis','p1.desc':'We understand your product, market and business goals.',
-      'p2.title':'Search','p2.desc':'We identify and verify manufacturers in our network of 100+ suppliers.',
-      'p3.title':'Negotiation','p3.desc':'We manage prices, samples and production terms directly in China.',
-      'p4.title':'Delivery','p4.desc':'We coordinate logistics and quality control until you receive your goods.',
-      'resources.label':'Learn','resources.title':'Resources','resources.subtitle':'Practical guides and tools to understand the import process from scratch.',
-      'r1.tag':'Free guide','r1.title':'Step-by-step guide','r1.desc':'From finding suppliers to receiving your goods. Complete process with real examples.','r1.btn':'Watch video',
-      'r2.tag':'Checklist','r2.title':'Common mistakes','r2.desc':'Avoid typical losses. Frequent mistakes of novice importers and how to prevent them.','r2.btn':'Watch video',
-      'r3.tag':'Calculator','r3.title':'Real costs','r3.desc':'Calculate your cost per unit. Tool to estimate total investment including hidden costs.','r3.btn':'Watch video',
-      'contact.label':"Let's start",'contact.title':'Contact','contact.subtitle':"We're here to help you import from China safely and profitably.",
-      'contact.cardTitle':'Ready to Grow?','contact.cardDesc':'Fill out the form below and start your import process with us.',
-      'contact.fadeLabel':'Work form','contact.btnText':'Work with Us',
-      'footer.tagline':'Your trusted partner for importing from China safely and profitably.',
-      'footer.sections':'Sections','footer.contactTitle':'Contact','footer.legal':'Legal',
-      'footer.form':'Form','footer.work':'Work with us','footer.privacy':'Privacy policy','footer.terms':'Terms and conditions',
-      'footer.copy':'© 2026 Latam Sourcing. All rights reserved.'
+      retail: { title: "Retail / E-Commerce", desc: "We connect your brand with end-sales channels, offering D2C logistics, packaging compliance, and retail distribution." },
+      producto: { title: "Product Development", desc: "Definition of technical specifications, material selection, initial prototyping, and sample validation." },
+      diseno: { title: "Design & Branding", desc: "Industrial package design, regulatory labeling, user manuals, and brand identity development." },
+      sourcing: { title: "Supplier Sourcing", desc: "On-site supplier search, factory audits, and direct negotiation with top certified manufacturers in China." },
+      produccion: { title: "Production Management", desc: "On-site manufacturing schedule supervision, raw material control, and process assurance." },
+      calidad: { title: "Quality Control (QA/QC)", desc: "In-line technical inspections and pre-shipment quality audits under strict ISO guidelines." },
+      logistica: { title: "International Logistics", desc: "Freight consolidation, ocean/air shipping coordination, and global transport route optimization." },
+      aduanas: { title: "Customs & Compliance", desc: "Import clearance procedures, tariff classification, and local regulatory compliance management." }
     }
   };
 
+  const nodes = document.querySelectorAll('.wheel-node');
+  const stageTitle = document.getElementById('stageTitle');
+  const stageDesc = document.getElementById('stageDesc');
+  let currentActiveStage = 'retail';
   let currentLang = 'es';
 
-  function applyLang(lang) {
+  function updateStageBox(stageKey) {
+    currentActiveStage = stageKey;
+    const stageInfo = wheelStagesData[currentLang][stageKey];
+    if (stageInfo) {
+      stageTitle.textContent = stageInfo.title;
+      stageDesc.textContent = stageInfo.desc;
+    }
+  }
+
+  nodes.forEach(node => {
+    function activateNode() {
+      nodes.forEach(n => n.classList.remove('active'));
+      node.classList.add('active');
+      const stageKey = node.getAttribute('data-stage');
+      updateStageBox(stageKey);
+    }
+    node.addEventListener('mouseenter', activateNode);
+    node.addEventListener('click', activateNode);
+  });
+
+  // 3. Diccionario Multidioma General
+  const translations = {
+    es: {
+      'nav.home': 'Inicio', 'nav.services': 'Servicios', 'nav.process': 'Metodología', 'nav.resources': 'Recursos', 'nav.faq': 'Preguntas Frecuentes', 'nav.contact': 'CONTACTAR',
+      'hero.title': 'Manejamos la cadena de suministro que conecta Asia con el mundo.',
+      'hero.btnPrimary': 'Ver Catálogo Destacado', 'hero.btnSecondary': 'Ver Recursos',
+      'stats.stat1': 'Vendidos en 2025', 'stats.stat2': 'Proveedores Filtrados', 'stats.stat3': 'Aumento de márgenes ganancia', 'stats.stat4': 'Marcas desarrolladas',
+      'node.retail': 'Retail', 'node.producto': 'Producto', 'node.diseno': 'Diseño', 'node.sourcing': 'Sourcing', 'node.produccion': 'Producción', 'node.calidad': 'Calidad', 'node.logistica': 'Logística', 'node.aduanas': 'Aduanas',
+      'contact.label': 'Contacto Directo', 'contact.title': 'Comienza tu proyecto de importación de forma segura.', 'contact.subtitle': 'Completa nuestra solicitud inicial para evaluar tu proyecto.', 'contact.btnText': 'Iniciar Formulario de Trabajo',
+      'footer.tagline': 'Socio estratégico en Asia para la gestión de compras, control de calidad e importaciones seguras.', 'footer.sections': 'Navegación', 'footer.contactTitle': 'Contacto', 'footer.legal': 'Legal', 'footer.copy': '© 2026 Latam Sourcing. Todos los derechos reservados.'
+    },
+    en: {
+      'nav.home': 'Home', 'nav.services': 'Services', 'nav.process': 'Methodology', 'nav.resources': 'Resources', 'nav.faq': 'FAQ', 'nav.contact': 'CONTACT',
+      'hero.title': 'We manage the supply chain connecting Asia to the world.',
+      'hero.btnPrimary': 'View Featured Catalog', 'hero.btnSecondary': 'View Resources',
+      'stats.stat1': 'Sold in 2025', 'stats.stat2': 'Filtered Suppliers', 'stats.stat3': 'Increase in profit margins', 'stats.stat4': 'Developed brands',
+      'node.retail': 'Retail', 'node.producto': 'Product', 'node.diseno': 'Design', 'node.sourcing': 'Sourcing', 'node.produccion': 'Production', 'node.calidad': 'Quality', 'node.logistica': 'Logistics', 'node.aduanas': 'Customs',
+      'contact.label': 'Direct Contact', 'contact.title': 'Start your import project safely.', 'contact.subtitle': 'Complete our initial application so we can evaluate your project.', 'contact.btnText': 'Start Application Form',
+      'footer.tagline': 'Strategic partner in Asia for purchasing management and secure imports.', 'footer.sections': 'Navigation', 'footer.contactTitle': 'Contact', 'footer.legal': 'Legal', 'footer.copy': '© 2026 Latam Sourcing. All rights reserved.'
+    }
+  };
+
+  function applyLanguage(lang) {
     currentLang = lang;
     const t = translations[lang];
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if (t[key] !== undefined) el.textContent = t[key];
+      if (t[key]) el.innerHTML = t[key];
     });
-    document.documentElement.lang = lang;
-    // Update all label spans
-    document.querySelectorAll('#langLabel, #langLabelMobile').forEach(el => {
-      el.textContent = lang.toUpperCase();
-    });
-    // Update active state on all option elements across both dropdowns
+    document.getElementById('langLabel').textContent = lang.toUpperCase();
     document.querySelectorAll('.lang-option').forEach(opt => {
-      opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+      opt.classList.toggle('active', opt.dataset.lang === lang);
     });
+    updateStageBox(currentActiveStage);
   }
 
-  // ── DROPDOWN LOGIC ────────────────────────────────
-  function setupLangDropdown(btnId, panelId) {
-    const btn = document.getElementById(btnId);
-    const panel = document.getElementById(panelId);
-    if (!btn || !panel) return;
-
-    function openDropdown() {
-      btn.classList.add('open');
-      panel.classList.add('open');
-      btn.setAttribute('aria-expanded', 'true');
-    }
-    function closeDropdown() {
-      btn.classList.remove('open');
-      panel.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    }
-    function toggleDropdown() {
-      btn.classList.contains('open') ? closeDropdown() : openDropdown();
-    }
-
-    btn.addEventListener('click', (e) => { e.stopPropagation(); toggleDropdown(); });
-
-    // Option click
-    panel.querySelectorAll('.lang-option').forEach(opt => {
-      opt.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const lang = opt.getAttribute('data-lang');
-        applyLang(lang);
-        closeDropdown();
-        // Close the other dropdown too
-        document.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('open'));
-        document.querySelectorAll('.lang-btn').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
-      });
-    });
-
-    // Close on outside click
-    document.addEventListener('click', (e) => {
-      if (!btn.contains(e.target) && !panel.contains(e.target)) closeDropdown();
-    });
-
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeDropdown();
-    });
-  }
-
-  setupLangDropdown('langBtn', 'langPanel');
-  setupLangDropdown('langBtnMobile', 'langPanelMobile');
-
-  // ── HEADER SCROLL ─────────────────────────────────
-  (function(){
-    const h = document.getElementById('siteHeader');
-    window.addEventListener('scroll', ()=>h.classList.toggle('is-scrolled', window.scrollY>10), {passive:true});
-  })();
-
-  // ── MOBILE MENU ───────────────────────────────────
-  document.getElementById('mobileMenuBtn').addEventListener('click', ()=>{
-    document.getElementById('mobileMenu').classList.toggle('hidden');
+  const langBtn = document.getElementById('langBtn');
+  const langPanel = document.getElementById('langPanel');
+  langBtn.addEventListener('click', (e) => { e.stopPropagation(); langPanel.classList.toggle('open'); });
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.addEventListener('click', (e) => { e.stopPropagation(); applyLanguage(opt.dataset.lang); langPanel.classList.remove('open'); });
   });
+  document.addEventListener('click', () => langPanel.classList.remove('open'));
 
-  // ── TYPEWRITER ────────────────────────────────────
-  (function(){
-    const el = document.getElementById('cityType');
-    const cities = ['Shenzhen','Dongguan','Guangzhou','Shanghái','Ningbo'];
-    let i=0,j=0,del=false;
-    function tick(){
-      const w=cities[i];
-      if(!del){ el.textContent=w.slice(0,++j); if(j===w.length){del=true;setTimeout(tick,1600);return;} }
-      else{ el.textContent=w.slice(0,--j); if(j===0){del=false;i=(i+1)%cities.length;setTimeout(tick,300);return;} }
-      setTimeout(tick,del?38:78);
-    }
-    tick();
-  })();
+  // 4. Menú Móvil
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-  // ── BACK TO TOP ───────────────────────────────────
-  (function(){
-    const btn=document.getElementById('backToTop');
-    window.addEventListener('scroll',()=>btn.classList.toggle('show',window.scrollY>420),{passive:true});
-    btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-  })();
-
-  // ── SCROLL REVEAL ─────────────────────────────────
-  (function(){
-    const els=document.querySelectorAll('.reveal');
-    if(!els.length) return;
-    const obs=new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
-    },{threshold:0.10,rootMargin:'0px 0px -50px 0px'});
-    els.forEach(el=>obs.observe(el));
-    setTimeout(()=>document.querySelectorAll('#home .reveal').forEach(el=>el.classList.add('is-visible')),80);
-  })();
-
-  // ── VIDEO PREVIEW ─────────────────────────────────
-  (function(){
-    const previews=document.querySelectorAll('.resource-video-preview');
-    if(!previews.length) return;
-    const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-    previews.forEach(preview=>{
-      const video=preview.querySelector('.resource-video');
-      const source=video?.querySelector('source');
-      const url=source?.getAttribute('data-src');
-      if(!video||!url) return;
-      let playing=false,loaded=false;
-      video.volume=0.7;
-      function load(){ if(loaded)return; source.setAttribute('src',url); video.load(); loaded=true; }
-      function play(){ if(reduced)return; load(); preview.classList.add('is-playing'); video.play().catch(()=>{video.muted=true;video.play().catch(()=>{})}); playing=true; }
-      function pause(){ preview.classList.remove('is-playing'); video.pause(); video.currentTime=0; playing=false; }
-      if(!('ontouchstart' in window)){ preview.addEventListener('mouseenter',play); preview.addEventListener('mouseleave',pause); }
-      preview.addEventListener('click',e=>{ e.preventDefault(); if(playing&&video.muted){video.muted=false;return;} playing?pause():play(); });
-      if('IntersectionObserver' in window){
-        const io=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting&&!loaded){load();io.unobserve(preview);}})},{rootMargin:'300px'});
-        io.observe(preview);
+  // 5. Animaciones Scroll Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       }
     });
-  })();
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ── LIGHTBOX ──────────────────────────────────────
-  (function(){
-    const lb=document.getElementById('imgLightbox');
-    const lbImg=document.getElementById('imgLightboxImg');
-    const closeBtn=document.getElementById('imgLightboxClose');
-    if(!lb||!lbImg||!closeBtn) return;
-    function close(){ lb.classList.remove('show'); lb.setAttribute('aria-hidden','true'); document.body.style.overflow=''; setTimeout(()=>{lbImg.src='';},150); }
-    closeBtn.addEventListener('click',close);
-    lb.addEventListener('click',e=>{if(e.target===lb)close();});
-    window.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('show'))close();});
-  })();
+  // 6. Animación de Contadores de Métricas
+  const statsSection = document.getElementById('stats-section');
+  let hasAnimatedStats = false;
+
+  function animateCounters() {
+    const counters = document.querySelectorAll('.counter-value');
+    counters.forEach(counter => {
+      const target = parseFloat(counter.getAttribute('data-target'));
+      const prefix = counter.getAttribute('data-prefix') || '';
+      const suffix = counter.getAttribute('data-suffix') || '';
+      const isFloat = target % 1 !== 0;
+      const duration = 2000;
+      const frameDuration = 1000 / 60;
+      const totalFrames = Math.round(duration / frameDuration);
+      let frame = 0;
+
+      const timer = setInterval(() => {
+        frame++;
+        const progress = frame / totalFrames;
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
+        const currentVal = isFloat 
+          ? (target * easeProgress).toFixed(1) 
+          : Math.round(target * easeProgress);
+
+        if (frame >= totalFrames) {
+          counter.textContent = prefix + target + suffix;
+          clearInterval(timer);
+        } else {
+          counter.textContent = prefix + currentVal + suffix;
+        }
+      }, frameDuration);
+    });
+  }
+
+  if (statsSection) {
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimatedStats) {
+          hasAnimatedStats = true;
+          animateCounters();
+        }
+      });
+    }, { threshold: 0.25 });
+    statsObserver.observe(statsSection);
+  }
+
+  // 7. Video Preview en Hover
+  document.querySelectorAll('.resource-video-preview').forEach(preview => {
+    const video = preview.querySelector('.resource-video');
+    const source = video?.querySelector('source');
+    if (!video || !source) return;
+    let isLoaded = false;
+    preview.addEventListener('mouseenter', () => {
+      if (!isLoaded) { source.src = source.dataset.src; video.load(); isLoaded = true; }
+      preview.classList.add('is-playing');
+      video.play().catch(() => {});
+    });
+    preview.addEventListener('mouseleave', () => {
+      preview.classList.remove('is-playing');
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
   </script>
 </body>
 </html>
-
 
 
 
