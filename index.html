@@ -184,22 +184,19 @@
 <body class="antialiased text-slate-900 bg-white">
 
   <!-- ════════════════════════════════════════════════
-       PRELOADER OVERLAY (PANTALLA DE CARGA KUAIZI STYLE)
+       PRELOADER OVERLAY
   ════════════════════════════════════════════════ -->
   <div id="preloader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#F8FAFC] transition-all duration-700 ease-in-out opacity-100">
-    <!-- Fondo decorativo con cuadrícula de puntos limpia -->
     <div class="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:20px_20px] opacity-50 pointer-events-none"></div>
 
     <div class="relative z-10 flex flex-col items-center gap-5 scale-100 transition-transform duration-500">
-      <!-- Logo Branding -->
+      <!-- Logo Branding con imagen -->
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center font-black text-2xl shadow-xl shadow-red-600/30 animate-pulse">
-          L
-        </div>
+        <img src="assets/logo_latam.webp" alt="Latam Sourcing Logo" class="w-12 h-12 object-contain animate-pulse">
         <span class="font-extrabold text-2xl tracking-tight text-slate-900">LATAM<span class="text-slate-500 font-normal">SOURCING</span></span>
       </div>
 
-      <!-- Barra de progreso pulsante y delgada -->
+      <!-- Barra de progreso -->
       <div class="w-24 h-1 bg-slate-200 rounded-full overflow-hidden relative mt-2">
         <div class="h-full bg-red-600 rounded-full animate-loader-bar"></div>
       </div>
@@ -212,11 +209,9 @@
   <header id="siteHeader" class="fixed top-4 left-0 w-full z-50 px-4 md:px-8">
     <div class="max-w-6xl mx-auto bg-slate-900/80 backdrop-blur-md border border-white/15 rounded-full px-6 h-16 flex items-center justify-between shadow-2xl">
 
-      <!-- Logo -->
+      <!-- Logo con imagen -->
       <a href="/" class="flex items-center gap-3 group">
-        <div class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
-          L
-        </div>
+        <img src="assets/logo_latam.webp" alt="Latam Sourcing Logo" class="w-8 h-8 object-contain">
         <span class="font-extrabold text-lg tracking-tight text-white">LATAM<span class="text-slate-400 font-normal">SOURCING</span></span>
       </a>
 
@@ -268,12 +263,8 @@
   </header>
 
   <main>
-    <!-- ════════════════════════════════════════════════
-         HERO SECTION
-  ════════════════════════════════════════════════ -->
+    <!-- HERO SECTION -->
     <section id="home" class="relative min-h-screen flex flex-col justify-center items-center pt-28 pb-16 overflow-hidden bg-slate-950 text-white">
-      
-      <!-- Fondo de Video -->
       <div class="absolute inset-0 z-0">
         <video class="w-full h-full object-cover opacity-75 scale-105" autoplay loop muted playsinline poster="assets/guia.jpg">
           <source src="https://res.cloudinary.com/dzjjcsfr0/video/upload/v1771107699/Servicio_1_hidjmb.mp4" type="video/mp4">
@@ -281,9 +272,7 @@
         <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-black/30 to-black/40 backdrop-blur-[0.5px]"></div>
       </div>
 
-      <!-- Contenido Principal del Hero -->
       <div class="relative z-10 max-w-5xl mx-auto px-6 w-full text-center my-auto">
-
         <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.08] tracking-tight mb-10 drop-shadow-lg reveal reveal-delay-1" data-i18n="hero.title">
           Manejamos la cadena de suministro que conecta Asia con el mundo.
         </h1>
@@ -296,65 +285,47 @@
             <span data-i18n="hero.btnSecondary">Ver Recursos</span>
           </a>
         </div>
-
       </div>
 
-      <!-- Indicador de Scroll -->
       <div class="relative z-10 mt-auto pt-6 flex flex-col items-center gap-2 text-slate-300 text-[10px] md:text-xs font-bold uppercase tracking-widest animate-bounce">
         <span>Desliza para explorar</span>
         <div class="w-8 h-8 rounded-full border border-white/30 bg-black/20 backdrop-blur-sm flex items-center justify-center">
           <i class="fas fa-chevron-down text-xs text-white"></i>
         </div>
       </div>
-
     </section>
 
-    <!-- ════════════════════════════════════════════════
-         SECCIÓN DE MÉTRICAS
-    ════════════════════════════════════════════════ -->
+    <!-- MÉTRICAS -->
     <section id="stats-section" class="py-16 md:py-20 bg-slate-50 border-b border-slate-200/80 relative z-20">
       <div class="max-w-6xl mx-auto px-6">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-5xl mx-auto text-center">
-          
-          <!-- Métrica 1 -->
           <div class="reveal reveal-delay-1">
             <div class="text-4xl md:text-5xl font-black text-[#EF4444] tracking-tight mb-2 counter-value" data-target="3.5" data-prefix="$" data-suffix="M+">$0M+</div>
             <p class="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-600" data-i18n="stats.stat1">Vendidos en 2025</p>
           </div>
-
-          <!-- Métrica 2 -->
           <div class="reveal reveal-delay-2">
             <div class="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight mb-2 counter-value" data-target="1" data-suffix="K+">0K+</div>
             <p class="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-600" data-i18n="stats.stat2">Proveedores Filtrados</p>
           </div>
-
-          <!-- Métrica 3 -->
           <div class="reveal reveal-delay-3">
             <div class="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight mb-2 counter-value" data-target="40" data-suffix="%">0%</div>
             <p class="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-600" data-i18n="stats.stat3">Aumento de márgenes ganancia</p>
           </div>
-
-          <!-- Métrica 4 -->
           <div class="reveal">
             <div class="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight mb-2 counter-value" data-target="10" data-suffix="+">0+</div>
             <p class="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-600" data-i18n="stats.stat4">Marcas desarrolladas</p>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════════
-         SERVICES SECTION (RUEDA INTERACTIVA 8 SERVICIOS)
-    ════════════════════════════════════════════════ -->
+    <!-- SERVICES -->
     <section id="services" class="py-24 bg-white border-b border-slate-100">
       <div class="max-w-7xl mx-auto px-6">
-        
         <div class="max-w-4xl mb-16 reveal">
           <h2 class="text-3xl md:text-5xl font-extrabold text-[#0F172A] tracking-tight mb-8 leading-tight" data-i18n="services.title">
             Creamos la cadena de suministro del futuro
           </h2>
-
           <div class="space-y-6 text-slate-600 text-base md:text-lg leading-relaxed">
             <p data-i18n="services.p1">
               La gestión tradicional de la cadena de suministro está experimentando una transformación profunda impulsada por nuevas tecnologías y las exigencias del comercio moderno.
@@ -368,84 +339,63 @@
           </div>
         </div>
 
-        <!-- Rueda Interactivas -->
         <div class="mt-16 pt-12 border-t border-slate-100 grid lg:grid-cols-12 gap-12 items-center reveal reveal-delay-1">
           <div class="lg:col-span-7 flex justify-center py-6">
-            
             <div class="relative w-[340px] h-[340px] sm:w-[440px] sm:h-[440px] flex items-center justify-center">
-              
-              <!-- Anillo del círculo principal -->
               <div class="absolute inset-2 rounded-full border-[6px] border-red-500/90 shadow-[0_0_25px_rgba(239,68,68,0.2)]"></div>
               <div class="absolute inset-8 rounded-full border border-dashed border-slate-200"></div>
 
-              <!-- 1. Retail (Top-Left) -->
               <div class="wheel-node active group" style="top: 18.9%; left: 18.9%;" data-stage="retail">
                 <div class="flex items-center gap-2">
                   <span class="node-dot"></span>
                   <span class="node-label" data-i18n="node.retail">Retail</span>
                 </div>
               </div>
-
-              <!-- 2. Producto (Top) -->
               <div class="wheel-node group" style="top: 6%; left: 50%;" data-stage="producto">
                 <div class="flex flex-col items-center gap-1">
                   <span class="node-dot"></span>
                   <span class="node-label" data-i18n="node.producto">Producto</span>
                 </div>
               </div>
-
-              <!-- 3. Diseño (Top-Right) -->
               <div class="wheel-node group" style="top: 18.9%; left: 81.1%;" data-stage="diseno">
                 <div class="flex items-center gap-2">
                   <span class="node-label" data-i18n="node.diseno">Diseño</span>
                   <span class="node-dot"></span>
                 </div>
               </div>
-
-              <!-- 4. Sourcing (Right) -->
               <div class="wheel-node group" style="top: 50%; left: 94%;" data-stage="sourcing">
                 <div class="flex items-center gap-2">
                   <span class="node-label" data-i18n="node.sourcing">Sourcing</span>
                   <span class="node-dot"></span>
                 </div>
               </div>
-
-              <!-- 5. Producción (Bottom-Right) -->
               <div class="wheel-node group" style="top: 81.1%; left: 81.1%;" data-stage="produccion">
                 <div class="flex items-center gap-2">
                   <span class="node-label" data-i18n="node.produccion">Producción</span>
                   <span class="node-dot"></span>
                 </div>
               </div>
-
-              <!-- 6. Calidad (Bottom) -->
               <div class="wheel-node group" style="top: 94%; left: 50%;" data-stage="calidad">
                 <div class="flex flex-col items-center gap-1">
                   <span class="node-label" data-i18n="node.calidad">Calidad</span>
                   <span class="node-dot"></span>
                 </div>
               </div>
-
-              <!-- 7. Logística (Bottom-Left) -->
               <div class="wheel-node group" style="top: 81.1%; left: 18.9%;" data-stage="logistica">
                 <div class="flex items-center gap-2">
                   <span class="node-dot"></span>
                   <span class="node-label" data-i18n="node.logistica">Logística</span>
                 </div>
               </div>
-
-              <!-- 8. Aduanas (Left) -->
               <div class="wheel-node group" style="top: 50%; left: 6%;" data-stage="aduanas">
                 <div class="flex items-center gap-2">
                   <span class="node-dot"></span>
                   <span class="node-label" data-i18n="node.aduanas">Aduanas</span>
                 </div>
               </div>
-
             </div>
           </div>
 
-          <!-- Caja informativa de la Rueda -->
           <div class="lg:col-span-5 bg-slate-50/90 p-8 rounded-2xl border border-slate-200/80 min-h-[280px] flex flex-col justify-center shadow-sm">
             <div class="pl-6 border-l-4 border-red-500 transition-all duration-300" id="stageContentBox">
               <h3 id="stageTitle" class="text-2xl font-extrabold text-[#0F172A] mb-4">
@@ -457,16 +407,12 @@
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════════
-         PROCESS / METHODOLOGY
-    ════════════════════════════════════════════════ -->
+    <!-- PROCESS -->
     <section id="process" class="py-24 bg-[#0F172A] text-white relative">
       <div class="max-w-7xl mx-auto px-6">
-        
         <div class="text-center max-w-2xl mx-auto mb-20 reveal">
           <span class="text-xs font-bold uppercase tracking-widest text-red-500 block mb-2" data-i18n="process.label">Garantía Operativa</span>
           <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight" data-i18n="process.title">Nuestra Metodología</h2>
@@ -494,24 +440,18 @@
             <p class="text-slate-300 text-sm" data-i18n="p4.desc">Gestión aduanera y coordinación de transporte marítimo/aéreo directo a tu almacén.</p>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════════
-         RESOURCES
-    ════════════════════════════════════════════════ -->
+    <!-- RESOURCES -->
     <section id="resources" class="py-24 bg-[#F8FAFC] border-t border-slate-200/60">
       <div class="max-w-7xl mx-auto px-6">
-        
         <div class="max-w-2xl mb-16 reveal">
           <span class="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-2" data-i18n="resources.label">Conocimiento Especializado</span>
           <h2 class="text-3xl md:text-4xl font-extrabold text-[#0F172A] tracking-tight" data-i18n="resources.title">Recursos Prácticos</h2>
         </div>
 
         <div class="grid lg:grid-cols-3 gap-8">
-
-          <!-- R1 -->
           <div class="card-clean overflow-hidden reveal">
             <div class="resource-video-preview aspect-video cursor-pointer">
               <img src="assets/guia.jpg" alt="Guía paso a paso" class="resource-poster w-full h-full object-cover">
@@ -528,7 +468,6 @@
             </div>
           </div>
 
-          <!-- R2 -->
           <div class="card-clean overflow-hidden reveal reveal-delay-1">
             <div class="resource-video-preview aspect-video cursor-pointer">
               <img src="assets/errores.jpg" alt="Errores comunes" class="resource-poster w-full h-full object-cover">
@@ -545,7 +484,6 @@
             </div>
           </div>
 
-          <!-- R3 -->
           <div class="card-clean overflow-hidden reveal reveal-delay-2">
             <div class="resource-video-preview aspect-video cursor-pointer">
               <img src="assets/exel.jpg" alt="Costos reales" class="resource-poster w-full h-full object-cover">
@@ -561,17 +499,13 @@
               </a>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════════
-         FAQ SECTION
-    ════════════════════════════════════════════════ -->
+    <!-- FAQ SECTION -->
     <section id="faq" class="py-24 bg-white border-t border-slate-200/80">
       <div class="max-w-4xl mx-auto px-6">
-        
         <div class="text-center mb-16 reveal">
           <span class="text-red-600 font-extrabold text-lg md:text-xl tracking-tight block mb-2 uppercase" data-i18n="faq.subtitle">
             ¿Tienes dudas?
@@ -582,7 +516,6 @@
         </div>
 
         <div class="space-y-4 reveal reveal-delay-1">
-
           <details class="group border-b border-dashed border-slate-300 pb-6 transition-all">
             <summary class="flex items-center justify-between cursor-pointer list-none py-2 group-hover:text-red-600 transition-colors">
               <h3 class="text-base md:text-xl font-extrabold text-[#0F172A] uppercase tracking-tight pr-6 group-hover:text-red-600" data-i18n="faq.q1">
@@ -655,18 +588,13 @@
               </p>
             </div>
           </details>
-
         </div>
-
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════════
-         CONTACT / CTA
-    ════════════════════════════════════════════════ -->
+    <!-- CONTACT / CTA -->
     <section id="contact" class="py-24 bg-[#0F172A] text-white">
       <div class="max-w-4xl mx-auto px-6 text-center reveal">
-        
         <span class="text-xs font-bold uppercase tracking-widest text-red-400 block mb-3" data-i18n="contact.label">Contacto Directo</span>
         <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-6" data-i18n="contact.title">
           Comienza tu proyecto de importación de forma segura.
@@ -679,7 +607,6 @@
           <span data-i18n="contact.btnText">Iniciar Formulario de Trabajo</span>
           <i class="fas fa-arrow-right text-white group-hover:translate-x-1 transition-transform"></i>
         </a>
-
       </div>
     </section>
   </main>
@@ -690,10 +617,10 @@
   <footer class="bg-[#070C18] text-white py-16 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-        
         <div>
+          <!-- Logo con imagen -->
           <div class="flex items-center gap-2 mb-4">
-            <div class="w-7 h-7 bg-red-600 text-white rounded-full font-bold flex items-center justify-center text-sm">L</div>
+            <img src="assets/logo_latam.webp" alt="Latam Sourcing Logo" class="w-7 h-7 object-contain">
             <span class="font-extrabold text-lg tracking-tight">LATAM SOURCING</span>
           </div>
           <p class="text-slate-400 text-xs leading-relaxed" data-i18n="footer.tagline">
@@ -727,7 +654,6 @@
             <li><a href="/terminos-condiciones/" class="hover:text-white transition">Términos y Condiciones</a></li>
           </ul>
         </div>
-
       </div>
 
       <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500" data-i18n="footer.copy">
@@ -929,11 +855,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
